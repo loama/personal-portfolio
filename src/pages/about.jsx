@@ -17,9 +17,9 @@ function SocialLink({ className, href, children, icon: Icon }) {
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group text-zinc-800 hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500 flex font-medium text-sm transition"
+        className="group text-zinc-800 hover:text-blue-500 dark:text-zinc-200 dark:hover:text-blue-500 flex font-medium text-sm transition"
       >
-        <Icon className="fill-zinc-500 group-hover:fill-teal-500 flex-none h-6 transition w-6" />
+        <Icon className="fill-zinc-500 group-hover:fill-blue-500 flex-none h-6 transition w-6" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -60,7 +60,7 @@ export default function About() {
             </div>
           </div>
           <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-bold text-4xl tracking-tight">
+            <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-semibold text-4xl tracking-tight">
               I’m Eduardo López. I live in Guadalajara, Mexico, where I design the
               future.
             </h1>

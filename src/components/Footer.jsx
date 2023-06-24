@@ -6,7 +6,7 @@ function NavLink({ href, children }) {
   return (
     <Link
       href={href}
-      className="hover:text-teal-500 dark:hover:text-teal-400 transition"
+      className="hover:text-blue-500 dark:hover:text-blue-400 transition"
     >
       {children}
     </Link>
@@ -21,10 +21,9 @@ export function Footer() {
           <Container.Inner>
             <div className="sm:flex-row flex flex-col gap-6 items-center justify-between">
               <div className="gap-x-6 gap-y-1 text-zinc-800 dark:text-zinc-200 flex flex-wrap font-medium justify-center text-sm">
-                <NavLink href="/about">About</NavLink>
+                <NavLink href="/">Me</NavLink>
                 <NavLink href="/projects">Projects</NavLink>
-                <NavLink href="/speaking">Speaking</NavLink>
-                <NavLink href="/uses">Uses</NavLink>
+                <NavLink href="/jobs">Jobs</NavLink>
               </div>
               <p className="text-zinc-400 dark:text-zinc-500 text-sm">
                 &copy; {new Date().getFullYear()} Eduardo López. All rights

@@ -27,9 +27,9 @@ export function Card({ as: Component = 'div', className, children }) {
 Card.Link = function CardLink({ children, ...props }) {
   return (
     <>
-      <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
+      <div className="-inset-x-4 -inset-y-6 bg-zinc-50 group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl absolute opacity-0 scale-95 transition z-0" />
       <Link {...props}>
-        <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+        <span className="-inset-x-4 -inset-y-6 sm:-inset-x-6 sm:rounded-2xl absolute z-20" />
         <span className="relative z-10">{children}</span>
       </Link>
     </>
@@ -38,7 +38,7 @@ Card.Link = function CardLink({ children, ...props }) {
 
 Card.Title = function CardTitle({ as: Component = 'h2', href, children }) {
   return (
-    <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+    <Component className="text-zinc-800 dark:text-zinc-100 font-semibold text-base tracking-tight">
       {href ? <Card.Link href={href}>{children}</Card.Link> : children}
     </Component>
   )
@@ -46,7 +46,7 @@ Card.Title = function CardTitle({ as: Component = 'h2', href, children }) {
 
 Card.Description = function CardDescription({ children }) {
   return (
-    <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+    <p className="text-zinc-600 dark:text-zinc-400 mt-2 relative text-sm z-10">
       {children}
     </p>
   )
@@ -56,10 +56,10 @@ Card.Cta = function CardCta({ children }) {
   return (
     <div
       aria-hidden="true"
-      className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+      className="flex font-medium items-center mt-4 relative text-blue-500 text-sm z-10"
     >
       {children}
-      <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
+      <ChevronRightIcon className="h-4 ml-1 stroke-current w-4" />
     </div>
   )
 }
@@ -82,7 +82,7 @@ Card.Eyebrow = function CardEyebrow({
     >
       {decorate && (
         <span
-          className="absolute inset-y-0 left-0 flex items-center"
+          className="absolute flex inset-y-0 items-center left-0"
           aria-hidden="true"
         >
           <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />

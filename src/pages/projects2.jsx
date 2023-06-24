@@ -90,7 +90,7 @@ export default function Projects() {
                 <Card.Link href={project.link.href}>{project.name}</Card.Link>
               </h2>
               <Card.Description>{project.description}</Card.Description>
-              <p className="text-zinc-400 group-hover:text-teal-500 dark:text-zinc-200 flex font-medium mt-6 relative text-sm transition z-10">
+              <p className="text-zinc-400 group-hover:text-blue-500 dark:text-zinc-200 flex font-medium mt-6 relative text-sm transition z-10">
                 <LinkIcon className="flex-none h-6 w-6" />
                 <span className="ml-2">{project.link.label}</span>
               </p>

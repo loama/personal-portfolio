@@ -2,3 +2,12 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+@font-face {
+  font-family: 'GeneralSans';
+  src: url('./GeneralSans-Variable.ttf') format('truetype-variations');
+}
+
+html, body {
+  font-family: 'GeneralSans', sans-serif;
+}

@@ -88,7 +88,7 @@ function ArrowDownIcon(props) {
 function Article({ article }) {
   return (
     <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
+      <Card.Title href={`/projects/${article.slug}`}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
@@ -105,35 +105,6 @@ function SocialLink({ icon: Icon, ...props }) {
     <Link className="group -m-1 p-1" {...props}>
       <Icon className="fill-zinc-500 group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300 h-6 transition w-6" />
     </Link>
-  )
-}
-
-function Newsletter() {
-  return (
-    <form
-      action="/thank-you"
-      className="border-zinc-100 dark:border-zinc-700/40 border p-6 rounded-2xl"
-    >
-      <h2 className="text-zinc-900 dark:text-zinc-100 flex font-semibold text-sm">
-        <MailIcon className="flex-none h-6 w-6" />
-        <span className="ml-3">Stay up to date</span>
-      </h2>
-      <p className="text-zinc-600 dark:text-zinc-400 mt-2 text-sm">
-        Get notified when I publish something new, and unsubscribe at any time.
-      </p>
-      <div className="flex mt-6">
-        <input
-          type="email"
-          placeholder="Email address"
-          aria-label="Email address"
-          required
-          className="min-w-0 flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-teal-400 dark:focus:ring-teal-400/10 sm:text-sm"
-        />
-        <Button type="submit" className="flex-none ml-4">
-          Join
-        </Button>
-      </div>
-    </form>
   )
 }
 
@@ -220,33 +191,6 @@ function Resume() {
   )
 }
 
-function Photos() {
-  let rotations = ['rotate-2', '-rotate-2', 'rotate-2', 'rotate-2', '-rotate-2']
-
-  return (
-    <div className="sm:mt-20 mt-16">
-      <div className="sm:gap-8 flex gap-5 justify-center -my-4 overflow-hidden py-4">
-        {[image1, image2, image3, image4, image5].map((image, imageIndex) => (
-          <div
-            key={image.src}
-            className={clsx(
-              'relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:w-72 sm:rounded-2xl',
-              rotations[imageIndex % rotations.length]
-            )}
-          >
-            <Image
-              src={image}
-              alt=""
-              sizes="(min-width: 640px) 18rem, 11rem"
-              className="absolute h-full inset-0 object-cover w-full"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default function Home({ articles }) {
   return (
     <>
@@ -256,16 +200,17 @@ export default function Home({ articles }) {
         </title>
         <meta
           name="description"
-          content="I’m Spencer, a software designer and entrepreneur based in New York City. I’m the founder and CEO of Planetaria, where we develop technologies that empower regular people to explore space on their own terms."
+          content="I'm Eduardo, have been building software for the last 10 years, mainly for startups.
+          I cofounded amiloz (YC w22) for which we raised a few million dollars, later on we had to pivot and I got a micro exit from that."
         />
       </Head>
       <Container className="mt-9">
         <div className="max-w-2xl">
-          <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-bold text-4xl tracking-tight">
+          <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-semibold text-4xl tracking-tight">
             Software developer, founder and designer.
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 mt-6 text-base">
-            I’m Eduardo, have been building software for the last 10 years, mainly for startups.
+            I'm Eduardo, have been building software for the last 10 years, mainly for startups.
             I cofounded amiloz (YC w22) for which we raised a few million dollars, later on we had to pivot and I got a micro exit from that.
             <br />Now I am onto my next thing and meanwhile I help other startups build their products.
           </p>
@@ -303,7 +248,7 @@ export default function Home({ articles }) {
           </div>
         </div>
       </Container>
-      <Photos />
+      
       <Container className="md:mt-28 mt-24">
         <div className="gap-y-20 lg:max-w-none lg:grid-cols-2 grid grid-cols-1 max-w-xl mx-auto">
           <div className="flex flex-col gap-16">
@@ -312,7 +257,6 @@ export default function Home({ articles }) {
             ))}
           </div>
           <div className="lg:pl-16 xl:pl-24 space-y-10">
-            <Newsletter />
             <Resume />
           </div>
         </div>

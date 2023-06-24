@@ -51,7 +51,7 @@ export function ArticleLayout({
             )}
             <article>
               <header className="flex flex-col">
-                <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-bold mt-6 text-4xl tracking-tight">
+                <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-semibold mt-6 text-4xl tracking-tight">
                   {meta.title}
                 </h1>
                 <time
