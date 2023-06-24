@@ -123,9 +123,7 @@ function MobileNavigation(props) {
               <ul className="divide-zinc-100 text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300 divide-y -my-2 text-base">
                 <MobileNavItem href="/">Me</MobileNavItem>
                 <MobileNavItem href="/projects">Projects</MobileNavItem>
-                <MobileNavItem href="/projects2">Projects2</MobileNavItem>
-                <MobileNavItem href="/speaking">Speaking</MobileNavItem>
-                <MobileNavItem href="/uses">Uses</MobileNavItem>
+                <MobileNavItem href="/jobs">Jobs</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -164,9 +162,7 @@ function DesktopNavigation(props) {
       <ul className="bg-white/90 text-zinc-800 shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 flex font-medium px-3 rounded-full shadow-lg text-sm">
         <NavItem href="/">Me</NavItem>
         <NavItem href="/projects">Projects</NavItem>
-        <NavItem href="/projects2">Projects2</NavItem>
-        <NavItem href="/speaking">Speaking</NavItem>
-        <NavItem href="/uses">Uses</NavItem>
+        <NavItem href="/jobs">Jobs</NavItem>
       </ul>
     </nav>
   )
@@ -409,8 +405,7 @@ export function Header() {
                 )}
               </div>
               <div className="md:justify-center flex flex-1 justify-end">
-                <MobileNavigation className="md:hidden pointer-events-auto" />
-                <DesktopNavigation className="md:block hidden pointer-events-auto" />
+                <DesktopNavigation className="pointer-events-auto" />
               </div>
               <div className="md:flex-1 flex justify-end">
                 <div className="pointer-events-auto">

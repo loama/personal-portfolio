@@ -11,6 +11,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
+  WhatsappIcon,
 } from '@/components/SocialIcons'
 import logoAirbnb from '@/images/logos/airbnb.svg'
 import logoFacebook from '@/images/logos/facebook.svg'
@@ -261,34 +262,43 @@ export default function Home({ articles }) {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-bold text-4xl tracking-tight">
-            Software designer, founder, and amateur astronaut.
+            Software developer, founder and designer.
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 mt-6 text-base">
-            I’m Spencer, a software designer and entrepreneur based in New York
-            City. I’m the founder and CEO of Planetaria, where we develop
-            technologies that empower regular people to explore space on their
-            own terms.
+            I’m Eduardo, have been building software for the last 10 years, mainly for startups.
+            I cofounded amiloz (YC w22) for which we raised a few million dollars, later on we had to pivot and I got a micro exit from that.
+            <br />Now I am onto my next thing and meanwhile I help other startups build their products.
           </p>
           <div className="flex gap-6 mt-6">
             <SocialLink
-              href="https://twitter.com"
+              href="https://twitter.com/loama18"
               aria-label="Follow on Twitter"
               icon={TwitterIcon}
+              target="_blank"
             />
             <SocialLink
-              href="https://instagram.com"
+              href="https://twitter.com/loama18"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
+              target="_blank"
             />
             <SocialLink
-              href="https://github.com"
+              href="https://github.com/loama"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
+              target="_blank"
             />
             <SocialLink
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/eduardolopezamaya/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+              target="_blank"
+            />
+            <SocialLink
+              href="https://api.whatsapp.com/send?phone=16468757265&text=Hey%20Eduardo!%20I%20was%20on%20your%20personal%20portfolio%20and%20would%20love%20to%20chat"
+              aria-label="Text me on whatsapp"
+              icon={WhatsappIcon}
+              target="_blank"
             />
           </div>
         </div>
