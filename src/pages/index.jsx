@@ -210,7 +210,7 @@ export default function Home({ articles }) {
             Software developer, founder and designer.
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 mt-6 text-base">
-            I'm Eduardo, have been building software for the last 10 years, mainly for startups.
+            I&apos;m Eduardo, have been building software for the last 10 years, mainly for startups.
             I cofounded amiloz (YC w22) for which we raised a few million dollars, later on we had to pivot and I got a micro exit from that.
             <br />Now I am onto my next thing and meanwhile I help other startups build their products.
           </p>
