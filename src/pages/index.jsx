@@ -13,36 +13,15 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
+import logoAmiloz from '@/images/logos/amiloz.jpeg'
+import logoBetterfin from '@/images/logos/betterfin.jpeg'
+import logoZeel from '@/images/logos/zeel.jpeg'
+import logoEiya from '@/images/logos/eiya.jpeg'
+import logoRappi from '@/images/logos/rappi.jpeg'
 import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
 import { formatDate } from '@/lib/formatDate'
 import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
-
-function MailIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
 
 function BriefcaseIcon(props) {
   return (
@@ -106,35 +85,49 @@ function SocialLink({ icon: Icon, ...props }) {
 function Resume() {
   let resume = [
     {
-      company: 'Planetaria',
-      title: 'CEO',
+      company: 'Startup Software Consultant',
+      title: '-',
       logo: logoPlanetaria,
-      start: '2019',
+      start: '2018',
       end: {
         label: 'Present',
         dateTime: new Date().getFullYear(),
       },
     },
     {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
+      company: 'amiloz (YC w22)',
+      title: 'cofounder / CTO',
+      logo: logoAmiloz,
+      start: '2021',
+      end: '2022',
+    },
+    {
+      company: 'Betterfin (acq)',
+      title: 'Software Engineer',
+      logo: logoBetterfin,
+      start: '2019',
+      end: '2021',
+    },
+    {
+      company: 'Zeel',
+      title: 'Full Stack Developer',
+      logo: logoZeel,
+      start: '2018',
       end: '2019',
     },
     {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
+      company: 'eiya',
+      title: 'Lead Engineer',
+      logo: logoEiya,
+      start: '2016',
+      end: '2018',
     },
     {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
+      company: 'Rappi',
+      title: 'First in-house engineer',
+      logo: logoRappi,
+      start: '2015',
+      end: '2016',
     },
   ]
 
@@ -148,7 +141,7 @@ function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 flex flex-none h-10 items-center justify-center mt-1 relative rounded-full shadow-md w-10">
-              <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
+              <Image src={role.logo} alt="" className="h-8 rounded-full w-8" unoptimized />
             </div>
             <dl className="gap-x-2 flex flex-auto flex-wrap">
               <dt className="sr-only">Company</dt>
