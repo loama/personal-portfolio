@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
-import clsx from 'clsx'
 
 import { Button } from '@/components/Button'
 import { Card } from '@/components/Card'
@@ -10,8 +9,9 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  TwitterIcon,
   WhatsappIcon,
+  XIcon,
+  MailIcon,
 } from '@/components/SocialIcons'
 import logoAmiloz from '@/images/logos/amiloz.jpeg'
 import logoBetterfin from '@/images/logos/betterfin.jpeg'
@@ -76,8 +76,8 @@ function Article({ article }) {
 
 function SocialLink({ icon: Icon, ...props }) {
   return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="fill-zinc-500 group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300 h-6 transition w-6" />
+    <Link className="p-1 group -m-1" {...props}>
+      <Icon className="fill-zinc-500 h-6 transition w-6 group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
     </Link>
   )
 }
@@ -132,29 +132,34 @@ function Resume() {
   ]
 
   return (
-    <div className="border-zinc-100 dark:border-zinc-700/40 border p-6 rounded-2xl">
-      <h2 className="text-zinc-900 dark:text-zinc-100 flex font-semibold text-sm">
+    <div className="border border-zinc-100 p-6 rounded-2xl dark:border-zinc-700/40">
+      <h2 className="flex font-semibold text-sm text-zinc-900 dark:text-zinc-100">
         <BriefcaseIcon className="flex-none h-6 w-6" />
         <span className="ml-3">Work</span>
       </h2>
       <ol className="mt-6 space-y-4">
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
-            <div className="shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 flex flex-none h-10 items-center justify-center mt-1 relative rounded-full shadow-md w-10">
-              <Image src={role.logo} alt="" className="h-8 rounded-full w-8" unoptimized />
+            <div className="flex flex-none h-10 items-center justify-center mt-1 relative ring-1 rounded-full shadow-md w-10 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+              <Image
+                src={role.logo}
+                alt=""
+                className="h-8 rounded-full w-8"
+                unoptimized
+              />
             </div>
-            <dl className="gap-x-2 flex flex-auto flex-wrap">
+            <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
-              <dd className="text-zinc-900 dark:text-zinc-100 flex-none font-medium text-sm w-full">
+              <dd className="flex-none font-medium text-sm text-zinc-900 w-full dark:text-zinc-100">
                 {role.company}
               </dd>
               <dt className="sr-only">Role</dt>
-              <dd className="text-zinc-500 dark:text-zinc-400 text-xs">
+              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
                 {role.title}
               </dd>
               <dt className="sr-only">Date</dt>
               <dd
-                className="text-zinc-400 dark:text-zinc-500 ml-auto text-xs"
+                className="text-xs text-zinc-400 ml-auto dark:text-zinc-500"
                 aria-label={`${role.start.label ?? role.start} until ${
                   role.end.label ?? role.end
                 }`}
@@ -171,9 +176,9 @@ function Resume() {
           </li>
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+      <Button href="#" variant="secondary" className="mt-6 w-full group">
         Download CV
-        <ArrowDownIcon className="stroke-zinc-400 group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50 h-4 transition w-4" />
+        <ArrowDownIcon className="h-4 stroke-zinc-400 transition w-4 group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
@@ -194,27 +199,19 @@ export default function Home({ articles }) {
       </Head>
       <Container className="mt-9">
         <div className="max-w-2xl">
-          <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-semibold text-4xl tracking-tight">
+          <h1 className="font-semibold text-4xl text-zinc-800 tracking-tight dark:text-zinc-100 sm:text-5xl">
             Software developer, founder and designer.
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mt-6 text-base">
-            I&apos;m Eduardo, have been building software for the last 10 years, mainly for startups.
-            I cofounded amiloz (YC w22) for which we raised a few million dollars, later on we had to pivot and I got a micro exit from that.
-            <br />Now I am onto my next thing and meanwhile I help other startups build their products.
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+            I&apos;m Eduardo, have been building software for the last 10 years,
+            mainly for startups. I cofounded amiloz (YC w22) for which we raised
+            a few million dollars, later on we had to pivot and I got a micro
+            exit from that.
+            <br />
+            Now I am onto my next thing and meanwhile I help other startups
+            build their products.
           </p>
           <div className="flex gap-6 mt-6">
-            <SocialLink
-              href="https://twitter.com/loama18"
-              aria-label="Follow on Twitter"
-              icon={TwitterIcon}
-              target="_blank"
-            />
-            <SocialLink
-              href="https://twitter.com/loama18"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
-              target="_blank"
-            />
             <SocialLink
               href="https://github.com/loama"
               aria-label="Follow on GitHub"
@@ -228,23 +225,43 @@ export default function Home({ articles }) {
               target="_blank"
             />
             <SocialLink
-              href="https://api.whatsapp.com/send?phone=16468757265&text=Hey%20Eduardo!%20I%20was%20on%20your%20personal%20portfolio%20and%20would%20love%20to%20chat"
+              href="https://api.whatsapp.com/send?phone=34637432670&text=Hey%20Eduardo!%20I%20was%20on%20your%20personal%20portfolio%20and%20would%20love%20to%20chat"
               aria-label="Text me on whatsapp"
               icon={WhatsappIcon}
+              target="_blank"
+            />
+            <Link
+              className="p-1 group -m-1"
+              href="mailto:hello@eduardo-lopez.com"
+            >
+              <MailIcon className="mt-0.5 h-5 opacity-60 transition hover:opacity-100" />
+            </Link>
+
+            <Link
+              className="p-1 group -m-1"
+              href="https://www.x.com/eduardo_lop__"
+              target="_blank"
+            >
+              <XIcon className="fill-zinc-500 h-4 mt-1 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+            </Link>
+            <SocialLink
+              href="https://www.instagram.com/eduardo.lopez.amaya/"
+              aria-label="Follow on Instagram"
+              icon={InstagramIcon}
               target="_blank"
             />
           </div>
         </div>
       </Container>
-      
-      <Container className="md:mt-28 mt-24">
-        <div className="gap-y-20 lg:max-w-none lg:grid-cols-2 grid grid-cols-1 max-w-xl mx-auto">
+
+      <Container className="mt-24 md:mt-28">
+        <div className="gap-y-20 grid grid-cols-1 max-w-xl mx-auto lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (
               <Article key={article.slug} article={article} />
             ))}
           </div>
-          <div className="lg:pl-16 xl:pl-24 space-y-10">
+          <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Resume />
           </div>
         </div>
