@@ -8,7 +8,6 @@ import {
   GitHubIcon,
   InstagramIcon,
   LinkedInIcon,
-  TwitterIcon,
 } from '@/components/SocialIcons'
 import portraitImage from '@/images/portrait.jpg'
 
@@ -17,9 +16,9 @@ function SocialLink({ className, href, children, icon: Icon }) {
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group text-zinc-800 hover:text-blue-500 dark:text-zinc-200 dark:hover:text-blue-500 flex font-medium text-sm transition"
+        className="flex font-medium text-sm text-zinc-800 transition group hover:text-blue-500 dark:text-zinc-200 dark:hover:text-blue-500"
       >
-        <Icon className="fill-zinc-500 group-hover:fill-blue-500 flex-none h-6 transition w-6" />
+        <Icon className="fill-zinc-500 flex-none h-6 transition w-6 group-hover:fill-blue-500" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -47,7 +46,7 @@ export default function About() {
           content="I’m Eduardo López. I live in Guadalajara, Mexico, where I design the future."
         />
       </Head>
-      <Container className="sm:mt-32 mt-16">
+      <Container className="mt-16 sm:mt-32">
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
           <div className="lg:pl-20">
             <div className="max-w-xs px-2.5 lg:max-w-none">
@@ -55,16 +54,16 @@ export default function About() {
                 src={portraitImage}
                 alt=""
                 sizes="(min-width: 1024px) 32rem, 20rem"
-                className="aspect-square rotate-3 bg-zinc-100 dark:bg-zinc-800 object-cover rounded-2xl"
+                className="aspect-square bg-zinc-100 object-cover rotate-3 rounded-2xl dark:bg-zinc-800"
               />
             </div>
           </div>
           <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-zinc-800 dark:text-zinc-100 sm:text-5xl font-semibold text-4xl tracking-tight">
-              I’m Eduardo López. I live in Guadalajara, Mexico, where I design the
-              future.
+            <h1 className="font-semibold text-4xl text-zinc-800 tracking-tight dark:text-zinc-100 sm:text-5xl">
+              I’m Eduardo López. I live in Guadalajara, Mexico, where I design
+              the future.
             </h1>
-            <div className="space-y-7 text-zinc-600 dark:text-zinc-400 mt-6 text-base">
+            <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
               <p>
                 I’ve loved making things for as long as I can remember, and
                 wrote my first program when I was 6 years old, just two weeks
@@ -95,9 +94,6 @@ export default function About() {
           </div>
           <div className="lg:pl-20">
             <ul role="list">
-              <SocialLink href="#" icon={TwitterIcon}>
-                Follow on Twitter
-              </SocialLink>
               <SocialLink href="#" icon={InstagramIcon} className="mt-4">
                 Follow on Instagram
               </SocialLink>
@@ -110,7 +106,7 @@ export default function About() {
               <SocialLink
                 href="mailto:spencer@planetaria.tech"
                 icon={MailIcon}
-                className="border-zinc-100 dark:border-zinc-700/40 border-t mt-8 pt-8"
+                className="border-t border-zinc-100 mt-8 pt-8 dark:border-zinc-700/40"
               >
                 eduardo@autopilott.com
               </SocialLink>
