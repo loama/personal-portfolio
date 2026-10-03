@@ -1,11 +1,33 @@
 import { describe, expect, test } from "bun:test";
-import { azureReviewUrl, changeInventory, parsePatch, parseReview, reviewBatches } from "../../scripts/model-review";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { tmpdir } from "node:os";
+import { azureReviewUrl, changeInventory, parsePatch, parseReview, readChangedPatch, reviewBatches } from "../../scripts/model-review";
 
 const patch = parsePatch("src/example.ts", "diff --git a/src/example.ts b/src/example.ts\n--- a/src/example.ts\n+++ b/src/example.ts\n@@ -1,2 +1,2 @@\n-const consent = true;\n+const consent = false;\n send(consent);\n");
 const finding = { severity: "high", file: "src/example.ts", side: "new", line: 1, title: "Consent handling fails", evidence: "const consent = false;", explanation: "The changed line blocks the intended consent flow." };
 const review = (findings: unknown[]) => JSON.stringify({ summary: "Reviewed the changed consent flow.", findings });
 
 describe("model review evidence validation", () => {
+  test("reads literal Git filenames without selecting a different path", () => {
+    const directory = mkdtempSync(join(tmpdir(), "portfolio-review-paths-"));
+    function git(...args: string[]) {
+      const result = Bun.spawnSync(["git", "-C", directory, ...args], { stdout: "pipe", stderr: "pipe" });
+      if (result.exitCode) throw new Error("Could not create the Git test fixture.");
+      return result.stdout.toString().trim();
+    }
+    try {
+      git("init", "--quiet");
+      writeFileSync(join(directory, ":(literal)example.ts"), "export const exactFile = true;\n");
+      writeFileSync(join(directory, "example.ts"), "export const differentFile = true;\n");
+      git("add", ".");
+      const patch = readChangedPatch(git("hash-object", "-t", "tree", "/dev/null"), git("write-tree"), ":(literal)example.ts", directory);
+      expect(patch.lines.get(1)).toBe("export const exactFile = true;");
+      expect(patch.diff).not.toContain("differentFile");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
   test("accepts structured findings backed by exact changed source", () => {
     expect(parseReview(review([finding]), [patch]).findings).toHaveLength(1);
     expect(patch.lines.get(2)).toBe("send(consent);");

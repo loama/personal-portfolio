@@ -134,6 +134,10 @@ function ensureCommit(sha: string) {
   if (existing.exitCode !== 0) git("fetch", "--no-tags", "origin", sha);
 }
 
+export function readChangedPatch(base: string, head: string, file: string, directory = process.cwd()): Patch {
+  return parsePatch(file, git("--literal-pathspecs", "-C", directory, "diff", "--no-ext-diff", "--no-textconv", "--no-renames", "--unified=30", base, head, "--", file));
+}
+
 const schema = {
   type: "object",
   additionalProperties: false,
@@ -179,7 +183,7 @@ async function run() {
   }
   const inventory = changeInventory(git("diff", "--numstat", "-z", "--no-renames", base, head, "--"));
   const files = inventory.filter(({ contentReviewed }) => contentReviewed).map(({ file }) => file);
-  const patches = files.map((file) => parsePatch(file, git("diff", "--no-ext-diff", "--no-textconv", "--no-renames", "--unified=30", base, head, "--", file))).filter(({ diff }) => diff.length > 0);
+  const patches = files.map((file) => readChangedPatch(base, head, file)).filter(({ diff }) => diff.length > 0);
   const patchBudget = maxBatchBytes - Buffer.byteLength(JSON.stringify(inventory));
   if (patchBudget <= 0) throw new Error("The change inventory exceeds the review limit. Split the change before review.");
   const batches = reviewBatches(patches, patchBudget);
