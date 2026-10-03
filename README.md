@@ -2,7 +2,7 @@
 
 A bilingual portfolio at [eduardo-lopez.com](https://eduardo-lopez.com), with founder and employee resumes, PDF and JSON downloads, a public resume API, and an MCP endpoint.
 
-The app uses Next.js, React, TypeScript and Bun. Professional claims live in `content/profile.json`; `docs/content-sources.md` records their sources. English and Spanish have equal coverage. Each language has founder and employee resume exports.
+The app uses Next.js, React, TypeScript and Bun. Professional claims live in `content/profile.json`; `docs/content-sources.md` records their sources. English and Spanish have equal coverage. Each language has founder and employee resumes, with a one page PDF, a detailed PDF, and JSON containing the full experience record. Web readers can expand the details within each role.
 
 ## Run locally
 
@@ -29,7 +29,7 @@ bunx --bun lhci autorun --config=lighthouserc.cjs
 git diff --check
 ```
 
-The checks cover source validation, unit behavior, all four resume exports, browser navigation, responsive layouts, consent behavior, downloads and automated accessibility. React Doctor blocks warnings. Lighthouse requires at least 95 for mobile performance and 100 for accessibility, best practices and SEO on four representative routes, using the median of three runs. These are test thresholds, not a claim about current production PageSpeed scores.
+The checks cover source validation, unit behavior, four JSON and eight PDF exports, browser navigation, responsive layouts, consent behavior, downloads and automated accessibility. React Doctor blocks warnings. Lighthouse requires at least 95 for mobile performance and 100 for accessibility, best practices and SEO on four representative routes, using the median of three runs. These are test thresholds, not a claim about current production PageSpeed scores.
 
 GitHub Actions also requests a structured Azure OpenAI review. It checks every selected source diff without truncation and requires each finding to cite exact text at a reviewed line. Medium, high and critical findings block the workflow. See the release guide for credentials, coverage limits and the trusted code boundary.
 
@@ -39,11 +39,12 @@ GitHub Actions also requests a structured Azure OpenAI review. It checks every s
 | --- | --- |
 | Resume JSON | `/api/resume?lang=en&version=founder` |
 | Resume PDF | `/api/resume?lang=es&version=employee&format=pdf` |
+| Detailed PDF | `/api/resume?lang=en&version=founder&format=pdf&length=full` |
 | MCP | `/mcp` |
 | Agent reading guide | `/en/agents` |
 | Text discovery | `/llms.txt` |
 
-The resume API accepts `en` or `es`, and `founder` or `employee`. Invalid values return an error. The MCP endpoint exposes public professional information and requires no account.
+The resume API accepts `en` or `es`, and `founder` or `employee`. PDF requests accept `length=short` or `length=full`, defaulting to `short`. JSON always includes expanded experience in `work[].details`, grouped into sections with a `title` and `paragraphs`. Invalid values return an error. The MCP `get_resume` tool accepts the same PDF length options and returns the complete details for JSON and resources. No account is required.
 
 ## Releases
 
