@@ -4,6 +4,7 @@ import { contacts, LOCALES, SITE_URL, VERSIONS, type Locale, type ResumeVersion 
 
 const translatedText = z.strictObject({ en: z.string().min(1), es: z.string().min(1) });
 const translatedHighlights = z.strictObject({ en: z.array(z.string().min(1)), es: z.array(z.string().min(1)) });
+const translatedParagraphs = z.strictObject({ en: z.array(z.string().min(1)).min(1), es: z.array(z.string().min(1)).min(1) });
 const resumeDate = z.string().regex(/^\d{4}(?:-(?:0[1-9]|1[0-2]))?$/);
 
 export const profileSchema = z.strictObject({
@@ -20,6 +21,7 @@ export const profileSchema = z.strictObject({
     position: translatedText,
     summary: translatedText,
     highlights: translatedHighlights,
+    details: z.array(z.strictObject({ title: translatedText, paragraphs: translatedParagraphs })).optional(),
   })).min(1),
   publicWork: z.array(z.strictObject({ project: z.string().min(1), url: z.url(), title: translatedText, body: translatedText })),
   skills: z.array(z.string().min(1)),
@@ -76,6 +78,7 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       ...(work.endDate ? { endDate: work.endDate } : {}),
       summary: work.summary[locale],
       highlights: [...work.highlights[locale]],
+      details: (work.details ?? []).map((detail) => ({ title: detail.title[locale], paragraphs: [...detail.paragraphs[locale]] })),
     })),
     education: profile.education.map((education) => ({
       institution: education.institution,

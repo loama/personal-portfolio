@@ -7,8 +7,8 @@
       "es": "Fundador e ingeniero full stack de IA. Creo productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación."
     },
     "employee": {
-      "en": "Full stack AI engineer and product builder with experience since 2015. Built web products for Nixtla and web or mobile applications for Selia and MarketPryce. Cofounded Amiloz, a Y Combinator W22 company, where I built the first products and led a technology team averaging seven people. I work across interfaces, APIs, product design, and software for business operations.",
-      "es": "Ingeniero full stack de IA con experiencia creando productos desde 2015. He desarrollado productos web para Nixtla y aplicaciones web o móviles para Selia y MarketPryce. Cofundé Amiloz, parte de Y Combinator W22, donde construí los primeros productos y dirigí un equipo de tecnología de siete personas en promedio. Mi trabajo abarca interfaces, APIs, diseño de producto y software para operaciones."
+      "en": "Full stack AI engineer building products since 2015. Nixtla's first web engineer, where I built the first TimeGPT API, developer dashboard, and website. Cofounder and CTO at Amiloz, part of Y Combinator W22. I built the initial apps before we raised more than USD 3.5 million, then led a technology team of seven.",
+      "es": "Ingeniero full stack de IA. Creo productos desde 2015. Fui el primer ingeniero web de Nixtla, donde desarrollé la primera API de TimeGPT, el panel para desarrolladores y el sitio web. Cofundador y CTO de Amiloz, parte de Y Combinator W22. Construí las primeras aplicaciones antes de que levantáramos más de USD 3.5 millones y después dirigí un equipo de tecnología de siete personas."
     }
   },
   "work": [
@@ -33,17 +33,59 @@
       "position": { "en": "Cofounder & CTO", "es": "Cofundador y CTO" },
       "summary": { "en": "Built the first products for a company supplying corner stores in Mexico. Y Combinator W22.", "es": "Desarrollé los primeros productos de una empresa que abastecía a tiendas de barrio en México. Y Combinator W22." },
       "highlights": {
-        "en": ["Built the initial API, website, mobile apps, and internal tools, then hired and led a technology team averaging seven people.", "Owned technology for customer ordering, warehouse operations, deliveries, and internal analytics.", "We raised more than USD 3.5 million and served hundreds of business customers."],
-        "es": ["Desarrollé la primera API, el sitio web, las aplicaciones móviles y las herramientas internas. Después contraté y dirigí un equipo de tecnología de siete personas en promedio.", "Fui responsable de la tecnología para pedidos, almacén, entregas y análisis de datos.", "Levantamos más de USD 3.5 millones y atendimos a cientos de clientes empresariales."]
-      }
+        "en": ["Built the first API, website, and iOS, Android, and web apps for customers, warehouses, and deliveries before fundraising.", "We raised more than USD 3.5 million. I hired and led a technology team of seven in a company of 80 people."],
+        "es": ["Desarrollé la primera API, el sitio web y las apps de iOS, Android y web para clientes, almacenes y reparto antes de levantar capital.", "Levantamos más de USD 3.5 millones. Contraté y dirigí a siete personas en tecnología dentro de una empresa de 80 personas."]
+      },
+      "details": [
+        {
+          "title": { "en": "From the first apps to the engineering team", "es": "De las primeras apps al equipo de ingeniería" },
+          "paragraphs": {
+            "en": ["Before we raised funding, I built the software myself: the API, website, and iOS, Android, and web applications for customers, warehouse teams, and delivery drivers. My remit also covered internal tools and analytics.", "We went through Y Combinator W22, raised a little over USD 3.5 million during my time there, and served hundreds of business customers. The company reached 80 employees, including the technology team of seven that I hired and led."],
+            "es": ["Antes de levantar capital, construí el software por mi cuenta: la API, el sitio web y las aplicaciones de iOS, Android y web para clientes, equipos de almacén y repartidores. También era responsable de las herramientas internas y la analítica.", "Pasamos por Y Combinator W22, levantamos algo más de USD 3.5 millones durante mi etapa y atendimos a cientos de clientes empresariales. La empresa llegó a 80 empleados, incluido el equipo de tecnología de siete personas que contraté y dirigí."]
+          }
+        },
+        {
+          "title": { "en": "The next direction", "es": "El siguiente rumbo" },
+          "paragraphs": {
+            "en": ["I wanted to focus fully on AI, while my cofounders wanted to pivot toward lending. We agreed on a founder separation that included a small personal exit. The company now operates as BelozFi."],
+            "es": ["Yo quería centrarme por completo en IA, mientras mis cofundadores querían orientar la empresa hacia el crédito. Acordamos mi salida como cofundador, con una pequeña compensación económica. La empresa ahora opera como BelozFi."]
+          }
+        }
+      ]
     },
     {
       "id": "nixtla",
       "name": "Nixtla",
       "url": "https://nixtla.io",
       "position": { "en": "Head of Web", "es": "Head of Web" },
-      "summary": { "en": "Web products and developer experience for time series forecasting.", "es": "Productos web y experiencia para desarrolladores en pronóstico de series de tiempo." },
-      "highlights": { "en": ["Built the website and developer portal, and contributed to early versions of the forecasting API."], "es": ["Desarrollé el sitio web y el portal para desarrolladores, y contribuí a las primeras versiones de la API de pronóstico."] }
+      "summary": { "en": "First and, for most of my time there, sole web engineer for a time series AI company.", "es": "Primer ingeniero web y, durante la mayor parte de mi etapa, el único en una empresa de IA para series de tiempo." },
+      "highlights": {
+        "en": ["Created the first API serving TimeGPT, the developer dashboard, and the website.", "Own monitoring tools, analytics, HubSpot integrations, and internal AI products."],
+        "es": ["Creé la primera API de TimeGPT, el panel para desarrolladores y el sitio web.", "Soy responsable de herramientas de monitoreo, analítica, integraciones con HubSpot y productos internos de IA."]
+      },
+      "details": [
+        {
+          "title": { "en": "The first web engineer", "es": "El primer ingeniero web" },
+          "paragraphs": {
+            "en": ["As of October 2026, I had worked at Nixtla for a little over three years. I was the first web engineer and, for most of that time, the only person in that role. I continue as Head of Web."],
+            "es": ["En octubre de 2026 llevaba algo más de tres años en Nixtla. Fui el primer ingeniero web y, durante la mayor parte de ese tiempo, el único en ese puesto. Sigo trabajando como Head of Web."]
+          }
+        },
+        {
+          "title": { "en": "TimeGPT and the developer experience", "es": "TimeGPT y la experiencia para desarrolladores" },
+          "paragraphs": {
+            "en": ["I created the first API serving the initial TimeGPT model, along with the developer dashboard and website. This covered the web products and interfaces through which developers accessed the forecasting service."],
+            "es": ["Creé la primera API que servía el modelo inicial de TimeGPT, además del panel para desarrolladores y el sitio web. Mi trabajo abarcaba los productos web y las interfaces con las que los desarrolladores accedían al servicio de pronóstico."]
+          }
+        },
+        {
+          "title": { "en": "Monitoring, analytics, and internal products", "es": "Monitoreo, analítica y productos internos" },
+          "paragraphs": {
+            "en": ["I built monitoring tools and took responsibility for analytics and HubSpot integrations. My remit also includes several internal AI products that have not been publicly released."],
+            "es": ["Desarrollé herramientas de monitoreo y asumí la responsabilidad de la analítica y las integraciones con HubSpot. Mi trabajo también incluye varios productos internos de IA que todavía no se han publicado."]
+          }
+        }
+      ]
     },
     {
       "id": "consulting",
@@ -53,9 +95,39 @@
       "position": { "en": "Software consultant for startups", "es": "Consultor de software para startups" },
       "summary": { "en": "Web and mobile products for founders and growing teams.", "es": "Productos web y móviles para fundadores y equipos en crecimiento." },
       "highlights": {
-        "en": ["Built Selia's therapist marketplace across web, iOS, and Android, with tools for patients, therapists, and internal teams.", "Developed MarketPryce's mobile apps, redesigned Ciro, and led development of CervezaSiempre for AB InBev."],
-        "es": ["Desarrollé la plataforma de Selia que conecta pacientes y terapeutas para web, iOS y Android, con herramientas para pacientes, terapeutas y equipos internos.", "Creé las aplicaciones móviles de MarketPryce, rediseñé Ciro y dirigí el desarrollo de CervezaSiempre para AB InBev."]
-      }
+        "en": ["Built Selia's first iOS, Android, and web apps, including booking, payments, and video consultations.", "Built MarketPryce's iOS app, designed Ciro in Figma, and led CervezaSiempre for AB InBev."],
+        "es": ["Construí las primeras apps de Selia para iOS, Android y web, con reservas, pagos y videoconsultas.", "Desarrollé la app de iOS de MarketPryce, diseñé Ciro en Figma y lideré CervezaSiempre para AB InBev."]
+      },
+      "details": [
+        {
+          "title": { "en": "Selia", "es": "Selia" },
+          "paragraphs": {
+            "en": ["Built the complete first version for therapists and patients across iOS, Android, and web. It included therapist discovery, connecting patients with therapists, booking, payments, and video sessions inside the app."],
+            "es": ["Construí la primera versión completa para terapeutas y pacientes en iOS, Android y web. Incluía búsqueda de terapeutas, conexión entre pacientes y terapeutas, reservas, pagos y sesiones por videollamada dentro de la app."]
+          }
+        },
+        {
+          "title": { "en": "MarketPryce", "es": "MarketPryce" },
+          "paragraphs": {
+            "en": ["Built the iOS app for discovering and connecting with sports influencers, including matching. That app is no longer in use."],
+            "es": ["Desarrollé la app de iOS para descubrir y conectar con figuras del deporte, incluida la búsqueda de coincidencias. Esa app ya no está en uso."]
+          }
+        },
+        {
+          "title": { "en": "Ciro", "es": "Ciro" },
+          "paragraphs": {
+            "en": ["Redesigned the whole product in Figma. This engagement was entirely product design and did not include writing code."],
+            "es": ["Rediseñé todo el producto en Figma. El proyecto fue exclusivamente de diseño de producto y no incluyó programación."]
+          }
+        },
+        {
+          "title": { "en": "CervezaSiempre for AB InBev", "es": "CervezaSiempre para AB InBev" },
+          "paragraphs": {
+            "en": ["Led development of a beer subscription service for AB InBev. We launched in about a month and a half and reached thousands of customers over the following month and a half.", "It was planned as a short engagement. After completing it, I moved to the role at Betterfin that I had already arranged."],
+            "es": ["Lideré el desarrollo de un servicio de suscripción de cerveza para AB InBev. Lo lanzamos en aproximadamente un mes y medio y alcanzamos miles de clientes durante el mes y medio siguiente.", "El proyecto estaba previsto como una colaboración corta. Al terminarlo, me incorporé al puesto en Betterfin que ya había acordado."]
+          }
+        }
+      ]
     },
     {
       "id": "betterfin", "name": "Betterfin", "startDate": "2019-06", "endDate": "2021-02",
@@ -72,8 +144,17 @@
     {
       "id": "eiya", "name": "Eiya", "startDate": "2016-08", "endDate": "2017-12",
       "position": { "en": "Lead engineer", "es": "Líder de ingeniería" },
-      "summary": { "en": "Built fleet tools, customer dashboards, and delivery apps. Managed a small engineering and design team.", "es": "Desarrollé herramientas para flotas, paneles para clientes y aplicaciones de reparto. Dirigí un equipo pequeño de ingeniería y diseño." },
-      "highlights": { "en": [], "es": [] }
+      "summary": { "en": "Built iOS, Android, and web apps for delivery drivers, internal operations, and customers.", "es": "Desarrollé apps de iOS, Android y web para repartidores, operaciones internas y clientes." },
+      "highlights": { "en": [], "es": [] },
+      "details": [
+        {
+          "title": { "en": "Delivery products and team", "es": "Productos de reparto y equipo" },
+          "paragraphs": {
+            "en": ["My work covered the delivery apps, fleet tools, customer dashboards, and internal operations across iOS, Android, and web. I also managed a small engineering and design team."],
+            "es": ["Mi trabajo abarcaba las apps de reparto, las herramientas para flotas, los paneles de clientes y las operaciones internas en iOS, Android y web. También dirigí un equipo pequeño de ingeniería y diseño."]
+          }
+        }
+      ]
     },
     {
       "id": "rappi", "name": "Rappi", "startDate": "2016-02", "endDate": "2016-08",
