@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { contacts, type Locale } from "@/lib/site";
 import { MainNavigation } from "./main-navigation";
+import { SocialIcon } from "./social-icon";
 
 export function Arrow({ className = "" }: { className?: string }) {
   return <ArrowTopRightIcon aria-hidden="true" className={`h-4 w-4 ${className}`} />;
@@ -49,9 +50,9 @@ export function Footer({ locale }: { locale: Locale }) {
   return <footer className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-7 px-5 py-10 text-xs text-muted sm:px-10">
     <p>© 2026 Eduardo López</p>
     <div className="flex flex-wrap gap-x-6 gap-y-4">
-      <a href={contacts.linkedin} data-track="social_linkedin">LinkedIn</a>
-      <a href={contacts.x} data-track="social_x">X</a>
-      <a href={contacts.github} data-track="social_github">GitHub</a>
+      <a href={contacts.linkedin} data-track="social_linkedin" className="inline-flex items-center gap-2"><SocialIcon platform="linkedin" />LinkedIn</a>
+      <a href={contacts.x} data-track="social_x" className="inline-flex items-center gap-2"><SocialIcon platform="x" />X</a>
+      <a href={contacts.github} data-track="social_github" className="inline-flex items-center gap-2"><SocialIcon platform="github" />GitHub</a>
       <Link href={`/${locale}/agents`}>{locale === "es" ? "Para agentes" : "For agents"}</Link>
       <Link href={`/${locale}/privacy`}>{locale === "es" ? "Privacidad" : "Privacy"}</Link>
     </div>

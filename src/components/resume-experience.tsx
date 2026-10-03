@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { getCompanyLogo } from "@/lib/company-logos";
 import type { Resume } from "@/lib/resume";
 import type { Locale } from "@/lib/site";
@@ -41,6 +42,21 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
               <ul className="mt-3 space-y-2 pl-4 text-sm leading-relaxed text-muted">
                 {entry.highlights.map((item) => <li key={item} className="list-disc pl-1 marker:text-accent/50">{item}</li>)}
               </ul>
+            )}
+            {entry.details.length > 0 && (
+              <details className="group mt-3">
+                <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 rounded-md text-sm font-medium text-accent transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+                  {es ? "Más sobre este trabajo" : "More about this work"}
+                  <span className="sr-only">{` ${es ? "en" : "at"} ${entry.name}`}</span>
+                  <ChevronDownIcon aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />
+                </summary>
+                <div className="mb-1 mt-3 space-y-6 border-l-2 border-brand/25 pl-5">
+                  {entry.details.map((detail) => <section key={detail.title}>
+                    <h4 className="text-sm font-semibold text-ink">{detail.title}</h4>
+                    {detail.paragraphs.map((paragraph) => <p key={paragraph} className="mt-2 text-sm leading-[1.8] text-muted">{paragraph}</p>)}
+                  </section>)}
+                </div>
+              </details>
             )}
           </article>
         );

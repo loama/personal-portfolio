@@ -1,5 +1,8 @@
 import { profile } from "./resume";
 
+const nixtlaExperience = profile.work.find((work) => work.id === "nixtla");
+if (!nixtlaExperience) throw new Error("Nixtla experience is missing.");
+
 export const CASE_IDS = ["amiloz", "nixtla"] as const;
 export type CaseId = (typeof CASE_IDS)[number];
 
@@ -37,18 +40,18 @@ export const caseStudies = {
     version: "employee",
     en: {
       title: "The web side of forecasting.",
-      intro: "At Nixtla, I work on web products and developer experience. My contributions include the website, the developer portal, and early versions of the forecasting API.",
+      intro: `${nixtlaExperience.summary.en} ${nixtlaExperience.highlights.en[0]}`,
       context: "The public changes below show two small parts of the work: maintaining documentation routes and the workflows that publish developer documentation.",
-      scope: ["Website", "Developer portal", "Early API contributions"],
+      scope: ["Website", "Developer dashboard", "First TimeGPT API"],
       sections: profile.publicWork.filter((work) => work.project === "nixtla").map((work) => ({ title: work.title.en, body: work.body.en, source: work.url })),
       takeaway: "I continue to work as Head of Web at Nixtla, combining public web products, developer experience, and API contributions.",
       link: "Visit Nixtla",
     },
     es: {
       title: "La parte web del pronóstico.",
-      intro: "En Nixtla trabajo en productos web y experiencia para desarrolladores. He contribuido al sitio web, al portal para desarrolladores y a las primeras versiones de la API de pronóstico.",
+      intro: `${nixtlaExperience.summary.es} ${nixtlaExperience.highlights.es[0]}`,
       context: "Los cambios públicos de abajo muestran dos partes concretas del trabajo: mantener las rutas de documentación y los flujos que la publican.",
-      scope: ["Sitio web", "Portal para desarrolladores", "Contribuciones a la API inicial"],
+      scope: ["Sitio web", "Panel para desarrolladores", "Primera API de TimeGPT"],
       sections: profile.publicWork.filter((work) => work.project === "nixtla").map((work) => ({ title: work.title.es, body: work.body.es, source: work.url })),
       takeaway: "Sigo trabajando como Head of Web en Nixtla, combinando productos web, experiencia para desarrolladores y contribuciones a la API.",
       link: "Visitar Nixtla",
