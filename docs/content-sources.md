@@ -6,7 +6,7 @@ The résumé and website use the same career record in `content/profile.json`. E
 
 1. Eduardo's [LinkedIn profile](https://www.linkedin.com/in/eduardolopezamaya/), using a saved export captured August 21, 2026 and the live profile viewed October 3, 2026. This is the primary source for career chronology, consulting projects, Amiloz responsibilities, funding, customer count, average technology team size, and founder programs, including Platanus Ventures 2023.
 2. Eduardo's 2023 résumé, used to cross check earlier roles and education.
-3. Eduardo's October 2026 application résumé, used for the Nixtla Head of Web title and September 2026 end date.
+3. Eduardo's October 2026 application résumé, used for the Nixtla Head of Web title. Eduardo confirmed on October 3, 2026 that the role is current, correcting the earlier end date.
 4. [Y Combinator's Amiloz profile](https://www.ycombinator.com/companies/amiloz), for the company and W22 affiliation.
 5. [Supervisor](https://trysupervisor.com) and [Constructor](https://useconstructor.com), for current product descriptions and public links.
 6. [Nixtla PR 855](https://github.com/Nixtla/nixtla/pull/855), authored by `loama` and merged August 10, 2026. The public description and diff support the documentation routing example. Destination checks are reported in that PR, not presented as current live verification.
@@ -24,7 +24,7 @@ The YC mark is the [official vector asset](https://bookface-static.ycombinator.c
 
 Amiloz raised more than USD 3.5 million and served hundreds of business customers. These are company outcomes. The résumé does not attribute all fundraising or customer acquisition to Eduardo. His role covers building the initial API, website, mobile apps, internal tools, and then hiring and leading a technology team averaging seven people.
 
-Nixtla's start date has not been established. Its record intentionally omits `startDate`; the interface and PDF show the verified end date. The earlier LinkedIn record describes Nixtla work within consulting. Consulting dates overlap other roles because the source presents an ongoing independent practice, not a sequence of exclusive employment contracts.
+Nixtla's start date has not been established. Its record intentionally omits `startDate`; the interface and PDF show the role as current, following Eduardo's October 3, 2026 correction. The earlier LinkedIn record describes Nixtla work within consulting. Consulting dates overlap other roles because the source presents an ongoing independent practice, not a sequence of exclusive employment contracts.
 
 Supervisor and Constructor are described as current development work. Their interface illustrations are labeled accordingly. The website does not claim a customer count, revenue, growth rate, or production availability for either product.
 
