@@ -22,6 +22,6 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
 export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
-  const structured = { "@context": "https://schema.org", "@type": "Person", name: "Eduardo López", url: SITE_URL, image: `${SITE_URL}/images/eduardo.webp`, jobTitle: lang === "es" ? "Fundador e ingeniero de software" : "Founder & software engineer", email: contacts.email, sameAs: [contacts.linkedin, contacts.x, contacts.github], knowsLanguage: ["English", "Spanish"] };
+  const structured = { "@context": "https://schema.org", "@type": "Person", name: "Eduardo López", url: SITE_URL, image: `${SITE_URL}/images/eduardo-linkedin.webp`, jobTitle: lang === "es" ? "Fundador e ingeniero de software" : "Founder & software engineer", email: contacts.email, sameAs: [contacts.linkedin, contacts.x, contacts.github], knowsLanguage: ["English", "Spanish"] };
   return <><Header locale={lang} /><main id="main"><Hero locale={lang} /><div className="mx-auto max-w-[1240px] border-t border-ink/10" /><Projects locale={lang} /><FounderStory locale={lang} /><Experience locale={lang} /><About locale={lang} /><div className="px-5 sm:px-10"><Contact locale={lang} /></div></main><Footer locale={lang} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured).replace(/</g, "\\u003c") }} /></>;
 }

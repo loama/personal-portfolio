@@ -7,19 +7,20 @@ Eduardo López is a founder and full stack engineer. This site publishes his pro
 
 ## Résumé data
 
-Read ${SITE_URL}/api/resume for the English founder résumé as JSON. Set lang to en or es, version to founder or employee, and format to json or pdf. PDF requests redirect to a relative path on the current deployment. Unknown parameters, repeated parameters, and unsupported values return 400.
+Read the [English founder résumé](${SITE_URL}/api/resume) as JSON. Set lang to en or es, version to founder or employee, and format to json or pdf. PDF requests redirect to a relative path on the current deployment. Unknown parameters, repeated parameters, and unsupported values return 400.
 
 The founder version puts Supervisor and Amiloz first. The employee version puts Nixtla and Amiloz first. Both use the same source facts. Dates absent from the source stay absent. Do not infer a start date for Nixtla, language proficiency levels, or other missing facts.
 
 The response follows JSON Resume fields and adds language, version, lastModified, and sources inside meta. Cite the sources when using career claims.
 
-API schema: ${SITE_URL}/api/openapi
-Spanish employee example: ${SITE_URL}/api/resume?lang=es&version=employee&format=json
-English founder PDF: ${SITE_URL}/api/resume?lang=en&version=founder&format=pdf
+1. [OpenAPI schema](${SITE_URL}/api/openapi): Query parameters, responses, and résumé fields.
+2. [Spanish employee JSON](${SITE_URL}/api/resume?lang=es&version=employee&format=json): The employment and consulting version in Spanish.
+3. [English founder PDF](${SITE_URL}/api/resume?lang=en&version=founder&format=pdf): A printable résumé.
+4. [Web résumé and downloads](${SITE_URL}/en/resume/founder): Switch language and audience or download either format.
 
 ## MCP access
 
-Connect an MCP client with Streamable HTTP to ${SITE_URL}/mcp. Send POST requests with Content-Type application/json and an Accept header containing application/json and text/event-stream. Initialize normally. The server returns JSON responses and keeps no sessions. GET returns 405.
+Connect an MCP client with Streamable HTTP to the [MCP endpoint](${SITE_URL}/mcp). Send POST requests with Content-Type application/json and an Accept header containing application/json and text/event-stream. Initialize normally. The server returns JSON responses and keeps no sessions. GET returns 405.
 
 The get_resume tool accepts language en or es, version founder or employee, and format json or pdf. Defaults are en, founder, and json. JSON results contain the résumé in structuredContent and text. PDF results contain the exact public download URL.
 
