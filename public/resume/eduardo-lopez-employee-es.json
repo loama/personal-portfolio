@@ -59,7 +59,7 @@
     },
     {
       "name": "Supervisor",
-      "position": "Fundador",
+      "position": "Fundador único",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
@@ -94,10 +94,10 @@
     },
     {
       "name": "Rappi",
-      "position": "Primer desarrollador en México",
+      "position": "Desarrollador full stack",
       "startDate": "2016-02",
       "endDate": "2016-08",
-      "summary": "Desarrollé herramientas internas para operaciones y atención al cliente.",
+      "summary": "Primer desarrollador interno en México. Desarrollé herramientas internas para operaciones y atención al cliente.",
       "highlights": []
     },
     {

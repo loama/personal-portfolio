@@ -9,6 +9,9 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await page.goto("/en");
   await expect(page).toHaveTitle(/Eduardo L\u00F3pez/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText("I build software.");
+  const mainNavigation = page.getByRole("navigation", { name: "Main navigation", exact: true });
+  await expect(mainNavigation.getByRole("link")).toHaveCount(2);
+  await expect(mainNavigation.getByRole("link", { name: "Projects", exact: true })).toHaveAttribute("aria-current", "location");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
   await page.getByRole("link", { name: "For your team", exact: true }).click();
   await expect(page).toHaveURL(/\/en\/work$/);
@@ -20,7 +23,15 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(page).toHaveURL(/\/es\/resume\/employee$/);
   await page.getByRole("navigation", { name: "Versi\xF3n del curr\xEDculum" }).getByRole("link", { name: "Fundador", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/resume\/founder$/);
+  const spanishNavigation = page.getByRole("navigation", { name: "Navegación principal", exact: true });
+  await expect(spanishNavigation.getByRole("link", { name: "Currículum", exact: true })).toHaveAttribute("aria-current", "page");
   await expect(page.getByRole("link", { name: "Descargar PDF" })).toHaveAttribute("href", "/resume/eduardo-lopez-founder-es.pdf");
+  await spanishNavigation.getByRole("link", { name: "Proyectos", exact: true }).click();
+  await expect(page).toHaveURL(/\/es#work$/);
+  await expect(spanishNavigation.getByRole("link", { name: "Proyectos", exact: true })).toHaveAttribute("aria-current", "location");
+  await page.goBack();
+  await expect(page).toHaveURL(/\/es\/resume\/founder$/);
+  await expect(spanishNavigation.getByRole("link", { name: "Currículum", exact: true })).toHaveAttribute("aria-current", "page");
   expect(errors).toEqual([]);
 });
 test("layout fits small phones through wide screens", async ({ page }, testInfo) => {

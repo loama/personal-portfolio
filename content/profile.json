@@ -3,8 +3,8 @@
   "name": "Eduardo López",
   "summary": {
     "founder": {
-      "en": "Founder and full stack engineer building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
-      "es": "Fundador e ingeniero full stack que crea productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación."
+      "en": "Founder and full stack AI engineer. Building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+      "es": "Fundador e ingeniero full stack de IA. Creo productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación."
     },
     "employee": {
       "en": "Full stack engineer and product builder with experience since 2015. Built web products for Nixtla and web or mobile applications for Selia and MarketPryce. Cofounded Amiloz, a Y Combinator W22 company, where I built the first products and led a technology team averaging seven people. I work across interfaces, APIs, product design, and software for business operations.",
@@ -17,7 +17,7 @@
       "name": "Supervisor",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
-      "position": { "en": "Founder", "es": "Fundador" },
+      "position": { "en": "Solo founder", "es": "Fundador único" },
       "summary": { "en": "Building software that lets teams run business operations through conversation.", "es": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación." },
       "highlights": {
         "en": ["Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.", "Building Constructor, a companion product for creating applications from a description."],
@@ -77,8 +77,8 @@
     },
     {
       "id": "rappi", "name": "Rappi", "startDate": "2016-02", "endDate": "2016-08",
-      "position": { "en": "First developer in Mexico", "es": "Primer desarrollador en México" },
-      "summary": { "en": "Built internal software for operations and customer service.", "es": "Desarrollé herramientas internas para operaciones y atención al cliente." },
+      "position": { "en": "Full Stack Developer", "es": "Desarrollador full stack" },
+      "summary": { "en": "First in house developer in Mexico. Built internal software for operations and customer service.", "es": "Primer desarrollador interno en México. Desarrollé herramientas internas para operaciones y atención al cliente." },
       "highlights": { "en": [], "es": [] }
     },
     {

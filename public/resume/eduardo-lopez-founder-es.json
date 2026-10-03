@@ -1,11 +1,11 @@
 {
   "basics": {
     "name": "Eduardo López",
-    "label": "Fundador e ingeniero full stack",
+    "label": "Fundador e ingeniero full stack de IA",
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Fundador e ingeniero full stack que crea productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación.",
+    "summary": "Fundador e ingeniero full stack de IA. Creo productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Fundador",
+      "position": "Fundador único",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
@@ -94,10 +94,10 @@
     },
     {
       "name": "Rappi",
-      "position": "Primer desarrollador en México",
+      "position": "Desarrollador full stack",
       "startDate": "2016-02",
       "endDate": "2016-08",
-      "summary": "Desarrollé herramientas internas para operaciones y atención al cliente.",
+      "summary": "Primer desarrollador interno en México. Desarrollé herramientas internas para operaciones y atención al cliente.",
       "highlights": []
     },
     {
