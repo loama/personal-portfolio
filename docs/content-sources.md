@@ -20,6 +20,8 @@ Private source documents remain outside this repository. Contact details were su
 
 The orange and white palette, Sk Modernist headings, system body font, and VCR OSD Mono action font follow [Supervisor](https://trysupervisor.com), as requested by Eduardo. The font files come from his Supervisor website assets. Small orange text uses a darker shade for legibility.
 
+The PDFs embed the regular and bold Liberation Sans fonts distributed with Mozilla's PDF.js. The font files and their SIL Open Font License are stored in `assets/fonts`. These static fonts preserve the PDF layout and avoid relying on fonts installed in the viewer. Unicode mappings keep accented text searchable and selectable.
+
 The YC mark is the [official vector asset](https://bookface-static.ycombinator.com/vite/assets/yc-logo-vector-CecLwoGq.js) served by Y Combinator. It identifies the Amiloz W22 affiliation. Platanus Ventures is identified separately as the 2023 founder cohort.
 
 The [Supervisor logo](https://trysupervisor.com/supervisor-logo.svg) comes from its current website. The local copy preserves the original icon and wordmark.
