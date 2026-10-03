@@ -9,6 +9,8 @@ The résumé and website use the same career record in `content/profile.json`. E
 3. Eduardo's October 2026 application résumé, used for the Nixtla Head of Web title and September 2026 end date.
 4. [Y Combinator's Amiloz profile](https://www.ycombinator.com/companies/amiloz), for the company and W22 affiliation.
 5. [Supervisor](https://trysupervisor.com) and [Constructor](https://useconstructor.com), for current product descriptions and public links.
+6. [Nixtla PR 855](https://github.com/Nixtla/nixtla/pull/855), authored by `loama` and merged August 10, 2026. The public description and diff support the documentation routing example. Destination checks are reported in that PR, not presented as current live verification.
+7. [Nixtla documentation workflow correction](https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df), publicly attributed to `loama`. The diff supports replacing the previous HierarchicalForecast output in preview and production. It does not establish a measured reliability improvement.
 
 Private source documents remain outside this repository. Contact details were supplied by Eduardo. The portrait and X account came from his existing website.
 
@@ -22,7 +24,7 @@ Supervisor and Constructor are described as current development work. Their inte
 
 Education records distinguish founder programs from a university degree. Language records do not assign unverified proficiency levels. No compensation, agency valuation, or independent review verdict appears as a career fact.
 
-The Amiloz and Nixtla work notes expand the responsibilities described in these same sources. The diagrams show areas of responsibility and do not claim to reproduce production architecture or interfaces.
+The Amiloz and Nixtla work notes expand the responsibilities described in these same sources. Nixtla also includes two public code examples stored in `content/profile.json`. The diagrams show areas of responsibility and do not claim to reproduce production architecture or interfaces.
 
 ## Updating the record
 
