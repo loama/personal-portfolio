@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { flushSync } from "react-dom";
 import { usePathname } from "next/navigation";
 import { isAnalyticsEventName, type AnalyticsEventName } from "@/lib/analytics";
 import type { Locale } from "@/lib/site";
@@ -49,8 +50,9 @@ export function Analytics({ locale }: { locale: Locale }) {
   const message = copy[consent === "blocked" ? "blocked" : "enabled"];
 
   function closePreferences() {
-    setSettingsOpen(false);
-    if (settingsOpen) preferencesTrigger.current?.focus({ preventScroll: true });
+    if (!settingsOpen) return;
+    flushSync(() => setSettingsOpen(false));
+    preferencesTrigger.current?.focus({ preventScroll: true });
   }
 
   function choose(value: "accepted" | "declined") {
