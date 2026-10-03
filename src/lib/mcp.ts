@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { z } from "zod";
 import { getResume } from "./resume";
-import { LOCALES, resumePath, SITE_URL, VERSIONS } from "./site";
+import { LOCALES, PDF_LENGTHS, resumePath, SITE_URL, VERSIONS } from "./site";
 
 export function createResumeServer() {
   const server = new McpServer({ name: "eduardo-lopez-resume", version: "1.0.0" }, {
@@ -12,16 +12,17 @@ export function createResumeServer() {
 
   server.registerTool("get_resume", {
     title: "Get Eduardo López's résumé",
-    description: "Return the public résumé as structured JSON or a URL for the matching PDF. Dates absent from the source remain absent.",
+    description: "Return the public résumé as structured JSON, including expanded experience details, or a URL for a short or full PDF. Dates absent from the source remain absent.",
     inputSchema: z.strictObject({
       language: z.enum(LOCALES).default("en").describe("Résumé language."),
       version: z.enum(VERSIONS).default("founder").describe("Founder or employee emphasis."),
       format: z.enum(["json", "pdf"]).default("json").describe("Structured JSON or a PDF download URL."),
+      length: z.enum(PDF_LENGTHS).default("short").describe("PDF length. Short is one page; full includes expanded experience. JSON always includes all details."),
     }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-  }, ({ language, version, format }) => {
+  }, ({ language, version, format, length }) => {
     if (format === "pdf") {
-      const result = { url: new URL(resumePath(language, version, "pdf"), SITE_URL).href, language, version, mimeType: "application/pdf" };
+      const result = { url: new URL(resumePath(language, version, "pdf", length), SITE_URL).href, language, version, mimeType: "application/pdf" };
       return { content: [{ type: "text", text: JSON.stringify(result) }], structuredContent: result };
     }
 
@@ -33,7 +34,7 @@ export function createResumeServer() {
     for (const language of LOCALES) {
       server.registerResource(`resume_${version}_${language}`, `resume://${version}/${language}`, {
         title: `Eduardo López résumé, ${version}, ${language === "en" ? "English" : "Spanish"}`,
-        description: "Public résumé in JSON Resume format.",
+        description: "Public résumé using JSON Resume fields, with expanded experience in work[].details.",
         mimeType: "application/json",
       }, (uri) => ({
         contents: [{ uri: uri.href, mimeType: "application/json", text: JSON.stringify(getResume(language, version)) }],

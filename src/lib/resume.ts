@@ -1,6 +1,6 @@
 import { z } from "zod";
 import sourceProfile from "../../content/profile.json";
-import { contacts, LOCALES, SITE_URL, VERSIONS, type Locale, type ResumeVersion } from "./site";
+import { contacts, LOCALES, PDF_LENGTHS, SITE_URL, VERSIONS, type Locale, type ResumeVersion } from "./site";
 
 const translatedText = z.strictObject({ en: z.string().min(1), es: z.string().min(1) });
 const translatedHighlights = z.strictObject({ en: z.array(z.string().min(1)), es: z.array(z.string().min(1)) });
@@ -40,6 +40,7 @@ export const resumeQuerySchema = z.strictObject({
   lang: z.enum(LOCALES).default("en"),
   version: z.enum(VERSIONS).default("founder"),
   format: z.enum(["json", "pdf"]).default("json"),
+  length: z.enum(PDF_LENGTHS).default("short"),
 });
 
 const workPriority: Record<ResumeVersion, string[]> = {

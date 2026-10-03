@@ -22,14 +22,14 @@ export function GET(request: Request) {
     }, { status: 400, headers: { ...publicHeaders, "Cache-Control": "no-store" } });
   }
 
-  const { lang, version, format } = result.data;
+  const { lang, version, format, length } = result.data;
   if (format === "pdf") {
     return new Response(null, {
       status: 307,
       headers: {
         ...publicHeaders,
         "Cache-Control": "public, max-age=3600",
-        Location: resumePath(lang, version, "pdf"),
+        Location: resumePath(lang, version, "pdf", length),
       },
     });
   }
