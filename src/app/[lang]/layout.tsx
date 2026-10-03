@@ -40,7 +40,7 @@ export default async function LocaleLayout({ children, params }: {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} data-scroll-behavior="smooth" className={`${modernist.variable} ${vcr.variable}`}>
+    <html lang={lang} className={`${modernist.variable} ${vcr.variable}`}>
       <body className="bg-paper font-sans text-ink antialiased">
         <a href="#main" className="skip-link">{lang === "es" ? "Saltar al contenido" : "Skip to content"}</a>
         {children}
