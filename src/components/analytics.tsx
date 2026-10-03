@@ -8,12 +8,12 @@ import type { Locale } from "@/lib/site";
 const labels = {
   en: {
     options: "Privacy options", preferences: "Analytics preferences", close: "Close preferences", accept: "Accept analytics", decline: "Decline", privacy: "Privacy",
-    enabled: { title: "May I measure your visit?", description: "Plausible and PostHog measure visits and clicks to improve this site. No advertising or session recording." },
+    enabled: { title: "Cookies OK?", description: "Plausible and PostHog measure visits and clicks to improve this site. No advertising or session recording." },
     blocked: { title: "Your browser has disabled analytics", description: "We respect your privacy signal. To allow analytics, first change the preference in your browser." },
   },
   es: {
     options: "Opciones de privacidad", preferences: "Preferencias de analítica", close: "Cerrar preferencias", accept: "Aceptar analítica", decline: "Rechazar", privacy: "Privacidad",
-    enabled: { title: "¿Puedo medir tu visita?", description: "Plausible y PostHog miden visitas y clics para mejorar este sitio. Sin publicidad ni grabación de sesiones." },
+    enabled: { title: "¿Cookies OK?", description: "Plausible y PostHog miden visitas y clics para mejorar este sitio. Sin publicidad ni grabación de sesiones." },
     blocked: { title: "Tu navegador ha desactivado la analítica", description: "Respetamos tu señal de privacidad. Para permitir la analítica, cambia primero la preferencia de tu navegador." },
   },
 };
