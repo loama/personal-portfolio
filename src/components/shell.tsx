@@ -11,7 +11,10 @@ export function Header({ locale, path = "", mode = "founder" }: { locale: Locale
   const es = locale === "es";
   return (
     <header className="relative z-20 mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 px-5 pb-5 pt-7 sm:px-10">
-      <Link href={`/${locale}`} className="wordmark font-display inline-flex min-h-11 items-center text-lg font-semibold tracking-tight" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>eduardo lopez<span className="text-brand">.</span></Link>
+      <Link href={`/${locale}`} className="wordmark inline-flex min-h-11 flex-col items-start justify-center gap-0.5" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>
+        <span className="font-display text-lg font-semibold leading-5 tracking-tight">eduardo lopez<span className="text-brand">.</span></span>
+        <span className="text-xs leading-4 text-muted">{es ? "edu para los amigos" : "edu for friends"}</span>
+      </Link>
       <MainNavigation locale={locale} path={path} mode={mode} />
       <nav aria-label={es ? "Idioma" : "Language"} className="flex items-center gap-1 text-xs font-semibold">
         {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} scroll={false} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
