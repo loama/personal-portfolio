@@ -80,7 +80,9 @@ for (const locale of LOCALES) {
       const formatDate = (value: string) => new Intl.DateTimeFormat(locale, { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${value}-01T00:00:00Z`));
       const dates = work.startDate
         ? `${formatDate(work.startDate)} ${spanish ? "a" : "to"} ${work.endDate ? formatDate(work.endDate) : (spanish ? "presente" : "present")}`
-        : `${spanish ? "Hasta" : "Through"} ${formatDate(work.endDate!)}`;
+        : work.endDate
+          ? `${spanish ? "Hasta" : "Through"} ${formatDate(work.endDate)}`
+          : (spanish ? "Actualidad" : "Present");
       text(`${work.name}  |  ${work.position}`, 11, true, ink, 3);
       text(dates, 8.7, false, muted, 4);
       for (const highlight of work.highlights) text(highlight, 10.1, false, ink, 3.5);
