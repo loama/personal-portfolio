@@ -22,7 +22,12 @@ export function Hero({ locale, mode = "founder" }: { locale: Locale; mode?: "fou
   return <section className="mx-auto grid max-w-[1320px] items-center gap-14 px-5 pb-20 pt-9 sm:px-10 sm:pt-16 lg:grid-cols-[1.55fr_1fr] lg:gap-16 lg:pb-24 lg:pt-20">
     <div>
       <div className="hero-enter"><AudienceSwitch locale={locale} active={mode} /></div>
-      <p className="hero-enter mt-8 text-sm font-medium text-muted">{labels.greeting}</p>
+      <p className="hero-enter mt-8 flex items-center gap-2 font-action text-[15px] font-normal uppercase leading-normal tracking-[.08em] text-muted sm:text-[17px]">
+        <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 scale-95 text-[#ff4f00]" fill="none" viewBox="0 0 20 20">
+          <path d="M1 1H19V19M1 19L19 1" stroke="currentColor" strokeLinecap="square" strokeLinejoin="miter" strokeWidth="2" />
+        </svg>
+        <span>{labels.greeting}</span>
+      </p>
       <h1 className="hero-enter hero-title mt-4 font-bold tracking-[-0.058em]">
         {profile.title[0]}<br /><span className="text-brand">{profile.title[1]}</span><br /><span className="text-brand">{profile.title[2]}</span>
       </h1>
@@ -33,12 +38,12 @@ export function Hero({ locale, mode = "founder" }: { locale: Locale; mode?: "fou
       </div>
       <div className="hero-enter mt-10 flex items-center gap-3 text-xs text-muted"><span className="h-1.5 w-1.5 rounded-full bg-brand" /><span>{labels.since}</span></div>
     </div>
-    <div className="portrait-enter relative mx-auto w-full max-w-[430px] lg:mr-0">
+    <div className="portrait-enter relative mx-auto w-[90%] max-w-[370px] lg:mr-0">
       <div className="portrait-shell rounded-[2rem] p-2">
         <div className="relative overflow-hidden rounded-[1.55rem]">
-          <Image src="/images/eduardo-linkedin.webp" alt="Eduardo López" width={800} height={800} priority sizes="(min-width: 1024px) 410px, (min-width: 640px) 400px, calc(100vw - 56px)" className="aspect-[4/4.7] w-full object-cover" />
+          <Image src="/images/eduardo-linkedin.webp" alt="Eduardo López" width={800} height={800} priority sizes="(min-width: 452px) 354px, calc(90vw - 52px)" className="aspect-[4/4.7] w-full object-cover" />
           <div className="portrait-shade absolute inset-0" aria-hidden="true" />
-          <div className="absolute bottom-7 left-7 right-7 text-white"><p className="text-[11px] uppercase tracking-[.18em] opacity-80">{labels.how}</p><p className="mt-2 max-w-[260px] text-2xl font-medium leading-tight tracking-tight">{labels.approach}</p></div>
+          <div className="absolute bottom-7 left-5 right-5 text-white sm:left-7 sm:right-7"><p className="text-[11px] uppercase tracking-[.18em] opacity-80">{labels.how}</p><p className="mt-2 max-w-[260px] text-xl font-medium leading-tight tracking-tight sm:text-2xl">{labels.approach}</p></div>
         </div>
       </div>
       <div className="founder-note relative -mt-8 ml-4 mr-4 grid gap-3 rounded-2xl px-4 py-4 sm:ml-[-28px] sm:mr-10">
