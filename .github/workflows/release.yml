@@ -79,14 +79,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: '"$RUNNER_TEMP/vercel-cli/node_modules/.bin/vercel" deploy --prod --yes --no-color --build-env "RELEASE_COMMIT=$GITHUB_SHA"'
       - name: Verify the deployed release commit
-        run: |
-          bun -e '
-            const response = await fetch("https://eduardo-lopez.com/api/release", { cache: "no-store", signal: AbortSignal.timeout(30000) });
-            if (!response.ok) throw new Error(`Release metadata returned HTTP ${response.status}`);
-            const release = await response.json();
-            if (release.commit !== process.env.GITHUB_SHA) throw new Error("Production does not match the published release commit.");
-            console.log("Production commit matches the published release.");
-          '
+        run: bun scripts/check-production.ts
       - name: Verify the public resume API
         run: |
           bun -e '
