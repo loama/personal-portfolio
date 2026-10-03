@@ -59,7 +59,7 @@
     },
     {
       "name": "Supervisor",
-      "position": "Founder",
+      "position": "Solo founder",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Building software that lets teams run business operations through conversation.",
@@ -94,10 +94,10 @@
     },
     {
       "name": "Rappi",
-      "position": "First developer in Mexico",
+      "position": "Full Stack Developer",
       "startDate": "2016-02",
       "endDate": "2016-08",
-      "summary": "Built internal software for operations and customer service.",
+      "summary": "First in house developer in Mexico. Built internal software for operations and customer service.",
       "highlights": []
     },
     {

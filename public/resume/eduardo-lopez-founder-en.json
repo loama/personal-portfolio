@@ -1,11 +1,11 @@
 {
   "basics": {
     "name": "Eduardo López",
-    "label": "Founder and full stack engineer",
+    "label": "Founder and full stack AI engineer",
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Founder and full stack engineer building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+    "summary": "Founder and full stack AI engineer. Building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Founder",
+      "position": "Solo founder",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Building software that lets teams run business operations through conversation.",
@@ -94,10 +94,10 @@
     },
     {
       "name": "Rappi",
-      "position": "First developer in Mexico",
+      "position": "Full Stack Developer",
       "startDate": "2016-02",
       "endDate": "2016-08",
-      "summary": "Built internal software for operations and customer service.",
+      "summary": "First in house developer in Mexico. Built internal software for operations and customer service.",
       "highlights": []
     },
     {
