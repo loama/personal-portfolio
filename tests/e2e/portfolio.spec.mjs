@@ -114,6 +114,29 @@ test("key pages have no automated accessibility violations", async ({ page }) =>
     expect(results.violations, `${path}: ${JSON.stringify(results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })))}`).toEqual([]);
   }
 });
+test("resume company logos load and fit phone and desktop layouts", async ({ page }, testInfo) => {
+  for (const variant of [{ locale: "en", version: "employee", decline: "Decline" }, { locale: "es", version: "founder", decline: "Rechazar" }]) {
+    for (const width of [320, 1440]) {
+      await page.setViewportSize({ width, height: 960 });
+      await page.goto(`/${variant.locale}/resume/${variant.version}`);
+      const decline = page.getByRole("button", { name: variant.decline, exact: true });
+      if (await decline.isVisible()) await decline.click();
+      const entries = page.locator("main article");
+      await expect(entries.first().getByRole("heading", { level: 3 })).toHaveText("Supervisor");
+      const logos = entries.locator("img");
+      await expect(logos).toHaveCount(8);
+      for (const logo of await logos.all()) {
+        await logo.scrollIntoViewIfNeeded();
+        await expect.poll(() => logo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+      }
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+      if (testInfo.project.name === "chromium" && variant.locale === "en") {
+        await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
+        await page.screenshot({ path: join(process.env.QA_ARTIFACT_DIR ?? join(tmpdir(), "eduardo-portfolio-qa"), `resume-${width}.png`), fullPage: true, animations: "disabled" });
+      }
+    }
+  }
+});
 test("all four PDF and JSON downloads match the selected profile", async ({ request }) => {
   for (const lang of ["en", "es"]) {
     for (const version of ["founder", "employee"]) {

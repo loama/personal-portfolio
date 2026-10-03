@@ -24,9 +24,24 @@ The YC mark is the [official vector asset](https://bookface-static.ycombinator.c
 
 The [Supervisor logo](https://trysupervisor.com/supervisor-logo.svg) comes from its current website. The local copy preserves the original icon and wordmark.
 
+Company logos appear beside the experience entries on the website and in the PDFs. Local PNG copies in `public/images/companies` preserve the source colors and proportions.
+
+1. Supervisor uses the icon from its existing official logo asset.
+2. Nixtla uses its [official site icon](https://nixtla.io/favicon.svg).
+3. Amiloz uses the [original wordmark in Innogen Capital's 2022 archive](https://innogencapital.com/wp-content/uploads/2022/04/amiloz-logo-Innogen.png).
+4. Betterfin uses the image shown in Eduardo's experience record, linked to its [company profile](https://www.linkedin.com/company/11388878/).
+5. Zeel uses its [official application icon](https://inhome.zeel.com/favicon.png).
+6. Eiya uses the image shown in Eduardo's experience record, linked to its [company profile](https://www.linkedin.com/company/15264369/).
+7. Rappi uses its [official application icon](https://www.rappi.com.mx/pwa-icons/192x192.png).
+8. Centraal uses the image shown in Eduardo's experience record, linked to its [company profile](https://www.linkedin.com/company/2852335/).
+
+These assets were retrieved on October 3, 2026. The LinkedIn images are stored locally so they remain available after their source URLs expire.
+
 ## Claim boundaries
 
 Amiloz raised more than USD 3.5 million and served hundreds of business customers. These are company outcomes. The résumé does not attribute all fundraising or customer acquisition to Eduardo. His role covers building the initial API, website, mobile apps, internal tools, and then hiring and leading a technology team averaging seven people.
+
+The wording "We raised" follows Eduardo's October 3, 2026 feedback and refers to the founding team collectively.
 
 Nixtla's start date has not been established. Its record intentionally omits `startDate`; the interface and PDF show the role as current, following Eduardo's October 3, 2026 correction. The earlier LinkedIn record describes Nixtla work within consulting. Consulting dates overlap other roles because the source presents an ongoing independent practice, not a sequence of exclusive employment contracts.
 

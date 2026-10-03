@@ -42,7 +42,7 @@ export const resumeQuerySchema = z.strictObject({
 
 const workPriority: Record<ResumeVersion, string[]> = {
   founder: ["supervisor", "amiloz", "nixtla", "consulting"],
-  employee: ["nixtla", "amiloz", "consulting", "supervisor"],
+  employee: ["supervisor", "nixtla", "amiloz", "consulting"],
 };
 
 export function getResume(locale: Locale = "en", version: ResumeVersion = "founder") {

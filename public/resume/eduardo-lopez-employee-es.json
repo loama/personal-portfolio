@@ -26,6 +26,17 @@
   },
   "work": [
     {
+      "name": "Supervisor",
+      "position": "Fundador único",
+      "url": "https://trysupervisor.com",
+      "startDate": "2023-07",
+      "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
+      "highlights": [
+        "El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.",
+        "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."
+      ]
+    },
+    {
       "name": "Nixtla",
       "position": "Head of Web",
       "url": "https://nixtla.io",
@@ -44,7 +55,7 @@
       "highlights": [
         "Desarrollé la primera API, el sitio web, las aplicaciones móviles y las herramientas internas. Después contraté y dirigí un equipo de tecnología de siete personas en promedio.",
         "Fui responsable de la tecnología para pedidos, almacén, entregas y análisis de datos.",
-        "La empresa levantó más de USD 3.5 millones y atendió a cientos de clientes empresariales."
+        "Levantamos más de USD 3.5 millones y atendimos a cientos de clientes empresariales."
       ]
     },
     {
@@ -55,17 +66,6 @@
       "highlights": [
         "Desarrollé la plataforma de Selia que conecta pacientes y terapeutas para web, iOS y Android, con herramientas para pacientes, terapeutas y equipos internos.",
         "Creé las aplicaciones móviles de MarketPryce, rediseñé Ciro y dirigí el desarrollo de CervezaSiempre para AB InBev."
-      ]
-    },
-    {
-      "name": "Supervisor",
-      "position": "Fundador único",
-      "url": "https://trysupervisor.com",
-      "startDate": "2023-07",
-      "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
-      "highlights": [
-        "El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.",
-        "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."
       ]
     },
     {

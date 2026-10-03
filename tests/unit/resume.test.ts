@@ -17,7 +17,7 @@ describe("résumé source and variants", () => {
         expect(resume.meta).toEqual({ language, version, lastModified: sourceProfile.updated, sources: sourceProfile.sources });
         expect(resume.work.map(({ name }) => name).slice(0, 4)).toEqual(version === "founder"
           ? ["Supervisor", "Amiloz", "Nixtla", language === "es" ? "Consultoría" : "Independent"]
-          : ["Nixtla", "Amiloz", language === "es" ? "Consultoría" : "Independent", "Supervisor"]);
+          : ["Supervisor", "Nixtla", "Amiloz", language === "es" ? "Consultoría" : "Independent"]);
         expect(resume.work).toHaveLength(sourceProfile.work.length);
 
         for (const source of sourceProfile.work) {
