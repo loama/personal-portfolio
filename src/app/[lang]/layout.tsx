@@ -5,9 +5,17 @@ import { isLocale, LOCALES, SITE_URL } from "@/lib/site";
 import "../globals.css";
 import { Analytics } from "@/components/analytics";
 
-const general = localFont({
-  src: "../../../public/fonts/GeneralSans-Variable.ttf",
-  variable: "--font-general",
+const modernist = localFont({
+  src: "../../../public/fonts/Sk-Modernist-Bold.otf",
+  variable: "--font-modernist",
+  weight: "700",
+  display: "swap",
+});
+
+const vcr = localFont({
+  src: "../../../public/fonts/VCR-OSD-Mono-Latin.woff",
+  variable: "--font-vcr",
+  weight: "400",
   display: "swap",
 });
 
@@ -32,7 +40,7 @@ export default async function LocaleLayout({ children, params }: {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} data-scroll-behavior="smooth" className={general.variable}>
+    <html lang={lang} data-scroll-behavior="smooth" className={`${modernist.variable} ${vcr.variable}`}>
       <body className="bg-paper font-sans text-ink antialiased">
         <a href="#main" className="skip-link">{lang === "es" ? "Saltar al contenido" : "Skip to content"}</a>
         {children}
