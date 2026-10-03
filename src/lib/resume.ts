@@ -57,7 +57,7 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       name: profile.name,
       label: version === "founder"
         ? (locale === "en" ? "Founder and full stack AI engineer" : "Fundador e ingeniero full stack de IA")
-        : (locale === "en" ? "Full stack engineer" : "Ingeniero full stack"),
+        : (locale === "en" ? "Full stack AI engineer" : "Ingeniero full stack de IA"),
       email: contacts.email,
       phone: contacts.phone,
       url: SITE_URL,
