@@ -42,3 +42,5 @@ test-results/
 playwright-report/
 .lighthouseci/
 artifacts/
+
+/next-env.d.ts

@@ -11,7 +11,7 @@
     "build": "bun run generate:resume && bun --bun next build",
     "start": "bun --bun next start --hostname 0.0.0.0 --port 3000",
     "lint": "eslint . --max-warnings 0",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "bun --bun next typegen && tsc --noEmit",
     "test": "bun test tests/unit --coverage",
     "test:e2e": "playwright test",
     "generate:resume": "bun scripts/generate-resumes.ts",
