@@ -1,0 +1,72 @@
+name: Quality
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'release' }}
+
+jobs:
+  checks:
+    name: Code and browser checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: true
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: '1.4.2'
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Validate source and unit behavior
+        run: bun run check
+      - name: Require a clean React Doctor report
+        run: bun run check:react
+      - name: Build production output
+        run: bun run build
+      - name: Check regenerated resume exports
+        run: git diff --exit-code -- public/resume
+      - name: Install browser engines
+        run: bunx playwright install --with-deps chromium webkit
+      - name: Test browser behavior and accessibility
+        env:
+          QA_ARTIFACT_DIR: ${{ runner.temp }}/portfolio-qa
+        run: bun run test:e2e
+      - name: Require Lighthouse quality thresholds
+        env:
+          LHCI_ARTIFACT_DIR: ${{ runner.temp }}/portfolio-lighthouse
+        run: |
+          export CHROME_PATH="$(bun -e 'import { chromium } from "@playwright/test"; console.log(chromium.executablePath());')"
+          bunx --bun lhci autorun --config=lighthouserc.cjs
+      - name: Upload browser failure evidence
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: browser-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/portfolio-qa
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Upload Lighthouse measurements
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: lighthouse-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/portfolio-lighthouse
+          if-no-files-found: ignore
+          retention-days: 7

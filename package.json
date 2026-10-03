@@ -16,7 +16,7 @@
     "test:e2e": "playwright test",
     "generate:resume": "bun scripts/generate-resumes.ts",
     "check:content": "bun scripts/check-content.ts",
-    "check:react": "react-doctor . --yes --verbose --fail-on warning",
+    "check:react": "react-doctor . --yes --verbose --blocking warning",
     "check": "bun run lint && bun run typecheck && bun run test && bun run check:content"
   },
   "dependencies": {
