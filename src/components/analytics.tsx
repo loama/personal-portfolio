@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { flushSync } from "react-dom";
 import { usePathname } from "next/navigation";
 import { isAnalyticsEventName, type AnalyticsEventName } from "@/lib/analytics";
 import type { Locale } from "@/lib/site";
@@ -51,8 +50,15 @@ export function Analytics({ locale }: { locale: Locale }) {
 
   function closePreferences() {
     if (!settingsOpen) return;
-    flushSync(() => setSettingsOpen(false));
-    preferencesTrigger.current?.focus({ preventScroll: true });
+    setSettingsOpen(false);
+    // Let the browser finish the activating key's scroll before returning focus.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (window.location.pathname === path && document.activeElement === document.body) {
+          preferencesTrigger.current?.focus({ preventScroll: true });
+        }
+      });
+    });
   }
 
   function choose(value: "accepted" | "declined") {

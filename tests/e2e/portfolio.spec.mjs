@@ -174,14 +174,17 @@ test("privacy preferences restore keyboard focus without changing scroll", async
         await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
       }
       for (const action of [copy.close, copy.accept, copy.decline]) {
-        await trigger.press("Enter");
-        await expect(preferences).toBeVisible();
-        await page.evaluate(() => window.scrollTo({ top: 400, behavior: "instant" }));
-        await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
-        await preferences.getByRole("button", { name: action, exact: true }).press("Enter");
-        await expect(preferences).toHaveCount(0);
-        await expect(trigger).toBeFocused();
-        await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
+        for (const activation of [{ key: "Enter", delay: 0 }, { key: "Enter", delay: 100 }, { key: "Space", delay: 100 }]) {
+          await trigger.press("Enter");
+          await expect(preferences).toBeVisible();
+          await page.evaluate(() => window.scrollTo({ top: 400, behavior: "instant" }));
+          await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
+          await preferences.getByRole("button", { name: action, exact: true }).press(activation.key, { delay: activation.delay });
+          await expect(preferences).toHaveCount(0);
+          await expect(trigger).toBeFocused();
+          await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+          await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
+        }
       }
     }
   }
