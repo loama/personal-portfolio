@@ -3,6 +3,7 @@ import { ArrowTopRightIcon } from "@radix-ui/react-icons";
 import { contacts, type Locale } from "@/lib/site";
 import { MainNavigation } from "./main-navigation";
 import { SocialIcon } from "./social-icon";
+import { ButtonLabel } from "./button-label";
 
 export function Arrow({ className = "" }: { className?: string }) {
   return <ArrowTopRightIcon aria-hidden="true" className={`h-4 w-4 ${className}`} />;
@@ -39,7 +40,7 @@ export function Contact({ locale }: { locale: Locale }) {
     <div className="relative grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-end">
       <div><span className="eyebrow">{es ? "La próxima conversación" : "The next conversation"}</span><h2 className="mt-5 max-w-xl text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.06] tracking-[-0.055em]">{es ? "¿Qué quieres construir?" : "What do you want to build?"}</h2><p className="mt-5 max-w-sm text-base leading-relaxed text-muted">{es ? "Un producto, una empresa o una mejor forma de trabajar. Me interesa escucharlo." : "A product, a company, or a better way to work. I'd like to hear about it."}</p></div>
       <div className="flex flex-col items-start gap-5 md:items-end">
-        <a href={contacts.whatsapp} className="button-primary group" data-track="contact_whatsapp">{es ? "Hablemos por WhatsApp" : "Let's talk on WhatsApp"}<span className="button-icon"><Arrow /></span></a>
+        <a href={contacts.whatsapp} className="button-primary" data-track="contact_whatsapp"><ButtonLabel>{es ? "Hablemos por WhatsApp" : "Let's talk on WhatsApp"}</ButtonLabel><span className="button-icon"><Arrow /></span></a>
         <a href={`mailto:${contacts.email}`} className="flex items-center gap-3 text-sm underline decoration-ink/25 underline-offset-4 hover:decoration-ink" data-track="contact_email">{contacts.email}<Arrow /></a>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { Header, Footer, Arrow } from "@/components/shell";
 import { getResume } from "@/lib/resume";
 import { ResumeExperience } from "@/components/resume-experience";
 import { SocialIcon } from "@/components/social-icon";
+import { ButtonLabel } from "@/components/button-label";
 import { isLocale, isVersion, resumePath, VERSIONS, contacts } from "@/lib/site";
 
 type Params = Promise<{ lang: string; version: string }>;
@@ -25,7 +26,7 @@ export default async function ResumePage({ params }: { params: Params }) {
     <div className="flex flex-wrap items-center justify-between gap-5"><span className="eyebrow">{es ? "La experiencia completa" : "The full experience"}</span><nav aria-label={es ? "Versión del currículum" : "Resume version"} className="flex gap-1 rounded-full bg-mist p-1 text-xs">{VERSIONS.map((v) => <Link key={v} href={`/${lang}/resume/${v}`} aria-current={version === v ? "page" : undefined} className={`rounded-full px-4 py-2.5 ${version === v ? "bg-white font-medium shadow-sm" : "text-muted"}`}>{v === "founder" ? (es ? "Fundador" : "Founder") : (es ? "Empleado y consultor" : "Employee & consultant")}</Link>)}</nav></div>
     <h1 className="mt-7 text-[clamp(2.7rem,6vw,4.5rem)] font-bold leading-tight tracking-[-.05em]">{resume.basics.name}</h1><p className="mt-2 text-xl text-accent">{resume.basics.label}</p>
     <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
-      <a href={resumePath(lang, version, "pdf")} download className="button-primary" data-track="download_pdf">{es ? "Descargar PDF" : "Download PDF"}<span className="button-icon"><DownloadIcon aria-hidden="true" className="h-4 w-4" /></span></a>
+      <a href={resumePath(lang, version, "pdf")} download className="button-primary" data-track="download_pdf"><ButtonLabel>{es ? "Descargar PDF" : "Download PDF"}</ButtonLabel><span className="button-icon"><DownloadIcon aria-hidden="true" className="h-4 w-4" /></span></a>
       <a href={resumePath(lang, version, "pdf", "full")} download className="flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-ink" data-track="download_pdf_full">{es ? "PDF detallado" : "Detailed PDF"}<DownloadIcon aria-hidden="true" className="h-4 w-4" /></a>
       <a href={resumePath(lang, version, "json")} download className="flex min-h-11 items-center gap-2 text-sm font-medium" data-track="download_json">JSON<Arrow /></a>
       <a href={contacts.whatsapp} className="flex min-h-11 items-center gap-2 text-sm sm:ml-auto" data-track="contact_whatsapp"><SocialIcon platform="whatsapp" />WhatsApp<Arrow /></a>
