@@ -21,6 +21,7 @@ export const profileSchema = z.strictObject({
     summary: translatedText,
     highlights: translatedHighlights,
   })).min(1),
+  publicWork: z.array(z.strictObject({ project: z.string().min(1), url: z.url(), title: translatedText, body: translatedText })),
   skills: z.array(z.string().min(1)),
   languages: z.array(translatedText),
   education: z.array(z.strictObject({

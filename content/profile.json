@@ -89,6 +89,32 @@
       "highlights": { "en": [], "es": [] }
     }
   ],
+  "publicWork": [
+    {
+      "project": "nixtla",
+      "url": "https://github.com/Nixtla/nixtla/pull/855",
+      "title": {
+        "en": "Put the fix where the routes live",
+        "es": "Corregir las rutas donde se gestionan"
+      },
+      "body": {
+        "en": "Four obsolete documentation URLs returned 404s. I added redirects in Nixtla's Mintlify configuration, which owns the documentation routes. The website forwards documentation requests there. The merged change maps each old address to its replacement, with destination checks recorded in the pull request.",
+        "es": "Cuatro enlaces antiguos de la documentación devolvían errores 404. Añadí redirecciones en la configuración de Mintlify de Nixtla, que gestiona esas rutas. El sitio web reenvía allí las solicitudes de documentación. El cambio integrado asigna cada dirección antigua a su reemplazo. Las comprobaciones de destino están documentadas en el pull request."
+      }
+    },
+    {
+      "project": "nixtla",
+      "url": "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df",
+      "title": {
+        "en": "Replace the previous documentation output",
+        "es": "Sustituir la documentación anterior"
+      },
+      "body": {
+        "en": "I updated both preview and production documentation workflows to remove the previous HierarchicalForecast output before copying the rebuilt directory. This makes replacement explicit instead of copying new files over an existing output directory. The public diff shows the change in both workflows.",
+        "es": "Actualicé los flujos de documentación de vista previa y producción para eliminar la versión anterior de HierarchicalForecast antes de copiar el directorio reconstruido. Así, la copia sustituye el contenido anterior en lugar de mezclar archivos nuevos con los existentes. El diff público muestra el cambio en ambos flujos."
+      }
+    }
+  ],
   "skills": ["JavaScript", "TypeScript", "React", "Next.js", "Vue", "Node.js", "Python", "Django", "SQL", "PostgreSQL", "Firebase", "Capacitor", "Git", "Figma"],
   "languages": [{ "en": "English", "es": "Inglés" }, { "en": "Spanish", "es": "Español" }],
   "education": [
@@ -96,5 +122,5 @@
     { "institution": "Platanus Ventures", "area": { "en": "2023 founder cohort", "es": "Programa de fundadores de 2023" }, "startDate": "2023" },
     { "institution": "Dev.F", "area": { "en": "Software development bootcamp", "es": "Bootcamp de desarrollo de software" }, "startDate": "2015" }
   ],
-  "sources": ["https://www.linkedin.com/in/eduardolopezamaya/", "https://www.ycombinator.com/companies/amiloz", "https://trysupervisor.com", "https://useconstructor.com"]
+  "sources": ["https://www.linkedin.com/in/eduardolopezamaya/", "https://www.ycombinator.com/companies/amiloz", "https://trysupervisor.com", "https://useconstructor.com", "https://github.com/Nixtla/nixtla/pull/855", "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df"]
 }
