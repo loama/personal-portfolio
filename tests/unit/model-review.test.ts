@@ -3,6 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { azureReviewUrl, changeInventory, parsePatch, parseReview, readChangedPatch, reviewBatches } from "../../scripts/model-review";
+import { validReleaseTag } from "../../scripts/verify-release";
 
 const patch = parsePatch("src/example.ts", "diff --git a/src/example.ts b/src/example.ts\n--- a/src/example.ts\n+++ b/src/example.ts\n@@ -1,2 +1,2 @@\n-const consent = true;\n+const consent = false;\n send(consent);\n");
 const finding = { severity: "high", file: "src/example.ts", side: "new", line: 1, title: "Consent handling fails", evidence: "const consent = false;", explanation: "The changed line blocks the intended consent flow." };
@@ -82,12 +83,17 @@ describe("model review evidence validation", () => {
   });
 });
 
-describe("review endpoint boundaries", () => {
+describe("review endpoint and release boundaries", () => {
   test("accepts only Azure resource HTTPS endpoints", () => {
     expect(azureReviewUrl("https://portfolio.openai.azure.com").href).toBe("https://portfolio.openai.azure.com/openai/v1/chat/completions");
     expect(azureReviewUrl("https://portfolio.services.ai.azure.com/openai/v1/").pathname).toBe("/openai/v1/chat/completions");
     for (const endpoint of ["http://portfolio.openai.azure.com", "https://example.com", "https://portfolio.openai.azure.com.evil.example", "https://user:pass@portfolio.openai.azure.com", "https://portfolio.openai.azure.com?key=secret", "https://portfolio.openai.azure.com:444", "https://portfolio.openai.azure.com/other"]) {
       expect(() => azureReviewUrl(endpoint)).toThrow();
     }
+  });
+  test("accepts stable semantic version tags only", () => {
+    expect(validReleaseTag("v1.2.3")).toBe(true);
+    expect(validReleaseTag("v0.0.1")).toBe(true);
+    for (const tag of ["main", "1.2.3", "v01.2.3", "v1.2.3-rc.1", "v1.2.3+build", "v1.2.3\n", "v1.2.3;echo secret"]) expect(validReleaseTag(tag)).toBe(false);
   });
 });

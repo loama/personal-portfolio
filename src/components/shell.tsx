@@ -1,0 +1,61 @@
+import Link from "next/link";
+import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { contacts, type Locale } from "@/lib/site";
+
+export function Arrow({ className = "" }: { className?: string }) {
+  return <ArrowTopRightIcon aria-hidden="true" className={`h-4 w-4 ${className}`} />;
+}
+
+export function Header({ locale, path = "", mode = "founder" }: { locale: Locale; path?: string; mode?: "founder" | "employee" }) {
+  const es = locale === "es";
+  const home = `/${locale}${mode === "employee" ? "/work" : ""}`;
+  return (
+    <header className="relative z-20 mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 px-5 pb-5 pt-7 sm:px-10">
+      <Link href={`/${locale}`} className="wordmark inline-flex min-h-11 items-center text-lg font-semibold tracking-tight" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>eduardo<span className="text-olive">.</span></Link>
+      <nav aria-label={es ? "Navegación principal" : "Main navigation"} className="nav-island order-3 flex w-full items-center justify-center gap-1 rounded-full px-3 py-1 text-[13px] font-medium sm:order-none sm:w-auto sm:gap-7 sm:px-5">
+        <Link href={`/${locale}#work`}>{es ? "Proyectos" : "Selected work"}</Link>
+        <Link href={`/${locale}#about`}>{es ? "Sobre mí" : "About"}</Link>
+        <Link href={`/${locale}/resume/${mode}`}>{es ? "Currículum" : "Resume"}</Link>
+        <Link href={`${home}#contact`} className="flex items-center gap-1.5">{es ? "Hablemos" : "Let's talk"}<Arrow /></Link>
+      </nav>
+      <nav aria-label={es ? "Idioma" : "Language"} className="flex items-center gap-1 text-xs font-semibold">
+        {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
+      </nav>
+    </header>
+  );
+}
+
+export function AudienceSwitch({ locale, active }: { locale: Locale; active: "founder" | "employee" }) {
+  const es = locale === "es";
+  return <nav aria-label={es ? "Tipo de perfil" : "Profile focus"} className="inline-flex max-w-full items-center gap-1 rounded-full bg-[#e9ece3] p-1 text-xs font-medium">
+    <Link href={`/${locale}`} aria-current={active === "founder" ? "page" : undefined} className={`rounded-full px-4 py-2.5 transition-colors ${active === "founder" ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink"}`}>{es ? "Como fundador" : "As a founder"}</Link>
+    <Link href={`/${locale}/work`} aria-current={active === "employee" ? "page" : undefined} className={`rounded-full px-4 py-2.5 transition-colors ${active === "employee" ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink"}`}>{es ? "Para tu equipo" : "For your team"}</Link>
+  </nav>;
+}
+
+export function Contact({ locale }: { locale: Locale }) {
+  const es = locale === "es";
+  return <section id="contact" className="contact-panel relative mx-auto mt-12 max-w-[1240px] overflow-hidden rounded-[2rem] px-7 py-14 sm:px-14 sm:py-20">
+    <div className="contact-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+    <div className="relative grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-end">
+      <div><span className="eyebrow">{es ? "La próxima conversación" : "The next conversation"}</span><h2 className="mt-5 max-w-xl text-[clamp(2.5rem,5.5vw,4.5rem)] font-medium leading-[1.06] tracking-[-0.055em]">{es ? "¿Qué quieres construir?" : "What do you want to build?"}</h2><p className="mt-5 max-w-sm text-base leading-relaxed text-muted">{es ? "Un producto, una empresa o una mejor forma de trabajar. Me interesa escucharlo." : "A product, a company, or a better way to work. I'd like to hear about it."}</p></div>
+      <div className="flex flex-col items-start gap-5 md:items-end">
+        <a href={contacts.whatsapp} className="button-primary group" data-track="contact_whatsapp">{es ? "Hablemos por WhatsApp" : "Let's talk on WhatsApp"}<span className="button-icon"><Arrow /></span></a>
+        <a href={`mailto:${contacts.email}`} className="flex items-center gap-3 text-sm underline decoration-ink/25 underline-offset-4 hover:decoration-ink" data-track="contact_email">{contacts.email}<Arrow /></a>
+      </div>
+    </div>
+  </section>;
+}
+
+export function Footer({ locale }: { locale: Locale }) {
+  return <footer className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-7 px-5 py-10 text-xs text-muted sm:px-10">
+    <p>© 2026 Eduardo López</p>
+    <div className="flex flex-wrap gap-x-6 gap-y-4">
+      <a href={contacts.linkedin} data-track="social_linkedin">LinkedIn</a>
+      <a href={contacts.x} data-track="social_x">X</a>
+      <a href={contacts.github} data-track="social_github">GitHub</a>
+      <Link href={`/${locale}/agents`}>{locale === "es" ? "Para agentes" : "For agents"}</Link>
+      <Link href={`/${locale}/privacy`}>{locale === "es" ? "Privacidad" : "Privacy"}</Link>
+    </div>
+  </footer>;
+}

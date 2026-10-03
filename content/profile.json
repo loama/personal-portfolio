@@ -1,0 +1,126 @@
+{
+  "updated": "2026-10-03",
+  "name": "Eduardo López",
+  "summary": {
+    "founder": {
+      "en": "Founder and full stack engineer building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+      "es": "Fundador e ingeniero full stack que crea productos para startups desde 2015. Cofundé Amiloz, parte de Y Combinator W22, y desarrollé sus primeros productos antes de contratar al equipo de ingeniería. Ahora desarrollo Supervisor y Constructor, conectando la operación de las empresas con software que los equipos pueden usar mediante una conversación."
+    },
+    "employee": {
+      "en": "Full stack engineer and product builder with experience since 2015. Built web products for Nixtla and web or mobile applications for Selia and MarketPryce. Cofounded Amiloz, a Y Combinator W22 company, where I built the first products and led a technology team averaging seven people. I work across interfaces, APIs, product design, and software for business operations.",
+      "es": "Ingeniero full stack con experiencia creando productos desde 2015. He desarrollado productos web para Nixtla y aplicaciones web o móviles para Selia y MarketPryce. Cofundé Amiloz, parte de Y Combinator W22, donde construí los primeros productos y dirigí un equipo de tecnología de siete personas en promedio. Mi trabajo abarca interfaces, APIs, diseño de producto y software para operaciones."
+    }
+  },
+  "work": [
+    {
+      "id": "supervisor",
+      "name": "Supervisor",
+      "url": "https://trysupervisor.com",
+      "startDate": "2023-07",
+      "position": { "en": "Founder", "es": "Fundador" },
+      "summary": { "en": "Building software that lets teams run business operations through conversation.", "es": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación." },
+      "highlights": {
+        "en": ["Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.", "Building Constructor, a companion product for creating applications from a description."],
+        "es": ["El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.", "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."]
+      }
+    },
+    {
+      "id": "amiloz",
+      "name": "Amiloz",
+      "url": "https://www.ycombinator.com/companies/amiloz",
+      "startDate": "2021-07",
+      "endDate": "2022-12",
+      "position": { "en": "Cofounder & CTO", "es": "Cofundador y CTO" },
+      "summary": { "en": "Built the first products for a company supplying corner stores in Mexico. Y Combinator W22.", "es": "Desarrollé los primeros productos de una empresa que abastecía a tiendas de barrio en México. Y Combinator W22." },
+      "highlights": {
+        "en": ["Built the initial API, website, mobile apps, and internal tools, then hired and led a technology team averaging seven people.", "Owned technology for customer ordering, warehouse operations, deliveries, and internal analytics.", "The company raised more than USD 3.5 million and served hundreds of business customers."],
+        "es": ["Desarrollé la primera API, el sitio web, las aplicaciones móviles y las herramientas internas. Después contraté y dirigí un equipo de tecnología de siete personas en promedio.", "Fui responsable de la tecnología para pedidos, almacén, entregas y análisis de datos.", "La empresa levantó más de USD 3.5 millones y atendió a cientos de clientes empresariales."]
+      }
+    },
+    {
+      "id": "nixtla",
+      "name": "Nixtla",
+      "url": "https://nixtla.io",
+      "endDate": "2026-09",
+      "position": { "en": "Head of Web", "es": "Head of Web" },
+      "summary": { "en": "Web products and developer experience for time series forecasting.", "es": "Productos web y experiencia para desarrolladores en pronóstico de series de tiempo." },
+      "highlights": { "en": ["Built the website and developer portal, and contributed to early versions of the forecasting API."], "es": ["Desarrollé el sitio web y el portal para desarrolladores, y contribuí a las primeras versiones de la API de pronóstico."] }
+    },
+    {
+      "id": "consulting",
+      "name": "Independent",
+      "nameEs": "Consultoría",
+      "startDate": "2018-01",
+      "position": { "en": "Software consultant for startups", "es": "Consultor de software para startups" },
+      "summary": { "en": "Web and mobile products for founders and growing teams.", "es": "Productos web y móviles para fundadores y equipos en crecimiento." },
+      "highlights": {
+        "en": ["Built Selia's therapist marketplace across web, iOS, and Android, with tools for patients, therapists, and internal teams.", "Developed MarketPryce's mobile apps, redesigned Ciro, and led development of CervezaSiempre for AB InBev."],
+        "es": ["Desarrollé la plataforma de Selia que conecta pacientes y terapeutas para web, iOS y Android, con herramientas para pacientes, terapeutas y equipos internos.", "Creé las aplicaciones móviles de MarketPryce, rediseñé Ciro y dirigí el desarrollo de CervezaSiempre para AB InBev."]
+      }
+    },
+    {
+      "id": "betterfin", "name": "Betterfin", "startDate": "2019-06", "endDate": "2021-02",
+      "position": { "en": "Front end software engineer", "es": "Ingeniero de frontend" },
+      "summary": { "en": "Built the frontend for a business financial insights and lending platform.", "es": "Desarrollé el frontend de una plataforma de análisis financiero y crédito para empresas." },
+      "highlights": { "en": [], "es": [] }
+    },
+    {
+      "id": "zeel", "name": "Zeel", "startDate": "2018-01", "endDate": "2019-05",
+      "position": { "en": "Full stack developer", "es": "Desarrollador full stack" },
+      "summary": { "en": "Built internal software for tracking orders and operational issues.", "es": "Desarrollé software interno para dar seguimiento a pedidos e incidencias operativas." },
+      "highlights": { "en": [], "es": [] }
+    },
+    {
+      "id": "eiya", "name": "Eiya", "startDate": "2016-08", "endDate": "2017-12",
+      "position": { "en": "Lead engineer", "es": "Líder de ingeniería" },
+      "summary": { "en": "Built fleet tools, customer dashboards, and delivery apps. Managed a small engineering and design team.", "es": "Desarrollé herramientas para flotas, paneles para clientes y aplicaciones de reparto. Dirigí un equipo pequeño de ingeniería y diseño." },
+      "highlights": { "en": [], "es": [] }
+    },
+    {
+      "id": "rappi", "name": "Rappi", "startDate": "2016-02", "endDate": "2016-08",
+      "position": { "en": "First developer in Mexico", "es": "Primer desarrollador en México" },
+      "summary": { "en": "Built internal software for operations and customer service.", "es": "Desarrollé herramientas internas para operaciones y atención al cliente." },
+      "highlights": { "en": [], "es": [] }
+    },
+    {
+      "id": "centraal", "name": "Centraal", "startDate": "2015-06", "endDate": "2016-02",
+      "position": { "en": "Junior full stack developer", "es": "Desarrollador junior full stack" },
+      "summary": { "en": "Built an internal ERP for coworking operations and the website.", "es": "Desarrollé un ERP interno para la operación del coworking y su sitio web." },
+      "highlights": { "en": [], "es": [] }
+    }
+  ],
+  "publicWork": [
+    {
+      "project": "nixtla",
+      "url": "https://github.com/Nixtla/nixtla/pull/855",
+      "title": {
+        "en": "Put the fix where the routes live",
+        "es": "Corregir las rutas donde se gestionan"
+      },
+      "body": {
+        "en": "Four obsolete documentation URLs returned 404s. I added redirects in Nixtla's Mintlify configuration, which owns the documentation routes. The website forwards documentation requests there. The merged change maps each old address to its replacement, with destination checks recorded in the pull request.",
+        "es": "Cuatro enlaces antiguos de la documentación devolvían errores 404. Añadí redirecciones en la configuración de Mintlify de Nixtla, que gestiona esas rutas. El sitio web reenvía allí las solicitudes de documentación. El cambio integrado asigna cada dirección antigua a su reemplazo. Las comprobaciones de destino están documentadas en el pull request."
+      }
+    },
+    {
+      "project": "nixtla",
+      "url": "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df",
+      "title": {
+        "en": "Replace the previous documentation output",
+        "es": "Sustituir la documentación anterior"
+      },
+      "body": {
+        "en": "I updated both preview and production documentation workflows to remove the previous HierarchicalForecast output before copying the rebuilt directory. This makes replacement explicit instead of copying new files over an existing output directory. The public diff shows the change in both workflows.",
+        "es": "Actualicé los flujos de documentación de vista previa y producción para eliminar la versión anterior de HierarchicalForecast antes de copiar el directorio reconstruido. Así, la copia sustituye el contenido anterior en lugar de mezclar archivos nuevos con los existentes. El diff público muestra el cambio en ambos flujos."
+      }
+    }
+  ],
+  "skills": ["JavaScript", "TypeScript", "React", "Next.js", "Vue", "Node.js", "Python", "Django", "SQL", "PostgreSQL", "Firebase", "Capacitor", "Git", "Figma"],
+  "languages": [{ "en": "English", "es": "Inglés" }, { "en": "Spanish", "es": "Español" }],
+  "education": [
+    { "institution": "Y Combinator", "area": { "en": "W22 founder cohort", "es": "Programa de fundadores W22" }, "startDate": "2022" },
+    { "institution": "Platanus Ventures", "area": { "en": "2023 founder cohort", "es": "Programa de fundadores de 2023" }, "startDate": "2023" },
+    { "institution": "Dev.F", "area": { "en": "Software development bootcamp", "es": "Bootcamp de desarrollo de software" }, "startDate": "2015" }
+  ],
+  "sources": ["https://www.linkedin.com/in/eduardolopezamaya/", "https://www.ycombinator.com/companies/amiloz", "https://trysupervisor.com", "https://useconstructor.com", "https://github.com/Nixtla/nixtla/pull/855", "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df"]
+}
