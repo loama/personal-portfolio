@@ -41,7 +41,6 @@
       "id": "nixtla",
       "name": "Nixtla",
       "url": "https://nixtla.io",
-      "endDate": "2026-09",
       "position": { "en": "Head of Web", "es": "Head of Web" },
       "summary": { "en": "Web products and developer experience for time series forecasting.", "es": "Productos web y experiencia para desarrolladores en pronóstico de series de tiempo." },
       "highlights": { "en": ["Built the website and developer portal, and contributed to early versions of the forecasting API."], "es": ["Desarrollé el sitio web y el portal para desarrolladores, y contribuí a las primeras versiones de la API de pronóstico."] }
