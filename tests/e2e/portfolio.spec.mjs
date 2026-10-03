@@ -34,6 +34,34 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(spanishNavigation.getByRole("link", { name: "Currículum", exact: true })).toHaveAttribute("aria-current", "page");
   expect(errors).toEqual([]);
 });
+
+for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+  test(`language changes preserve scroll and resume version at ${viewport.width}px`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    for (const path of ["", "/work", "/resume/founder", "/resume/employee"]) {
+      await page.goto(`/en${path}`);
+      await page.evaluate(() => document.fonts.ready);
+      for (const y of [0, 400]) {
+        await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), y);
+        await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
+        for (const lang of ["es", "en"]) {
+          const link = page.getByRole("navigation", { name: /^(Language|Idioma)$/ }).getByRole("link", { name: lang.toUpperCase(), exact: true });
+          if (y === 0) {
+            await link.click();
+          } else {
+            // Activate the link without the test runner scrolling the header into view.
+            await link.dispatchEvent("click");
+          }
+          await expect(page).toHaveURL(`/${lang}${path}`);
+          await expect(page.locator("html")).toHaveAttribute("lang", lang);
+          await page.evaluate(() => document.fonts.ready);
+          await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
+        }
+      }
+    }
+  });
+}
+
 test("layout fits small phones through wide screens", async ({ page }, testInfo) => {
   await page.goto("/en");
   await page.getByRole("button", { name: "Decline", exact: true }).click();

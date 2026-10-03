@@ -14,7 +14,7 @@ export function Header({ locale, path = "", mode = "founder" }: { locale: Locale
       <Link href={`/${locale}`} className="wordmark font-display inline-flex min-h-11 items-center text-lg font-semibold tracking-tight" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>eduardo lopez<span className="text-brand">.</span></Link>
       <MainNavigation locale={locale} path={path} mode={mode} />
       <nav aria-label={es ? "Idioma" : "Language"} className="flex items-center gap-1 text-xs font-semibold">
-        {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
+        {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} scroll={false} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
       </nav>
     </header>
   );
