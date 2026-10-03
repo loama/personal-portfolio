@@ -11,15 +11,15 @@ export function Header({ locale, path = "", mode = "founder" }: { locale: Locale
   const home = `/${locale}${mode === "employee" ? "/work" : ""}`;
   return (
     <header className="relative z-20 mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-4 px-5 pb-5 pt-7 sm:px-10">
-      <Link href={`/${locale}`} className="wordmark text-lg font-semibold tracking-tight" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>eduardo<span className="text-olive">.</span></Link>
-      <nav aria-label={es ? "Navegación principal" : "Main navigation"} className="nav-island order-3 flex w-full items-center justify-center gap-6 rounded-full px-5 py-3 text-[13px] font-medium sm:order-none sm:w-auto sm:gap-7">
+      <Link href={`/${locale}`} className="wordmark inline-flex min-h-11 items-center text-lg font-semibold tracking-tight" aria-label={es ? "Eduardo López, inicio" : "Eduardo López, home"}>eduardo<span className="text-olive">.</span></Link>
+      <nav aria-label={es ? "Navegación principal" : "Main navigation"} className="nav-island order-3 flex w-full items-center justify-center gap-1 rounded-full px-3 py-1 text-[13px] font-medium sm:order-none sm:w-auto sm:gap-7 sm:px-5">
         <Link href={`/${locale}#work`}>{es ? "Proyectos" : "Selected work"}</Link>
         <Link href={`/${locale}#about`}>{es ? "Sobre mí" : "About"}</Link>
         <Link href={`/${locale}/resume/${mode}`}>{es ? "Currículum" : "Resume"}</Link>
         <Link href={`${home}#contact`} className="flex items-center gap-1.5">{es ? "Hablemos" : "Let's talk"}<Arrow /></Link>
       </nav>
       <nav aria-label={es ? "Idioma" : "Language"} className="flex items-center gap-1 text-xs font-semibold">
-        {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
+        {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
       </nav>
     </header>
   );

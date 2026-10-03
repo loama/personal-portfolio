@@ -30,6 +30,8 @@ test("layout fits small phones through wide screens", async ({ page }, testInfo)
     await page.setViewportSize({ width, height: 960 });
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    const targetHeights = await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
+    expect(targetHeights.every((height) => height >= 44)).toBe(true);
   }
   if (testInfo.project.name === "chromium") {
     await page.setViewportSize({ width: 1440, height: 1000 });
@@ -85,8 +87,8 @@ test("analytics requires consent and records the real download action", async ({
 test("keyboard, reduced motion and missing routes remain usable", async ({ page, browserName }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/en");
-  // Safari includes links in keyboard navigation with Option plus Tab.
-  await page.keyboard.press(browserName === "webkit" ? "Alt+Tab" : "Tab");
+  // Safari on macOS includes links in keyboard navigation with Option plus Tab.
+  await page.keyboard.press(browserName === "webkit" && process.platform === "darwin" ? "Alt+Tab" : "Tab");
   await expect(page.getByRole("link", { name: "Skip to content" })).toBeFocused();
   expect(await page.locator("h1").evaluate((el) => getComputedStyle(el).animationName)).toBe("none");
   const response = await page.goto("/en/resume/missing");
