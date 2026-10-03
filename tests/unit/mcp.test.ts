@@ -3,7 +3,7 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
 import { GET, OPTIONS, POST } from "../../src/app/mcp/route";
 import { getResume } from "../../src/lib/resume";
-import { LOCALES, resumePath, SITE_URL, VERSIONS } from "../../src/lib/site";
+import { LOCALES, PDF_LENGTHS, resumePath, SITE_URL, VERSIONS } from "../../src/lib/site";
 
 const protocolHeaders = {
   "content-type": "application/json",
@@ -39,6 +39,7 @@ describe("MCP client compatibility", () => {
       expect(tools[0].annotations?.readOnlyHint).toBe(true);
       expect(tools[0].annotations?.destructiveHint).toBe(false);
       expect((tools[0].inputSchema.properties?.language as { enum: string[] }).enum).toEqual(["en", "es"]);
+      expect((tools[0].inputSchema.properties?.length as { enum: string[] }).enum).toEqual([...PDF_LENGTHS]);
 
       const { resources } = await client.listResources();
       expect(resources).toHaveLength(4);
@@ -47,6 +48,8 @@ describe("MCP client compatibility", () => {
           const result = await client.callTool({ name: "get_resume", arguments: { language, version, format: "json" } });
           expect(result.isError).not.toBe(true);
           expect(result.structuredContent).toEqual(getResume(language, version));
+          const jsonResume = result.structuredContent as ReturnType<typeof getResume>;
+          expect(jsonResume.work.find((work) => work.name === "Nixtla")?.details.length).toBeGreaterThan(0);
 
           const uri = `resume://${version}/${language}`;
           expect(resources.map((resource) => resource.uri)).toContain(uri);
@@ -59,6 +62,8 @@ describe("MCP client compatibility", () => {
 
           const pdf = await client.callTool({ name: "get_resume", arguments: { language, version, format: "pdf" } });
           expect(pdf.structuredContent).toEqual({ url: `${SITE_URL}${resumePath(language, version, "pdf")}`, language, version, mimeType: "application/pdf" });
+          const fullPdf = await client.callTool({ name: "get_resume", arguments: { language, version, format: "pdf", length: "full" } });
+          expect(fullPdf.structuredContent).toEqual({ url: `${SITE_URL}${resumePath(language, version, "pdf", "full")}`, language, version, mimeType: "application/pdf" });
         }
       }
       const defaultResume = await client.callTool({ name: "get_resume", arguments: {} });
@@ -72,7 +77,7 @@ describe("MCP client compatibility", () => {
 
 describe("MCP protocol errors", () => {
   test("invalid tool arguments return a meaningful tool error", async () => {
-    for (const argumentsValue of [{ language: "fr" }, { version: "manager" }, { format: "html" }, { private: true }]) {
+    for (const argumentsValue of [{ language: "fr" }, { version: "manager" }, { format: "html" }, { length: "long" }, { length: "" }, { private: true }]) {
       const response = await rpc("tools/call", { name: "get_resume", arguments: argumentsValue });
       const body = await response.json();
       expect(response.status).toBe(200);
