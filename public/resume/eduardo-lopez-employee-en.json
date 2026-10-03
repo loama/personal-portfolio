@@ -26,6 +26,17 @@
   },
   "work": [
     {
+      "name": "Supervisor",
+      "position": "Solo founder",
+      "url": "https://trysupervisor.com",
+      "startDate": "2023-07",
+      "summary": "Building software that lets teams run business operations through conversation.",
+      "highlights": [
+        "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
+        "Building Constructor, a companion product for creating applications from a description."
+      ]
+    },
+    {
       "name": "Nixtla",
       "position": "Head of Web",
       "url": "https://nixtla.io",
@@ -44,7 +55,7 @@
       "highlights": [
         "Built the initial API, website, mobile apps, and internal tools, then hired and led a technology team averaging seven people.",
         "Owned technology for customer ordering, warehouse operations, deliveries, and internal analytics.",
-        "The company raised more than USD 3.5 million and served hundreds of business customers."
+        "We raised more than USD 3.5 million and served hundreds of business customers."
       ]
     },
     {
@@ -55,17 +66,6 @@
       "highlights": [
         "Built Selia's therapist marketplace across web, iOS, and Android, with tools for patients, therapists, and internal teams.",
         "Developed MarketPryce's mobile apps, redesigned Ciro, and led development of CervezaSiempre for AB InBev."
-      ]
-    },
-    {
-      "name": "Supervisor",
-      "position": "Solo founder",
-      "url": "https://trysupervisor.com",
-      "startDate": "2023-07",
-      "summary": "Building software that lets teams run business operations through conversation.",
-      "highlights": [
-        "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
-        "Building Constructor, a companion product for creating applications from a description."
       ]
     },
     {
