@@ -1,3 +1,5 @@
+import { profile } from "./resume";
+
 export const CASE_IDS = ["amiloz", "nixtla"] as const;
 export type CaseId = (typeof CASE_IDS)[number];
 
@@ -36,26 +38,18 @@ export const caseStudies = {
     en: {
       title: "The web side of forecasting.",
       intro: "At Nixtla, my work covered the website, the developer portal, and contributions to early versions of the forecasting API.",
-      context: "A forecasting product needs both the underlying capability and a way for developers to discover and use it. My work spanned those points of entry.",
+      context: "The public changes below show two small parts of the work: maintaining documentation routes and the workflows that publish developer documentation.",
       scope: ["Website", "Developer portal", "Early API contributions"],
-      sections: [
-        { title: "The website", body: "I built the website for Nixtla's forecasting products. This was the public side of the work, alongside the tools developers used to access the product." },
-        { title: "The developer portal", body: "I built the developer portal. The role connected product interfaces with the experience of developers using forecasting software." },
-        { title: "Contribute beyond the interface", body: "I also contributed to early versions of the forecasting API. My remit connected the web experience with early API development." },
-      ],
+      sections: profile.publicWork.filter((work) => work.project === "nixtla").map((work) => ({ title: work.title.en, body: work.body.en, source: work.url })),
       takeaway: "The work combined public web products, developer experience, and API contributions. My Head of Web role continued through September 2026.",
       link: "Visit Nixtla",
     },
     es: {
       title: "La parte web del pronóstico.",
       intro: "En Nixtla, mi trabajo abarcó el sitio web, el portal para desarrolladores y contribuciones a las primeras versiones de la API de pronóstico.",
-      context: "Un producto de pronóstico necesita su capacidad técnica y una forma de que los desarrolladores lo descubran y lo usen. Mi trabajo abarcó esos puntos de entrada.",
+      context: "Los cambios públicos de abajo muestran dos partes concretas del trabajo: mantener las rutas de documentación y los flujos que la publican.",
       scope: ["Sitio web", "Portal para desarrolladores", "Contribuciones a la API inicial"],
-      sections: [
-        { title: "El sitio web", body: "Desarrollé el sitio web de los productos de pronóstico de Nixtla. Era la parte pública del trabajo, junto con las herramientas que usaban los desarrolladores para acceder al producto." },
-        { title: "El portal para desarrolladores", body: "Desarrollé el portal para desarrolladores. El trabajo conectaba las interfaces del producto con la experiencia de quienes usaban el software de pronóstico." },
-        { title: "Contribuir más allá de la interfaz", body: "También contribuí a las primeras versiones de la API de pronóstico. Mi trabajo conectó la experiencia web con el desarrollo inicial de la API." },
-      ],
+      sections: profile.publicWork.filter((work) => work.project === "nixtla").map((work) => ({ title: work.title.es, body: work.body.es, source: work.url })),
       takeaway: "El trabajo combinó productos web, experiencia para desarrolladores y contribuciones a la API. Mi etapa como Head of Web terminó en septiembre de 2026.",
       link: "Visitar Nixtla",
     },
