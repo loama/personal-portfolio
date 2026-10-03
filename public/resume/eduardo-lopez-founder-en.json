@@ -1,0 +1,187 @@
+{
+  "basics": {
+    "name": "Eduardo López",
+    "label": "Founder and full stack engineer",
+    "email": "hello@eduardo-lopez.com",
+    "phone": "+34 637 432 670",
+    "url": "https://eduardo-lopez.com",
+    "summary": "Founder and full stack engineer building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "eduardolopezamaya",
+        "url": "https://www.linkedin.com/in/eduardolopezamaya/"
+      },
+      {
+        "network": "GitHub",
+        "username": "loama",
+        "url": "https://github.com/loama"
+      },
+      {
+        "network": "X",
+        "username": "eduardo_lop__",
+        "url": "https://x.com/eduardo_lop__"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Supervisor",
+      "position": "Founder",
+      "url": "https://trysupervisor.com",
+      "startDate": "2023-07",
+      "summary": "Building software that lets teams run business operations through conversation.",
+      "highlights": [
+        "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
+        "Building Constructor, a companion product for creating applications from a description."
+      ]
+    },
+    {
+      "name": "Amiloz",
+      "position": "Cofounder & CTO",
+      "url": "https://www.ycombinator.com/companies/amiloz",
+      "startDate": "2021-07",
+      "endDate": "2022-12",
+      "summary": "Built the first products for a company supplying corner stores in Mexico. Y Combinator W22.",
+      "highlights": [
+        "Built the initial API, website, mobile apps, and internal tools, then hired and led a technology team averaging seven people.",
+        "Owned technology for customer ordering, warehouse operations, deliveries, and internal analytics.",
+        "The company raised more than USD 3.5 million and served hundreds of business customers."
+      ]
+    },
+    {
+      "name": "Nixtla",
+      "position": "Head of Web",
+      "url": "https://nixtla.io",
+      "endDate": "2026-09",
+      "summary": "Web products and developer experience for time series forecasting.",
+      "highlights": [
+        "Built the website and developer portal, and contributed to early versions of the forecasting API."
+      ]
+    },
+    {
+      "name": "Independent",
+      "position": "Software consultant for startups",
+      "startDate": "2018-01",
+      "summary": "Web and mobile products for founders and growing teams.",
+      "highlights": [
+        "Built Selia's therapist marketplace across web, iOS, and Android, with tools for patients, therapists, and internal teams.",
+        "Developed MarketPryce's mobile apps, redesigned Ciro, and led development of CervezaSiempre for AB InBev."
+      ]
+    },
+    {
+      "name": "Betterfin",
+      "position": "Front end software engineer",
+      "startDate": "2019-06",
+      "endDate": "2021-02",
+      "summary": "Built the frontend for a business financial insights and lending platform.",
+      "highlights": []
+    },
+    {
+      "name": "Zeel",
+      "position": "Full stack developer",
+      "startDate": "2018-01",
+      "endDate": "2019-05",
+      "summary": "Built internal software for tracking orders and operational issues.",
+      "highlights": []
+    },
+    {
+      "name": "Eiya",
+      "position": "Lead engineer",
+      "startDate": "2016-08",
+      "endDate": "2017-12",
+      "summary": "Built fleet tools, customer dashboards, and delivery apps. Managed a small engineering and design team.",
+      "highlights": []
+    },
+    {
+      "name": "Rappi",
+      "position": "First developer in Mexico",
+      "startDate": "2016-02",
+      "endDate": "2016-08",
+      "summary": "Built internal software for operations and customer service.",
+      "highlights": []
+    },
+    {
+      "name": "Centraal",
+      "position": "Junior full stack developer",
+      "startDate": "2015-06",
+      "endDate": "2016-02",
+      "summary": "Built an internal ERP for coworking operations and the website.",
+      "highlights": []
+    }
+  ],
+  "education": [
+    {
+      "institution": "Y Combinator",
+      "area": "W22 founder cohort",
+      "startDate": "2022"
+    },
+    {
+      "institution": "Platanus Ventures",
+      "area": "2023 founder cohort",
+      "startDate": "2023"
+    },
+    {
+      "institution": "Dev.F",
+      "area": "Software development bootcamp",
+      "startDate": "2015"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Engineering and product",
+      "keywords": [
+        "JavaScript",
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Vue",
+        "Node.js",
+        "Python",
+        "Django",
+        "SQL",
+        "PostgreSQL",
+        "Firebase",
+        "Capacitor",
+        "Git",
+        "Figma"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English"
+    },
+    {
+      "language": "Spanish"
+    }
+  ],
+  "projects": [
+    {
+      "name": "Supervisor",
+      "description": "Building software that lets teams run business operations through conversation.",
+      "highlights": [
+        "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
+        "Building Constructor, a companion product for creating applications from a description."
+      ],
+      "url": "https://trysupervisor.com"
+    },
+    {
+      "name": "Constructor",
+      "description": "Building Constructor, a companion product for creating applications from a description.",
+      "highlights": [],
+      "url": "https://useconstructor.com"
+    }
+  ],
+  "meta": {
+    "language": "en",
+    "version": "founder",
+    "lastModified": "2026-10-03",
+    "sources": [
+      "https://www.linkedin.com/in/eduardolopezamaya/",
+      "https://www.ycombinator.com/companies/amiloz",
+      "https://trysupervisor.com",
+      "https://useconstructor.com"
+    ]
+  }
+}
