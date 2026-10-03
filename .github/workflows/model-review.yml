@@ -1,0 +1,60 @@
+name: Model review
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_call:
+    secrets:
+      AZURE_OPENAI_API_KEY:
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: model-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'release' }}
+
+jobs:
+  review:
+    name: Grounded model review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Require an authorized branch for provider access
+        if: github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "Fork contributions require a maintainer to inspect the changes and create an authorized review branch in this repository."
+          exit 1
+      - name: Check out trusted review code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: '1.4.2'
+      - name: Validate trusted review parser
+        run: bun test tests/unit/model-review.test.ts
+      - name: Review the proposed change as data
+        env:
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
+          AZURE_OPENAI_ENDPOINT: ${{ vars.AZURE_OPENAI_ENDPOINT }}
+          AZURE_OPENAI_DEPLOYMENT: ${{ vars.AZURE_OPENAI_DEPLOYMENT }}
+          REVIEW_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+          REVIEW_BASE: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+          REVIEW_EVENT: ${{ github.event_name }}
+          MODEL_REVIEW_ARTIFACT_DIR: ${{ runner.temp }}/portfolio-model-review
+        run: bun scripts/model-review.ts
+      - name: Upload structured review
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: model-review-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/portfolio-model-review/review.json
+          if-no-files-found: ignore
+          retention-days: 14
