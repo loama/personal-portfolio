@@ -33,3 +33,12 @@ yarn-error.log*
 
 # generated files
 /public/rss/
+
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+test-results/
+playwright-report/
+.lighthouseci/
+artifacts/

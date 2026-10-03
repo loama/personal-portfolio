@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+html { scroll-behavior: smooth; scroll-padding-top: 7rem; }
+body { margin: 0; }
+::selection { background: #dbe1ca; color: #20241f; }
+*:focus-visible { outline: 2px solid #506243; outline-offset: 5px; }
+.skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 40; background: #20241f; color: white; padding: 1rem; border-radius: 1rem; }
+.skip-link:focus { top: 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
