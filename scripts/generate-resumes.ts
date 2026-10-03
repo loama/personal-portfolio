@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { PDFDocument, StandardFonts, rgb, PDFString } from "pdf-lib";
+import fontkit from "@pdf-lib/fontkit";
+import { PDFDocument, rgb, PDFString } from "pdf-lib";
 import { getResume } from "../src/lib/resume";
 import { getCompanyLogo } from "../src/lib/company-logos";
 import { contacts, LOCALES, VERSIONS, resumePath, SITE_URL } from "../src/lib/site";
@@ -7,14 +8,17 @@ import { contacts, LOCALES, VERSIONS, resumePath, SITE_URL } from "../src/lib/si
 const ink = rgb(0.125, 0.141, 0.122);
 const muted = rgb(0.35, 0.38, 0.33);
 const olive = rgb(0.28, 0.36, 0.23);
+const regularFontBytes = await readFile("assets/fonts/LiberationSans-Regular.ttf");
+const boldFontBytes = await readFile("assets/fonts/LiberationSans-Bold.ttf");
 await mkdir("public/resume", { recursive: true });
 
 for (const locale of LOCALES) {
   for (const version of VERSIONS) {
     const resume = getResume(locale, version);
     const pdf = await PDFDocument.create();
-    const regular = await pdf.embedFont(StandardFonts.Helvetica);
-    const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
+    pdf.registerFontkit(fontkit);
+    const regular = await pdf.embedFont(regularFontBytes, { subset: false, features: { liga: false } });
+    const bold = await pdf.embedFont(boldFontBytes, { subset: false, features: { liga: false } });
     const page = pdf.addPage([595.28, 841.89]);
     const margin = 44;
     const width = 507.28;
