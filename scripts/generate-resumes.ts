@@ -1,6 +1,7 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { PDFDocument, StandardFonts, rgb, PDFString } from "pdf-lib";
 import { getResume } from "../src/lib/resume";
+import { getCompanyLogo } from "../src/lib/company-logos";
 import { contacts, LOCALES, VERSIONS, resumePath, SITE_URL } from "../src/lib/site";
 
 const ink = rgb(0.125, 0.141, 0.122);
@@ -28,13 +29,13 @@ for (const locale of LOCALES) {
     pdf.setProducer("eduardo-lopez.com");
     pdf.setCreator("eduardo-lopez.com");
 
-    function text(value: string, size = 9.1, weight = false, color = ink, gap = 3.6) {
+    function text(value: string, size = 9.1, weight = false, color = ink, gap = 3.6, inset = 0) {
       const font = weight ? bold : regular;
       const lines: string[] = [];
       let line = "";
       for (const word of value.split(/\s+/)) {
         const candidate = line ? `${line} ${word}` : word;
-        if (font.widthOfTextAtSize(candidate, size) > width && line) {
+        if (font.widthOfTextAtSize(candidate, size) > width - inset && line) {
           lines.push(line);
           line = word;
         } else line = candidate;
@@ -42,9 +43,17 @@ for (const locale of LOCALES) {
       if (line) lines.push(line);
       for (const value of lines) {
         if (y < 48) throw new Error(`Resume exceeds one page: ${locale}/${version}`);
-        page.drawText(value, { x: margin, y, size, font, color });
+        page.drawText(value, { x: margin + inset, y, size, font, color });
         y -= size + gap;
       }
+    }
+
+    async function companyLogo(name: string, size: number, baselineOffset: number) {
+      const path = getCompanyLogo(name);
+      if (!path) return 0;
+      const image = await pdf.embedPng(await readFile(`public${path}`));
+      page.drawImage(image, { x: margin, y: y + baselineOffset, width: size, height: size });
+      return size + 8;
     }
 
     function link(label: string, href: string, x: number, baseline: number, size = 8.6) {
@@ -83,8 +92,9 @@ for (const locale of LOCALES) {
         : work.endDate
           ? `${spanish ? "Hasta" : "Through"} ${formatDate(work.endDate)}`
           : (spanish ? "Actualidad" : "Present");
-      text(`${work.name}  |  ${work.position}`, 11, true, ink, 3);
-      text(dates, 8.7, false, muted, 4);
+      const inset = await companyLogo(work.name, 24, -15);
+      text(`${work.name}  |  ${work.position}`, 11, true, ink, 3, inset);
+      text(dates, 8.7, false, muted, 4, inset);
       for (const highlight of work.highlights) text(highlight, 10.1, false, ink, 3.5);
       y -= 5;
     }
@@ -94,7 +104,8 @@ for (const locale of LOCALES) {
       const years = work.startDate?.slice(0, 4) === work.endDate?.slice(0, 4)
         ? work.startDate!.slice(0, 4)
         : `${work.startDate?.slice(0, 4)} ${spanish ? "a" : "to"} ${work.endDate?.slice(0, 4)}`;
-      text(`${work.name} (${years}). ${work.position}. ${work.summary}`, 9.5, false, ink, 3.4);
+      const inset = await companyLogo(work.name, 12, -2);
+      text(`${work.name} (${years}). ${work.position}. ${work.summary}`, 9.5, false, ink, 3.4, inset);
     }
 
     section(spanish ? "Herramientas y formación" : "Tools & background");
