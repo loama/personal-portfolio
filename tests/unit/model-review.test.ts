@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { azureReviewUrl, changeInventory, parsePatch, parseReview, readChangedPatch, reviewBatch, reviewBatches, type Finding, type ReviewAttempt, type ReviewCorrection } from "../../scripts/model-review";
+import { azureReviewUrl, changeInventory, parsePatch, parseReview, readChangedPatch, reviewBatch, reviewBatches, reviewReasoning, type Finding, type ReviewAttempt, type ReviewCorrection } from "../../scripts/model-review";
 import { validReleaseTag } from "../../scripts/verify-release";
 
 const patch = parsePatch("src/example.ts", "diff --git a/src/example.ts b/src/example.ts\n--- a/src/example.ts\n+++ b/src/example.ts\n@@ -1,2 +1,2 @@\n-const consent = true;\n+const consent = false;\n send(consent);\n");
@@ -188,6 +188,13 @@ describe("model review correction", () => {
 });
 
 describe("review endpoint and release boundaries", () => {
+  test("sends reasoning settings only when explicitly configured", () => {
+    expect(reviewReasoning(undefined)).toEqual({});
+    expect(reviewReasoning("")).toEqual({});
+    for (const value of ["low", "medium", "high"]) expect(reviewReasoning(value)).toEqual({ reasoning_effort: value });
+    for (const value of ["enabled", "automatic", "HIGH", " high "]) expect(() => reviewReasoning(value)).toThrow("must be low, medium or high");
+  });
+
   test("accepts only Azure resource HTTPS endpoints", () => {
     expect(azureReviewUrl("https://portfolio.openai.azure.com").href).toBe("https://portfolio.openai.azure.com/openai/v1/chat/completions");
     expect(azureReviewUrl("https://portfolio.services.ai.azure.com/openai/v1/").pathname).toBe("/openai/v1/chat/completions");
