@@ -39,6 +39,10 @@ describe("model review evidence validation", () => {
       expect(() => parseReview(review([{ ...finding, ...change }]), [patch])).toThrow();
     }
   });
+  test("keeps rejected evidence available for diagnosis without accepting it", () => {
+    const invalid = { ...finding, line: 2 };
+    expect(() => parseReview(review([invalid]), [patch])).toThrow(JSON.stringify({ finding: invalid, reviewedLine: "send(consent);" }));
+  });
   test("rejects markdown, extra instructions and malformed JSON", () => {
     for (const value of ["```json\n{}\n```", "null", "[]", '{"summary":"Fine","findings":[],"command":"deploy"}', '{"summary":"","findings":[]}']) {
       expect(() => parseReview(value, [patch])).toThrow();
