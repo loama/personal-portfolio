@@ -15,11 +15,14 @@ Configure these repository values through GitHub settings or a secure CLI sessio
 | Secret | `AZURE_OPENAI_API_KEY` | Key for the approved Azure review resource |
 | Variable | `AZURE_OPENAI_ENDPOINT` | Azure resource HTTPS endpoint, optionally ending in `/openai/v1` |
 | Variable | `AZURE_OPENAI_DEPLOYMENT` | Existing model deployment with structured JSON output support |
+| Variable | `AZURE_OPENAI_REASONING_EFFORT` | Optional `low`, `medium` or `high` for a deployment that supports reasoning effort |
 | Secret | `VERCEL_TOKEN` | Token authorized for this Vercel project |
 | Variable | `VERCEL_ORG_ID` | `team_aGAWbuKx6x5BVxlYeyS6gN1E` |
 | Variable | `VERCEL_PROJECT_ID` | `prj_AW8UKS2NcyxscGlIzrLMYOYazNmg` |
 
 The workflow passes the Vercel token through the environment. Vercel CLI 62.2.0 reads `VERCEL_TOKEN` directly. The token never appears in command arguments. The Azure key is available only to the model request step, and the Vercel token is available only to deployment configuration validation and deployment.
+
+Configure `AZURE_OPENAI_REASONING_EFFORT` only when the selected deployment supports that parameter. Leaving it unset omits the parameter, preserving support for models that offer structured output without reasoning controls. Invalid values fail before any provider request.
 
 This guide describes required setup. It does not establish that credentials, provider billing, analytics projects or domain settings are active. Check those in their services and confirm a real result before the first release.
 
