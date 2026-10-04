@@ -35,7 +35,7 @@ for (const locale of LOCALES) {
       let expanded = false;
       let currentCompany = "";
       const spanish = locale === "es";
-      const fixedDate = new Date("2026-10-03T00:00:00Z");
+      const fixedDate = new Date(`${resume.meta.lastModified}T00:00:00Z`);
       pdf.setTitle(
         `Eduardo López | ${version === "founder" ? (spanish ? "Fundador" : "Founder") : spanish ? "Ingeniería y consultoría" : "Engineering & consulting"}${full ? (spanish ? " | Detallado" : " | Detailed") : ""}`,
       );
