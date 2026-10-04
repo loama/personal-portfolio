@@ -132,11 +132,20 @@ test("resume company logos load and fit phone and desktop layouts", async ({ pag
       if (await decline.isVisible()) await decline.click();
       const entries = page.locator("#experience article");
       await expect(entries.first().getByRole("heading", { level: 3 })).toHaveText("Supervisor");
-      const logos = entries.locator("img");
+      const logos = entries.locator(".company-logo");
       await expect(logos).toHaveCount(9);
       for (const logo of await logos.all()) {
         await logo.scrollIntoViewIfNeeded();
-        await expect.poll(() => logo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+        await expect.poll(() => logo.evaluate(async (element) => {
+          const source = element instanceof HTMLImageElement
+            ? element.currentSrc
+            : getComputedStyle(element).maskImage.match(/url\(["']?(.*?)["']?\)/)?.[1];
+          if (!source) return false;
+          const image = new Image();
+          image.src = source;
+          await image.decode();
+          return image.naturalWidth > 0 && image.naturalHeight > 0;
+        })).toBe(true);
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       if (testInfo.project.name === "chromium" && variant.locale === "en") {

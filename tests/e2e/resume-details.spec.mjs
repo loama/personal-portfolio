@@ -41,9 +41,8 @@ for (const locale of ["en", "es"]) {
         await expect(links.getByRole("link", { name: "LinkedIn", exact: true })).toHaveAttribute("href", "https://www.linkedin.com/in/eduardolopezamaya/");
         await expect(links.getByRole("link", { name: "X", exact: true })).toHaveAttribute("href", "https://x.com/eduardo_lop__");
 
-        const freelanceIcon = consulting.locator("img");
-        await expect(freelanceIcon).toHaveAttribute("src", /freelance/);
-        await expect.poll(() => freelanceIcon.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+        const freelanceIcon = consulting.locator(".company-logo");
+        await expect(freelanceIcon).toHaveCSS("mask-image", /freelance/);
         const amiloz = page.locator("#experience-amiloz");
         await expect(amiloz.getByRole("heading", { level: 3 })).toHaveText("amiloz");
         await expect(amiloz.locator("img")).toHaveAttribute("src", /amiloz/);
@@ -51,6 +50,9 @@ for (const locale of ["en", "es"]) {
           await expect(logo).toHaveCSS("padding", "0px");
           await expect(logo).toHaveCSS("border-width", "0px");
         }
+        const repository = links.getByRole("link", { name: locale === "es" ? "Código fuente en GitHub" : "Source code on GitHub", exact: true });
+        await expect(repository).toHaveAttribute("href", "https://github.com/loama/personal-portfolio");
+        await expect(repository.locator("svg").first()).toBeVisible();
 
         const profile = page.getByRole("region", { name: locale === "es" ? "Perfil" : "Profile", exact: true });
         const portrait = profile.getByRole("img", { name: "Eduardo López", exact: true });
@@ -61,6 +63,7 @@ for (const locale of ["en", "es"]) {
           return { top: bounds.top, bottom: bounds.bottom, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
         });
         expect(photo.ratio).toBeCloseTo(photo.naturalRatio, 2);
+        expect(photo.naturalRatio).toBeCloseTo(1260 / 1849, 2);
         const badges = await profile.locator(".founder-note").boundingBox();
         expect(badges.y).toBeGreaterThanOrEqual(photo.bottom);
         const label = profile.getByText(locale === "es" ? "ideas → productos" : "ideas → products", { exact: true });
