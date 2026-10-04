@@ -8,12 +8,12 @@ const nextConfig: NextConfig = {
   images: { formats: ["image/avif", "image/webp"] },
   async redirects() {
     return [
-      { source: "/", destination: "/en", permanent: false },
-      { source: "/about", destination: "/en#about", permanent: true },
-      { source: "/projects/:path*", destination: "/en#work", permanent: true },
-      { source: "/projects2", destination: "/en#work", permanent: true },
-      { source: "/speaking", destination: "/en#contact", permanent: true },
-      { source: "/uses", destination: "/en/work", permanent: true },
+      { source: "/", destination: "/en/resume/founder", permanent: false },
+      { source: "/about", destination: "/en/resume/founder", permanent: true },
+      { source: "/projects/:path*", destination: "/en/resume/founder#work", permanent: true },
+      { source: "/projects2", destination: "/en/resume/founder#work", permanent: true },
+      { source: "/speaking", destination: "/en/resume/founder#contact", permanent: true },
+      { source: "/uses", destination: "/en/resume/employee", permanent: true },
     ];
   },
   async headers() {
