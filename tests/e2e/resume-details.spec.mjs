@@ -27,7 +27,7 @@ for (const locale of ["en", "es"]) {
         await expect(disclosure).not.toHaveAttribute("open");
         await expect(summary).toBeFocused();
 
-        const consulting = page.locator("main article").filter({ has: page.getByRole("heading", { name: locale === "es" ? "Consultoría" : "Independent", exact: true }) });
+        const consulting = page.locator("main article").filter({ has: page.getByRole("heading", { name: "freelance", exact: true }) });
         await consulting.locator("summary").click();
         for (const project of ["Selia", "MarketPryce", "Ciro"]) await expect(consulting.getByRole("heading", { name: project, exact: true })).toBeVisible();
         await expect(consulting).toContainText(locale === "es" ? "no incluyó programación" : "did not include writing code");
@@ -40,6 +40,41 @@ for (const locale of ["en", "es"]) {
         }
         await expect(links.getByRole("link", { name: "LinkedIn", exact: true })).toHaveAttribute("href", "https://www.linkedin.com/in/eduardolopezamaya/");
         await expect(links.getByRole("link", { name: "X", exact: true })).toHaveAttribute("href", "https://x.com/eduardo_lop__");
+
+        const freelanceIcon = consulting.locator("img");
+        await expect(freelanceIcon).toHaveAttribute("src", /freelance/);
+        await expect.poll(() => freelanceIcon.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+        const amiloz = page.locator("#experience-amiloz");
+        await expect(amiloz.getByRole("heading", { level: 3 })).toHaveText("amiloz");
+        await expect(amiloz.locator("img")).toHaveAttribute("src", /amiloz/);
+        for (const logo of [freelanceIcon, amiloz.locator("img")]) {
+          await expect(logo).toHaveCSS("padding", "0px");
+          await expect(logo).toHaveCSS("border-width", "0px");
+        }
+
+        const profile = page.getByRole("region", { name: locale === "es" ? "Perfil" : "Profile", exact: true });
+        const portrait = profile.getByRole("img", { name: "Eduardo López", exact: true });
+        await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+        await expect(portrait).toHaveCSS("object-fit", "contain");
+        const photo = await portrait.evaluate((image) => {
+          const bounds = image.getBoundingClientRect();
+          return { top: bounds.top, bottom: bounds.bottom, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
+        });
+        expect(photo.ratio).toBeCloseTo(photo.naturalRatio, 2);
+        const badges = await profile.locator(".founder-note").boundingBox();
+        expect(badges.y).toBeGreaterThanOrEqual(photo.bottom);
+        const label = profile.getByText(locale === "es" ? "ideas → productos" : "ideas → products", { exact: true });
+        if (await label.isVisible()) {
+          const bounds = await label.boundingBox();
+          expect(bounds.y + bounds.height).toBeLessThanOrEqual(photo.top);
+        }
+        if (version === "founder") {
+          for (const [name, href] of [["Supervisor", "https://trysupervisor.com"], ["Constructor", "https://useconstructor.com"]]) {
+            const link = profile.getByRole("link", { name, exact: true });
+            await expect(link).toHaveAttribute("href", href);
+            await expect(link).toHaveCSS("text-decoration-line", "underline");
+          }
+        }
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         const accessibility = await new AxeBuilder({ page }).include("main").withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
         expect(accessibility.violations).toEqual([]);

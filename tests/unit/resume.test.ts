@@ -16,8 +16,8 @@ describe("résumé source and variants", () => {
         expect(resume.basics.email).toBe(contacts.email);
         expect(resume.meta).toEqual({ language, version, lastModified: sourceProfile.updated, sources: sourceProfile.sources });
         expect(resume.work.map(({ name }) => name).slice(0, 4)).toEqual(version === "founder"
-          ? ["Supervisor", "Amiloz", "Nixtla", language === "es" ? "Consultoría" : "Independent"]
-          : ["Supervisor", "Nixtla", "Amiloz", language === "es" ? "Consultoría" : "Independent"]);
+          ? ["Supervisor", "amiloz", "Nixtla", "freelance"]
+          : ["Supervisor", "Nixtla", "amiloz", "freelance"]);
         expect(resume.work).toHaveLength(sourceProfile.work.length);
 
         for (const source of sourceProfile.work) {
@@ -36,6 +36,8 @@ describe("résumé source and variants", () => {
           : [{ language: "Inglés" }, { language: "Español" }]);
         expect(resume.projects.map(({ name }) => name)).toEqual(["Supervisor", "Constructor"]);
         expect(resume.projects[1].url).toBe("https://useconstructor.com");
+        expect(resume.projects.map(({ name, url, description }) => ({ name, url, description })))
+          .toEqual(sourceProfile.projects.map((project) => ({ name: project.name, url: project.url, description: project.description[language] })));
       });
     }
   }

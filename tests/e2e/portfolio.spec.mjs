@@ -10,28 +10,27 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(page).toHaveURL(/\/en\/resume\/founder$/);
   await expect(page).toHaveTitle(/Eduardo L\u00F3pez/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Eduardo López");
-  const navigation = page.getByRole("navigation", { name: "Resume version", exact: true });
-  await expect(navigation.getByRole("link")).toHaveCount(2);
-  await expect(navigation.getByRole("link", { name: "Founder", exact: true })).toHaveAttribute("aria-current", "page");
+  const footer = page.getByRole("contentinfo");
+  await expect(page.getByRole("navigation", { name: "Resume version", exact: true })).toHaveCount(0);
+  await expect(footer.getByRole("link", { name: "Employee & consultant", exact: true })).toHaveAttribute("href", "/en/resume/employee");
   await expect(page.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
   await expect(page.getByRole("region", { name: "Profile", exact: true }).getByRole("img", { name: "Eduardo López", exact: true })).toBeVisible();
   await expect(page.locator("#work").getByRole("link", { name: "Visit Supervisor", exact: true })).toHaveAttribute("href", "https://trysupervisor.com");
   await expect(page.locator("#work").getByRole("link", { name: "Visit Constructor", exact: true })).toHaveAttribute("href", "https://useconstructor.com");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
-  await navigation.getByRole("link", { name: "Employee & consultant", exact: true }).click();
+  await footer.getByRole("link", { name: "Employee & consultant", exact: true }).click();
   await expect(page).toHaveURL(/\/en\/resume\/employee$/);
   await expect(page.getByRole("region", { name: "Profile", exact: true }).getByText("Full stack AI engineer", { exact: true })).toBeVisible();
   await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link", { name: "ES" }).click();
   await expect(page).toHaveURL(/\/es\/resume\/employee$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  const spanishNavigation = page.getByRole("navigation", { name: "Versión del currículum", exact: true });
-  await spanishNavigation.getByRole("link", { name: "Fundador", exact: true }).click();
+  await footer.getByRole("link", { name: "Fundador", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/resume\/founder$/);
-  await expect(spanishNavigation.getByRole("link", { name: "Fundador", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(footer.getByRole("link", { name: "Empleado y consultor", exact: true })).toHaveAttribute("href", "/es/resume/employee");
   await expect(page.getByRole("link", { name: "Descargar PDF" })).toHaveAttribute("href", "/resume/eduardo-lopez-founder-es.pdf");
   await page.goBack();
   await expect(page).toHaveURL(/\/es\/resume\/employee$/);
-  await expect(spanishNavigation.getByRole("link", { name: "Empleado y consultor", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(footer.getByRole("link", { name: "Fundador", exact: true })).toHaveAttribute("href", "/es/resume/founder");
   expect(errors).toEqual([]);
 });
 
@@ -54,6 +53,8 @@ test("previous landing and project links reach the relevant resume", async ({ pa
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   test(`page navigation opens at the top at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
+    await page.goto("/en/resume/founder");
+    await page.getByRole("button", { name: "Decline", exact: true }).click();
     for (const locale of ["en", "es"]) {
       for (const version of ["founder", "employee"]) {
         const destination = version === "founder" ? "employee" : "founder";
@@ -63,12 +64,11 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
           await page.evaluate(() => document.fonts.ready);
           await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), y);
           await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
-          const link = page.getByRole("navigation", { name: /^(Resume version|Versión del currículum)$/ }).getByRole("link", { name, exact: true });
+          const link = page.getByRole("contentinfo").getByRole("link", { name, exact: true });
           if (y === 0) await link.click();
           else await link.dispatchEvent("click");
           await expect(page).toHaveURL(`/${locale}/resume/${destination}`);
           await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-          await expect(link).toHaveAttribute("aria-current", "page");
           await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
         }
       }
@@ -106,7 +106,7 @@ test("layout fits small phones through wide screens", async ({ page }, testInfo)
     await page.setViewportSize({ width, height: 960 });
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    const targetHeights = await page.getByRole("navigation", { name: "Resume version", exact: true }).getByRole("link").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
+    const targetHeights = await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
     expect(targetHeights.every((height) => height >= 44)).toBe(true);
   }
   if (testInfo.project.name === "chromium") {
@@ -133,7 +133,7 @@ test("resume company logos load and fit phone and desktop layouts", async ({ pag
       const entries = page.locator("#experience article");
       await expect(entries.first().getByRole("heading", { level: 3 })).toHaveText("Supervisor");
       const logos = entries.locator("img");
-      await expect(logos).toHaveCount(8);
+      await expect(logos).toHaveCount(9);
       for (const logo of await logos.all()) {
         await logo.scrollIntoViewIfNeeded();
         await expect.poll(() => logo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);

@@ -20,6 +20,36 @@ async function expectAppearance(page, appearance) {
   await expect.poll(() => background(page)).toEqual(appearance === "dark" ? [21, 21, 21] : [255, 255, 255]);
 }
 
+test("appearance selection slides to each choice and respects reduced motion", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/en/resume/founder");
+  const control = page.getByRole("group", { name: "Appearance", exact: true });
+  const indicator = () => control.evaluate((element) => {
+    const style = getComputedStyle(element, "::before");
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return { x: matrix.m41, width: parseFloat(style.width), duration: style.transitionDuration, property: style.transitionProperty };
+  });
+  await page.getByTitle("Device", { exact: true }).click();
+  await expect.poll(async () => (await indicator()).x).toBe(0);
+  for (const [label, index] of [["Light", 1], ["Dark", 2], ["Device", 0]]) {
+    await page.getByTitle(label, { exact: true }).click();
+    await expect(control.getByRole("radio", { name: label, exact: true })).toBeChecked();
+    await expect.poll(async () => {
+      const state = await indicator();
+      return Math.abs(state.x - state.width * index);
+    }).toBeLessThan(0.1);
+    const state = await indicator();
+    expect(state.property).toContain("transform");
+    expect(parseFloat(state.duration)).toBeGreaterThan(0);
+  }
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.getByTitle("Dark", { exact: true }).click();
+  const reduced = await indicator();
+  expect(reduced.duration).toBe("0s");
+  expect(Math.abs(reduced.x - reduced.width * 2)).toBeLessThan(0.1);
+  await expectAppearance(page, "dark");
+});
+
 test("a stored theme applies before application scripts load", async ({ page }) => {
   await page.addInitScript(() => localStorage.setItem("portfolio_theme", "dark"));
   let releaseScripts;
