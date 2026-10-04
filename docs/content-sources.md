@@ -20,9 +20,11 @@ Private source documents remain outside this repository. Contact details were su
 
 ## Visual assets
 
-The orange and white palette, Sk Modernist headings, system body font, and VCR OSD Mono action font follow [Supervisor](https://trysupervisor.com), as requested by Eduardo. The font files come from his Supervisor website assets. Small orange text uses a darker shade for legibility.
+The orange and white palette, Sk Modernist headings, system body font, and VCR OSD Mono action font follow [Supervisor](https://trysupervisor.com), as requested by Eduardo. The font files come from his Supervisor website assets. Orange text uses a darker shade in Light mode and a lighter shade in Dark mode.
 
-Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Large headings use the brand orange, while buttons retain dark labels for contrast. The portrait displays the full square LinkedIn image without cropping.
+Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Buttons have white labels on a darker orange for readable contrast. The square LinkedIn image fills a vertical frame with a crop at the sides and no overlay text. The favicon has a white background.
+
+The résumé is now the main page. Both versions include the portrait, founder program badges, and Supervisor and Constructor cards. Previous landing pages redirect to the corresponding résumé. Device, Light, and Dark appearance options share the same content and navigation. The choice stays in the browser.
 
 The PDFs embed the regular and bold Liberation Sans fonts distributed with Mozilla's PDF.js. The font files and their SIL Open Font License are stored in `assets/fonts`. These static fonts preserve the PDF layout and avoid relying on fonts installed in the viewer. Unicode mappings keep accented text searchable and selectable.
 

@@ -58,7 +58,7 @@ git diff --check
 
 Inspect the complete diff for unintended files, credentials, generated output and unexpectedly large binaries. If content changed, commit the regenerated exports before running the clean export comparison.
 
-The browser suite uses Chromium and WebKit. Lighthouse collects three mobile runs for `/en`, `/es`, `/en/work` and `/es/resume/employee`. Median scores must reach 95 for performance and 100 for accessibility, best practices and SEO. Fix failed checks before publishing. A local Lighthouse score does not prove the deployed site's PageSpeed score.
+The browser suite uses Chromium and WebKit. Lighthouse collects three mobile runs for `/en/resume/founder`, `/es/resume/founder`, `/en/resume/employee` and `/es/resume/employee`. Median scores must reach 95 for performance and 100 for accessibility, best practices and SEO. Fix failed checks before publishing. A local Lighthouse score does not prove the deployed site's PageSpeed score.
 
 Browser evidence is retained for seven days after failed workflow runs. Lighthouse reports are retained for seven days. Structured model reviews are retained for fourteen days. Reports contain only test and public source data, not deployment environment files.
 
