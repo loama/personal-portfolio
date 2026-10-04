@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Resume } from "@/lib/resume";
-import { contacts, type Locale } from "@/lib/site";
+import { contacts, REPOSITORY_URL, type Locale } from "@/lib/site";
 import { Arrow } from "./shell";
 import { SocialIcon } from "./social-icon";
 
@@ -34,6 +34,9 @@ export function ResumeSidebar({ resume, locale }: { resume: Resume; locale: Loca
         <a href={contacts.x} data-track="social_x" className="flex min-h-11 items-center gap-3 transition-colors hover:text-ink"><SocialIcon platform="x" />X</a>
       </div>
     </section>
-    <Link href={`/${locale}/agents`} className="inline-flex min-h-11 items-center gap-2 text-xs text-accent">{es ? "También disponible por API y MCP" : "Also available through API & MCP"}<Arrow /></Link>
+    <div className="flex flex-col items-start gap-2">
+      <Link href={`/${locale}/agents`} className="inline-flex min-h-11 items-center gap-2 text-xs text-accent">{es ? "También disponible por API y MCP" : "Also available through API & MCP"}<Arrow /></Link>
+      <a href={REPOSITORY_URL} data-track="view_source" className="inline-flex min-h-11 items-center gap-2 text-xs text-muted underline decoration-ink/30 underline-offset-4 transition-colors hover:text-ink"><SocialIcon platform="github" />{es ? "Código fuente en GitHub" : "Source code on GitHub"}<Arrow /></a>
+    </div>
   </aside>;
 }

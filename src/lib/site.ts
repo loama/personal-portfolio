@@ -1,4 +1,5 @@
 export const SITE_URL = "https://eduardo-lopez.com";
+export const REPOSITORY_URL = "https://github.com/loama/personal-portfolio";
 export const LOCALES = ["en", "es"] as const;
 export const VERSIONS = ["founder", "employee"] as const;
 export const PDF_LENGTHS = ["short", "full"] as const;
