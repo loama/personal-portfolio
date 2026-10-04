@@ -24,7 +24,7 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
                   width={44}
                   height={44}
                   sizes="44px"
-                  className="h-11 w-11 shrink-0 rounded bg-white object-contain p-0.5"
+                  className="h-11 w-11 shrink-0 rounded bg-white object-contain"
                 />
               )}
               <div className="min-w-0 flex-1">
