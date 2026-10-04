@@ -154,15 +154,19 @@ describe("model review correction", () => {
     expect(attempts.every((attempt) => attempt.validationError !== null)).toBe(true);
   });
 
-  test("keeps schema failures and accepted corrections in the audit", async () => {
-    const attempts: ReviewAttempt[] = [];
-    const result = await reviewBatch(async (correction) => ({
-      model: "review fixture", content: correction ? review([]) : "not JSON",
-    }), [patch], [], async (attempt) => { attempts.push(attempt); });
-    expect(attempts[0].content).toBe("not JSON");
-    expect(attempts[0].validationError).not.toBeNull();
-    expect(attempts[1].content).toBe(review([]));
-    expect(result.review.findings).toEqual([]);
+  test("rejects invalid envelopes before a correction can erase valid findings", async () => {
+    for (const content of ["not JSON", JSON.stringify({ summary: "", findings: [finding] }), JSON.stringify({ summary: "a".repeat(2001), findings: [finding] }), JSON.stringify({ summary: "Review", findings: [finding], extra: true })]) {
+      const attempts: ReviewAttempt[] = [];
+      let calls = 0;
+      await expect(reviewBatch(async (correction) => {
+        calls++;
+        return { model: "review fixture", content: correction ? review([]) : content };
+      }, [patch], [], async (attempt) => { attempts.push(attempt); })).rejects.toThrow("could not validate the response");
+      expect(calls).toBe(1);
+      expect(attempts).toHaveLength(1);
+      expect(attempts[0].content).toBe(content);
+      expect(attempts[0].validationError).not.toBeNull();
+    }
   });
 
   test("fails immediately on provider or audit storage errors", async () => {
