@@ -45,7 +45,7 @@ export default async function ResumePage({ params }: { params: Params }) {
     <main id="main" className="mx-auto max-w-[1240px] px-5 pb-20 pt-10 sm:px-10 sm:pt-16">
       <section aria-label={es ? "Perfil" : "Profile"} className="grid items-center gap-14 pb-16 lg:grid-cols-[minmax(0,1fr)_304px] lg:gap-20 lg:pb-20">
         <div>
-          <p className="eyebrow">{es ? "La experiencia completa" : "The full experience"}</p>
+          <p className="eyebrow">{es ? "Currículum" : "Resume"}</p>
           <h1 className="mt-1 text-[clamp(2.7rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-.05em]">{resume.basics.name}</h1>
           <ResumeSummary resume={resume} />
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">

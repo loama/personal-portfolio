@@ -55,6 +55,7 @@ for (const locale of ["en", "es"]) {
         await expect(repository.locator("svg").first()).toBeVisible();
 
         const profile = page.getByRole("region", { name: locale === "es" ? "Perfil" : "Profile", exact: true });
+        await expect(profile.locator(".eyebrow")).toHaveText(locale === "es" ? "Currículum" : "Resume");
         const portrait = profile.getByRole("img", { name: "Eduardo López", exact: true });
         await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
         await expect(portrait).toHaveCSS("object-fit", "contain");
@@ -65,8 +66,7 @@ for (const locale of ["en", "es"]) {
           const bounds = image.getBoundingClientRect();
           return { top: bounds.top, bottom: bounds.bottom, width: bounds.width, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
         });
-        expect(photo.width).toBeLessThanOrEqual(145);
-        expect(photo.width).toBeGreaterThanOrEqual(128);
+        expect(photo.width).toBeCloseTo(width === 320 ? 198 : 216, 0);
         expect(photo.ratio).toBeCloseTo(photo.naturalRatio, 2);
         expect(photo.naturalRatio).toBeCloseTo(1260 / 1849, 2);
         const badges = await profile.locator(".founder-note").boundingBox();
