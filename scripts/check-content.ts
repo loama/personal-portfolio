@@ -5,6 +5,7 @@ import { LOCALES, PDF_LENGTHS, VERSIONS, resumePath } from "../src/lib/site";
 const forbidden = /[\u002d\u2010-\u2015\u2212]/;
 const prose = [
   ...Object.values(profile.summary).flatMap(Object.values),
+  ...profile.projects.flatMap((project) => Object.values(project.description)),
   ...profile.work.flatMap((work) => [
     ...Object.values(work.position), ...Object.values(work.summary),
     ...Object.values(work.highlights).flat(),

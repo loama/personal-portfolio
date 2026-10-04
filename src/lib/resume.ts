@@ -23,6 +23,12 @@ export const profileSchema = z.strictObject({
     highlights: translatedHighlights,
     details: z.array(z.strictObject({ title: translatedText, paragraphs: translatedParagraphs })).optional(),
   })).min(1),
+  projects: z.array(z.strictObject({
+    id: z.enum(["supervisor", "constructor"]),
+    name: z.string().min(1),
+    url: z.url(),
+    description: translatedText,
+  })).min(1),
   publicWork: z.array(z.strictObject({ project: z.string().min(1), url: z.url(), title: translatedText, body: translatedText })),
   skills: z.array(z.string().min(1)),
   languages: z.array(translatedText),
