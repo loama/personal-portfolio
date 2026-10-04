@@ -30,7 +30,12 @@ header.writeUInt32LE(22, 18);
 await writeFile("public/favicon.ico", Buffer.concat([header, png]));
 await sharp(Buffer.from(icon)).resize(180, 180).png().toFile("public/apple-touch-icon.png");
 
-const canvas = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#ffffff"/>${lettering("eduardo.", 64, 92, 26, "#000000")}${lettering("I build software.", 64, 247, 64, "#000000")}${lettering("And the companies", 64, 319, 62, "#ff5125")}${lettering("behind it.", 64, 391, 62, "#ff5125")}<g font-family="Arial,sans-serif"><text x="66" y="468" font-size="22" fill="#666666">Eduardo López · Founder and software engineer</text><text x="66" y="538" font-size="18" fill="#b63312">Supervisor · Constructor · Amiloz, YC W22</text><text x="66" y="570" font-size="18" fill="#666666">Platanus Ventures 2023</text></g><rect x="784" y="56" width="362" height="518" rx="34" fill="#ff5125"/></svg>`;
-const mask = Buffer.from(`<svg width="346" height="502"><rect width="346" height="502" rx="26" fill="white"/></svg>`);
-const portrait = await sharp("public/images/eduardo-linkedin.webp").resize(346, 502, { fit: "cover" }).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
-await sharp(Buffer.from(canvas)).composite([{ input: portrait, left: 792, top: 64 }]).png().toFile("public/og.png");
+const resizedPortrait = await sharp("public/images/eduardo-linkedin.webp").resize(346, 502, { fit: "inside" }).png().toBuffer({ resolveWithObject: true });
+const { width, height } = resizedPortrait.info;
+const left = 792 + Math.round((346 - width) / 2);
+const top = 64 + Math.round((502 - height) / 2);
+const companiesLeft = 64 + font.layout("And the ").positions.reduce((total, position) => total + position.xAdvance, 0) * 62 / font.unitsPerEm;
+const canvas = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"><rect width="1200" height="630" fill="#ffffff"/>${lettering("eduardo lopez.", 64, 92, 26, "#000000")}${lettering("I build software.", 64, 247, 64, "#000000")}${lettering("And the ", 64, 319, 62, "#000000")}${lettering("companies", companiesLeft, 319, 62, "#ff5125")}${lettering("behind it.", 64, 391, 62, "#000000")}<g font-family="Arial,sans-serif"><text x="66" y="468" font-size="22" fill="#666666">Eduardo López · Founder and full stack AI engineer</text><text x="66" y="538" font-size="18" fill="#b63312">Supervisor · Constructor · amiloz, YC W22</text><text x="66" y="570" font-size="18" fill="#666666">Platanus Ventures 2023</text></g><rect x="${left - 8}" y="${top - 8}" width="${width + 16}" height="${height + 16}" rx="34" fill="#ff5125"/></svg>`;
+const mask = Buffer.from(`<svg width="${width}" height="${height}"><rect width="${width}" height="${height}" rx="26" fill="white"/></svg>`);
+const portrait = await sharp(resizedPortrait.data).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
+await sharp(Buffer.from(canvas)).composite([{ input: portrait, left, top }]).png().toFile("public/og.png");
