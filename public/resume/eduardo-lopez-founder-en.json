@@ -5,7 +5,7 @@
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Founder and full stack AI engineer. Building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+    "summary": "Building startup products since 2015. Cofounded amiloz (over USD 3.5 million raised), a Y Combinator W22 company. As CTO, I built the first version of every product, then hired a team to continue the work. Now building Supervisor and Constructor, software to help SMBs run better using AI.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Solo founder",
+      "position": "Founder",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Building software that lets teams run business operations through conversation.",
@@ -38,7 +38,7 @@
       "details": []
     },
     {
-      "name": "Amiloz",
+      "name": "amiloz",
       "position": "Cofounder & CTO",
       "url": "https://www.ycombinator.com/companies/amiloz",
       "startDate": "2021-07",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "name": "Independent",
+      "name": "freelance",
       "position": "Software consultant for startups",
       "startDate": "2018-01",
       "summary": "Web and mobile products for founders and growing teams.",
@@ -233,24 +233,24 @@
   "projects": [
     {
       "name": "Supervisor",
-      "description": "Building software that lets teams run business operations through conversation.",
+      "url": "https://trysupervisor.com",
+      "description": "Supervise and run your business automatically. Get all the info about your operations in a single centralized place.",
       "highlights": [
         "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
         "Building Constructor, a companion product for creating applications from a description."
-      ],
-      "url": "https://trysupervisor.com"
+      ]
     },
     {
       "name": "Constructor",
-      "description": "Building Constructor, a companion product for creating applications from a description.",
-      "highlights": [],
-      "url": "https://useconstructor.com"
+      "url": "https://useconstructor.com",
+      "description": "Build software in a collaborative way. Apps, websites, APIs, MCPs, dashboards, scheduled jobs...",
+      "highlights": []
     }
   ],
   "meta": {
     "language": "en",
     "version": "founder",
-    "lastModified": "2026-10-03",
+    "lastModified": "2026-10-04",
     "sources": [
       "https://www.linkedin.com/in/eduardolopezamaya/",
       "https://www.ycombinator.com/companies/amiloz",

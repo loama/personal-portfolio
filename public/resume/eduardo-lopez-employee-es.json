@@ -5,7 +5,7 @@
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Ingeniero full stack de IA. Creo productos desde 2015. Fui el primer ingeniero web de Nixtla, donde desarrollé la primera API de TimeGPT, el panel para desarrolladores y el sitio web. Cofundador y CTO de Amiloz, parte de Y Combinator W22. Construí las primeras aplicaciones antes de que levantáramos más de USD 3.5 millones y después dirigí un equipo de tecnología de siete personas.",
+    "summary": "Creo productos desde 2015. Fui el primer ingeniero web de Nixtla, donde desarrollé la primera API de TimeGPT, el panel para desarrolladores y el sitio web. Cofundador y CTO de amiloz, parte de Y Combinator W22. Construí las primeras aplicaciones antes de que levantáramos más de USD 3.5 millones y después dirigí un equipo de tecnología de siete personas.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Fundador único",
+      "position": "Fundador",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "name": "Amiloz",
+      "name": "amiloz",
       "position": "Cofundador y CTO",
       "url": "https://www.ycombinator.com/companies/amiloz",
       "startDate": "2021-07",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "name": "Consultoría",
+      "name": "freelance",
       "position": "Consultor de software para startups",
       "startDate": "2018-01",
       "summary": "Productos web y móviles para fundadores y equipos en crecimiento.",
@@ -233,24 +233,24 @@
   "projects": [
     {
       "name": "Supervisor",
-      "description": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
+      "url": "https://trysupervisor.com",
+      "description": "Supervisa y gestiona tu negocio automáticamente. Toda la información de tus operaciones en un solo lugar.",
       "highlights": [
         "El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.",
         "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."
-      ],
-      "url": "https://trysupervisor.com"
+      ]
     },
     {
       "name": "Constructor",
-      "description": "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción.",
-      "highlights": [],
-      "url": "https://useconstructor.com"
+      "url": "https://useconstructor.com",
+      "description": "Crea software de forma colaborativa. Apps, sitios web, APIs, MCPs, paneles de control, tareas programadas...",
+      "highlights": []
     }
   ],
   "meta": {
     "language": "es",
     "version": "employee",
-    "lastModified": "2026-10-03",
+    "lastModified": "2026-10-04",
     "sources": [
       "https://www.linkedin.com/in/eduardolopezamaya/",
       "https://www.ycombinator.com/companies/amiloz",

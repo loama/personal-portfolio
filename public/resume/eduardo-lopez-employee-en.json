@@ -5,7 +5,7 @@
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Full stack AI engineer building products since 2015. Nixtla's first web engineer, where I built the first TimeGPT API, developer dashboard, and website. Cofounder and CTO at Amiloz, part of Y Combinator W22. I built the initial apps before we raised more than USD 3.5 million, then led a technology team of seven.",
+    "summary": "Building products since 2015. Nixtla's first web engineer, where I built the first TimeGPT API, developer dashboard, and website. Cofounder and CTO at amiloz, part of Y Combinator W22. I built the initial apps before we raised more than USD 3.5 million, then led a technology team of seven.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,7 +27,7 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Solo founder",
+      "position": "Founder",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Building software that lets teams run business operations through conversation.",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "name": "Amiloz",
+      "name": "amiloz",
       "position": "Cofounder & CTO",
       "url": "https://www.ycombinator.com/companies/amiloz",
       "startDate": "2021-07",
@@ -95,7 +95,7 @@
       ]
     },
     {
-      "name": "Independent",
+      "name": "freelance",
       "position": "Software consultant for startups",
       "startDate": "2018-01",
       "summary": "Web and mobile products for founders and growing teams.",
@@ -233,24 +233,24 @@
   "projects": [
     {
       "name": "Supervisor",
-      "description": "Building software that lets teams run business operations through conversation.",
+      "url": "https://trysupervisor.com",
+      "description": "Supervise and run your business automatically. Get all the info about your operations in a single centralized place.",
       "highlights": [
         "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
         "Building Constructor, a companion product for creating applications from a description."
-      ],
-      "url": "https://trysupervisor.com"
+      ]
     },
     {
       "name": "Constructor",
-      "description": "Building Constructor, a companion product for creating applications from a description.",
-      "highlights": [],
-      "url": "https://useconstructor.com"
+      "url": "https://useconstructor.com",
+      "description": "Build software in a collaborative way. Apps, websites, APIs, MCPs, dashboards, scheduled jobs...",
+      "highlights": []
     }
   ],
   "meta": {
     "language": "en",
     "version": "employee",
-    "lastModified": "2026-10-03",
+    "lastModified": "2026-10-04",
     "sources": [
       "https://www.linkedin.com/in/eduardolopezamaya/",
       "https://www.ycombinator.com/companies/amiloz",

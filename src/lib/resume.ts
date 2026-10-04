@@ -97,19 +97,12 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       keywords: [...profile.skills],
     }],
     languages: profile.languages.map((language) => ({ language: language[locale] })),
-    projects: profile.work.filter((work) => work.id === "supervisor").flatMap((work) => {
-      const supervisor = {
-        name: work.name,
-        description: work.summary[locale],
-        highlights: [...work.highlights[locale]],
-        ...(work.url ? { url: work.url } : {}),
-      };
-      const constructorDescription = work.highlights[locale].find((highlight) => highlight.includes("Constructor"));
-      const constructorUrl = profile.sources.find((url) => new URL(url).hostname === "useconstructor.com");
-      return constructorDescription && constructorUrl
-        ? [supervisor, { name: "Constructor", description: constructorDescription, highlights: [], url: constructorUrl }]
-        : [supervisor];
-    }),
+    projects: profile.projects.map((project) => ({
+      name: project.name,
+      url: project.url,
+      description: project.description[locale],
+      highlights: [...(profile.work.find((work) => work.id === project.id)?.highlights[locale] ?? [])],
+    })),
     meta: {
       language: locale,
       version,
