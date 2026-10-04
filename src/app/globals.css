@@ -81,6 +81,10 @@ body { margin: 0; }
   .button-primary:hover .button-label-rest { transform: translateY(-115%); }
   .button-primary:hover .button-label-hover { transform: translateY(0); }
 }
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: url("/images/cursor.svg") 4 4, auto; }
+  :is(a[href], button:not(:disabled), summary, [role="button"], .cursor-pointer):not([aria-disabled="true"]) { cursor: url("/images/cursor.svg") 4 4, pointer; }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .button-primary .button-label-rest, .button-primary:is(:hover, :focus-visible) .button-label-rest { transform: none; }
