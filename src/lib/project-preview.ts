@@ -23,8 +23,9 @@ function resourceUrl(value: string | undefined, source: string) {
   }
 }
 
-export function sanitizeProjectPreview(html: string, project: PreviewProject) {
-  const source = projectPreviewSources[project];
+export function sanitizeProjectPreview(html: string, project: PreviewProject, documentUrl: string = projectPreviewSources[project]) {
+  const source = resourceUrl(documentUrl, projectPreviewSources[project]);
+  if (!source) throw new Error("Preview document URL is outside the project website.");
   const cleaned = sanitizeHtml(html, {
     allowedTags: [...sanitizeHtml.defaults.allowedTags, "html", "head", "body", "title", "link", "img", "picture", "source", "svg", "g", "path", "rect", "circle", "ellipse", "line", "polyline", "polygon", "defs", "clippath", "mask", "lineargradient", "radialgradient", "stop", "button", "form", "input", "textarea", "label"],
     allowedAttributes: {
@@ -61,7 +62,8 @@ export function sanitizeProjectPreview(html: string, project: PreviewProject) {
     },
     exclusiveFilter: (frame) => (frame.tag === "link" && (frame.attribs.rel !== "stylesheet" || !frame.attribs.href)) || (frame.tag === "img" && !frame.attribs.src),
   });
-  const head = `<base href="${source}"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html{color-scheme:light}body{margin:0;overflow:hidden}</style>`;
+  const baseHref = source.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+  const head = `<base href="${baseHref}"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width, initial-scale=1"><style>html{color-scheme:light}body{margin:0;overflow:hidden}</style>`;
   return `<!doctype html>${cleaned.includes("<head>") ? cleaned.replace("<head>", `<head>${head}`) : `<html><head>${head}</head><body>${cleaned}</body></html>`}`;
 }
 
@@ -99,7 +101,7 @@ export async function fetchProjectPreview(project: PreviewProject, request: Prev
     } finally {
       await reader.cancel();
     }
-    return sanitizeProjectPreview(Buffer.concat(chunks).toString("utf8"), project);
+    return sanitizeProjectPreview(Buffer.concat(chunks).toString("utf8"), project, url);
   }
   throw new Error("Preview response has too many redirects.");
 }

@@ -59,6 +59,27 @@ describe("project previews", () => {
     expect(html).not.toContain("privateCode");
   });
 
+  test("resolve relative resources and the document base after directory redirects", async () => {
+    const urls: string[] = [];
+    const html = await fetchProjectPreview("supervisor", async (url) => {
+      urls.push(url);
+      if (urls.length === 1) return new Response(null, { status: 302, headers: { Location: "/landing/" } });
+      if (urls.length === 2) return new Response(null, { status: 307, headers: { Location: "en/?plan=pro&theme=light" } });
+      return new Response('<html><head><link rel="stylesheet" href="styles/site.css"></head><body><img src="../images/hero.png"><a href="pricing">Pricing</a></body></html>', { headers: { "Content-Type": "text/html" } });
+    });
+    expect(urls).toEqual(["https://trysupervisor.com/", "https://trysupervisor.com/landing/", "https://trysupervisor.com/landing/en/?plan=pro&theme=light"]);
+    expect(html).toContain('<base href="https://trysupervisor.com/landing/en/?plan=pro&amp;theme=light">');
+    expect(html).toContain('href="https://trysupervisor.com/landing/en/styles/site.css"');
+    expect(html).toContain('src="https://trysupervisor.com/landing/images/hero.png"');
+    expect(html).toContain('<a href="pricing">Pricing</a>');
+  });
+
+  test("reject an untrusted document base", () => {
+    for (const source of ["https://untrusted.example/landing/", "http://trysupervisor.com/", "https://user:password@trysupervisor.com/"]) {
+      expect(() => sanitizeProjectPreview("<h1>Preview</h1>", "supervisor", source)).toThrow("outside the project website");
+    }
+  });
+
   test("reject unsupported responses and oversized documents", async () => {
     await expect(fetchProjectPreview("supervisor", async () => new Response("failure", { status: 503 }))).rejects.toThrow("HTTP 503");
     await expect(fetchProjectPreview("supervisor", async () => new Response("{}", { headers: { "Content-Type": "application/json" } }))).rejects.toThrow("unsupported content type");
