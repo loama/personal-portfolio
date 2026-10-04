@@ -36,7 +36,7 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
             )}
             {(entry.details.length > 0 || publicWork.length > 0) && (
               <details className="group mt-3">
-                <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 rounded-md text-sm font-medium text-accent transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
+                <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 rounded-md text-sm font-medium text-accent hover:text-ink [&::-webkit-details-marker]:hidden">
                   {es ? "Más sobre este trabajo" : "More about this work"}
                   <span className="sr-only">{` ${es ? "en" : "at"} ${entry.name}`}</span>
                   <ChevronDownIcon aria-hidden="true" className="h-4 w-4 transition-transform duration-200 group-open:rotate-180" />

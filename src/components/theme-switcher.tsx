@@ -38,7 +38,7 @@ export function ThemeSwitcher({ locale, className = "" }: { locale: Locale; clas
             aria-label={labels[locale]}
             className="peer sr-only"
           />
-          <span className="flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:text-ink peer-checked:text-ink peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink sm:h-10 sm:w-10">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full text-muted hover:text-ink peer-checked:text-ink peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-ink sm:h-10 sm:w-10">
             <Icon aria-hidden="true" className="h-4 w-4" />
           </span>
         </label>

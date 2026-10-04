@@ -20,7 +20,7 @@ export function Header({ locale, path = "" }: { locale: Locale; path?: string })
       <div className="contents sm:col-start-2 sm:row-start-1 sm:flex sm:items-center sm:justify-end sm:gap-3">
         <ThemeSwitcher locale={locale} className="col-span-2 row-start-2 justify-self-end" />
         <nav aria-label={es ? "Idioma" : "Language"} className="col-start-2 row-start-1 flex items-center justify-self-end gap-1 text-xs font-semibold">
-          {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} scroll={false} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 transition-colors ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
+          {(["en", "es"] as const).map((lang) => <Link key={lang} href={`/${lang}${path}`} scroll={false} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
         </nav>
       </div>
     </header>

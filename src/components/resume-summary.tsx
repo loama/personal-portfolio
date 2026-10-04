@@ -16,7 +16,7 @@ export function ResumeSummary({ resume }: { resume: Resume }) {
       <a
         key={`${project.name}:${match.index}`}
         href={project.url}
-        className="font-medium text-accent underline decoration-accent/60 underline-offset-4 transition-colors hover:text-ink"
+        className="font-medium text-accent underline decoration-accent/60 underline-offset-4 hover:text-ink"
         data-track={`project_${project.name.toLowerCase()}`}
       >
         {project.name}

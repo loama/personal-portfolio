@@ -15,19 +15,9 @@ export const THEME_INIT_SCRIPT = `(() => {
 
 let preference: ThemePreference | undefined;
 const listeners = new Set<() => void>();
-let deviceScheme: MediaQueryList | undefined;
 
 function normalizePreference(value: string | null): ThemePreference {
   return value === "light" || value === "dark" ? value : "device";
-}
-
-function finishPaletteTransitions() {
-  // Switch foreground and background together so labels stay readable.
-  for (const animation of document.getAnimations()) {
-    if (animation instanceof CSSTransition && ["color", "background-color"].includes(animation.transitionProperty)) {
-      animation.finish();
-    }
-  }
 }
 
 function writeColorScheme(value: ThemePreference) {
@@ -36,11 +26,6 @@ function writeColorScheme(value: ThemePreference) {
   const scheme = value === "device" ? "light dark" : value;
   if (!rule || rule.style.getPropertyValue("color-scheme") === scheme) return;
   rule.style.setProperty("color-scheme", scheme);
-  finishPaletteTransitions();
-}
-
-function handleDeviceScheme() {
-  if (getThemeSnapshot() === "device") finishPaletteTransitions();
 }
 
 function applyTheme(value: ThemePreference) {
@@ -81,15 +66,12 @@ export function syncThemeStyle() {
 export function subscribeToTheme(listener: () => void) {
   if (listeners.size === 0) {
     window.addEventListener("storage", handleStorage);
-    deviceScheme = window.matchMedia("(prefers-color-scheme: dark)");
-    deviceScheme.addEventListener("change", handleDeviceScheme);
   }
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
     if (listeners.size === 0) {
       window.removeEventListener("storage", handleStorage);
-      deviceScheme?.removeEventListener("change", handleDeviceScheme);
     }
   };
 }

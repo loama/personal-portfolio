@@ -116,6 +116,58 @@ test("device appearance follows live system changes and explicit choices overrid
   expect(accessibility.violations).toEqual([]);
 });
 
+test("links remain readable on every frame of an appearance change", async ({ page }) => {
+  await page.goto("/en/resume/employee");
+  await expect(page.getByRole("radio", { name: "Device", exact: true })).toBeChecked();
+  const sampleContrast = () => page.evaluate(async () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1;
+    const context = canvas.getContext("2d");
+    const rgba = (color) => {
+      context.clearRect(0, 0, 1, 1);
+      context.fillStyle = color;
+      context.fillRect(0, 0, 1, 1);
+      return Array.from(context.getImageData(0, 0, 1, 1).data);
+    };
+    const luminance = (channels) => channels.slice(0, 3).map((value) => {
+      const channel = value / 255;
+      return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+    }).reduce((total, value, index) => total + value * [0.2126, 0.7152, 0.0722][index], 0);
+    const links = document.querySelectorAll('header nav a, a[data-track="view_source"]');
+    if (links.length !== 3) throw new Error("Expected the language and source links.");
+    let minimum = Infinity;
+    for (let frame = 0; frame < 20; frame++) {
+      await new Promise((resolve) => requestAnimationFrame(resolve));
+      for (const link of links) {
+        let parent = link;
+        let background;
+        while (parent) {
+          background = rgba(getComputedStyle(parent).backgroundColor);
+          if (background[3] === 255) break;
+          parent = parent.parentElement;
+        }
+        if (!parent) throw new Error("The link has no opaque background.");
+        const foregroundLuminance = luminance(rgba(getComputedStyle(link).color));
+        const backgroundLuminance = luminance(background);
+        const ratio = (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) / (Math.min(foregroundLuminance, backgroundLuminance) + 0.05);
+        minimum = Math.min(minimum, ratio);
+      }
+    }
+    return minimum;
+  });
+  for (const scheme of ["dark", "light", "dark"]) {
+    const contrast = sampleContrast();
+    await page.emulateMedia({ colorScheme: scheme });
+    expect(await contrast).toBeGreaterThanOrEqual(4.5);
+    await expectAppearance(page, scheme);
+  }
+  for (const preference of ["Light", "Dark", "Device"]) {
+    const contrast = sampleContrast();
+    await page.getByTitle(preference, { exact: true }).click();
+    expect(await contrast).toBeGreaterThanOrEqual(4.5);
+  }
+});
+
 test("appearance uses native radio keyboard controls in both languages", async ({ page }) => {
   for (const copy of [{ locale: "en", group: "Appearance", device: "Device", light: "Light", dark: "Dark" }, { locale: "es", group: "Apariencia", device: "Dispositivo", light: "Claro", dark: "Oscuro" }]) {
     await page.goto(`/${copy.locale}/resume/founder`);
