@@ -11,7 +11,12 @@ export default defineConfig({
   workers: 2,
   retries: 0,
   reporter: [["list"], ["html", { open: "never", outputFolder: join(qaDir, "report") }]],
-  use: { baseURL, trace: "retain-on-failure", screenshot: "only-on-failure" },
+  use: {
+    baseURL,
+    // DOM snapshots inject scripts into the previews. Keep their sandbox intact.
+    trace: { mode: "retain-on-failure", snapshots: false, screenshots: true, sources: true },
+    screenshot: "only-on-failure",
+  },
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
     { name: "webkit", use: { ...devices["Desktop Safari"] } },
