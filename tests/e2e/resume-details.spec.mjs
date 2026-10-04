@@ -45,8 +45,8 @@ for (const locale of ["en", "es"]) {
         await expect(freelanceIcon).toHaveCSS("mask-image", /freelance/);
         const amiloz = page.locator("#experience-amiloz");
         await expect(amiloz.getByRole("heading", { level: 3 })).toHaveText("amiloz");
-        await expect(amiloz.locator("img")).toHaveAttribute("src", /amiloz/);
-        for (const logo of [freelanceIcon, amiloz.locator("img")]) {
+        await expect(amiloz.locator(".company-logo")).toHaveCSS("mask-image", /amiloz/);
+        for (const logo of [freelanceIcon, amiloz.locator(".company-logo")]) {
           await expect(logo).toHaveCSS("padding", "0px");
           await expect(logo).toHaveCSS("border-width", "0px");
         }
