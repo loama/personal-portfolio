@@ -5,6 +5,7 @@ import { Header, Footer, Arrow } from "@/components/shell";
 import { getResume } from "@/lib/resume";
 import { ResumeExperience } from "@/components/resume-experience";
 import { ResumeSidebar } from "@/components/resume-sidebar";
+import { ResumeSummary } from "@/components/resume-summary";
 import { SocialIcon } from "@/components/social-icon";
 import { ButtonLabel } from "@/components/button-label";
 import { Portrait } from "@/components/portrait";
@@ -40,14 +41,13 @@ export default async function ResumePage({ params }: { params: Params }) {
   };
 
   return <>
-    <Header locale={lang} path={`/resume/${version}`} mode={version} />
+    <Header locale={lang} path={`/resume/${version}`} />
     <main id="main" className="mx-auto max-w-[1240px] px-5 pb-20 pt-10 sm:px-10 sm:pt-16">
       <section aria-label={es ? "Perfil" : "Profile"} className="grid items-center gap-14 pb-16 lg:grid-cols-[minmax(0,1fr)_304px] lg:gap-20 lg:pb-20">
         <div>
           <p className="eyebrow">{es ? "La experiencia completa" : "The full experience"}</p>
           <h1 className="mt-1 text-[clamp(2.7rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-[-.05em]">{resume.basics.name}</h1>
-          <p className="mt-2 text-xl text-muted">{resume.basics.label}</p>
-          <p className="mt-6 max-w-[650px] text-base leading-[1.85] text-muted">{resume.basics.summary}</p>
+          <ResumeSummary resume={resume} />
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <a href={resumePath(lang, version, "pdf")} download className="button-primary" data-track="download_pdf"><ButtonLabel>{es ? "Descargar PDF" : "Download PDF"}</ButtonLabel><span className="button-icon"><DownloadIcon aria-hidden="true" className="h-4 w-4" /></span></a>
             <a href={resumePath(lang, version, "pdf", "full")} download className="flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-ink" data-track="download_pdf_full">{es ? "PDF detallado" : "Detailed PDF"}<DownloadIcon aria-hidden="true" className="h-4 w-4" /></a>
@@ -67,7 +67,7 @@ export default async function ResumePage({ params }: { params: Params }) {
       </section>
       {version === "employee" && <Projects locale={lang} />}
     </main>
-    <Footer locale={lang} />
+    <Footer locale={lang} mode={version} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured).replace(/</g, "\\u003c") }} />
   </>;
 }
