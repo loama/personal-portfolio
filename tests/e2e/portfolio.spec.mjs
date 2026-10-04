@@ -192,13 +192,13 @@ test("analytics requires consent and records the real download action", async ({
   await expect(page.getByRole("button", { name: "Accept analytics", exact: true })).toHaveCount(0);
   expect(events).toEqual([]);
 });
-test("privacy preferences restore keyboard focus without changing scroll", async ({ page }) => {
-  for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
-    await page.setViewportSize(viewport);
-    for (const copy of [
-      { locale: "en", options: "Privacy options", preferences: "Analytics preferences", close: "Close preferences", accept: "Accept analytics", decline: "Decline" },
-      { locale: "es", options: "Opciones de privacidad", preferences: "Preferencias de analítica", close: "Cerrar preferencias", accept: "Aceptar analítica", decline: "Rechazar" },
-    ]) {
+for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
+  for (const copy of [
+    { locale: "en", options: "Privacy options", preferences: "Analytics preferences", close: "Close preferences", accept: "Accept analytics", decline: "Decline" },
+    { locale: "es", options: "Opciones de privacidad", preferences: "Preferencias de analítica", close: "Cerrar preferencias", accept: "Aceptar analítica", decline: "Rechazar" },
+  ]) {
+    test(`privacy preferences restore keyboard focus without changing scroll in ${copy.locale} at ${viewport.width}px`, async ({ page }) => {
+      await page.setViewportSize(viewport);
       await page.goto(`/${copy.locale}/resume/founder`);
       const trigger = page.getByRole("button", { name: copy.options, exact: true });
       const preferences = page.getByRole("region", { name: copy.preferences, exact: true });
@@ -227,9 +227,9 @@ test("privacy preferences restore keyboard focus without changing scroll", async
           await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
         }
       }
-    }
+    });
   }
-});
+}
 test("keyboard, reduced motion and missing routes remain usable", async ({ page, browserName }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/en");
