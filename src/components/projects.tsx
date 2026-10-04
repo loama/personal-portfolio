@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Arrow } from "./shell";
 import type { Locale } from "@/lib/site";
 import { profile } from "@/lib/resume";
+import { ProjectPreview } from "./project-preview";
 import supervisorPreview from "../../public/images/projects/supervisor.webp";
 import constructorPreview from "../../public/images/projects/constructor.webp";
 
@@ -21,18 +22,9 @@ export function Projects({ locale }: { locale: Locale }) {
         {profile.projects.map((project) => (
           <article key={project.id} className={project.id === "constructor" ? "md:pt-16" : undefined}>
             <a href={project.url} aria-label={`${es ? "Visitar" : "Visit"} ${project.name}`} className="project-shell group block rounded-[2rem] p-2" data-track={`project_${project.id}`}>
-              <div aria-hidden="true" className="relative aspect-[16/11] overflow-hidden rounded-[1.55rem] bg-white">
+              <ProjectPreview source={`/api/project-preview/${project.id}`} title={`${project.name} ${es ? "vista previa del sitio" : "website preview"}`}>
                 <Image src={previews[project.id]} alt="" fill sizes="(min-width: 768px) 600px, calc(100vw - 56px)" className="object-contain object-top" />
-                <iframe
-                  src={project.url}
-                  title={`${project.name} ${es ? "vista previa del sitio" : "website preview"}`}
-                  loading="lazy"
-                  sandbox="allow-scripts allow-same-origin"
-                  referrerPolicy="no-referrer"
-                  tabIndex={-1}
-                  className="pointer-events-none absolute left-0 top-0 h-[250%] w-[250%] origin-top-left scale-[.4] border-0"
-                />
-              </div>
+              </ProjectPreview>
             </a>
             <div className="px-1 pt-6">
               <div className="flex items-center justify-between">
