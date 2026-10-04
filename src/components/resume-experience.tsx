@@ -1,6 +1,5 @@
-import Image from "next/image";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
-import { getCompanyLogo } from "@/lib/company-logos";
+import { CompanyLogo } from "./company-logo";
 import { profile, type Resume } from "@/lib/resume";
 import type { Locale } from "@/lib/site";
 
@@ -10,23 +9,13 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
   return (
     <div className="mt-5">
       {work.map((entry) => {
-        const logo = getCompanyLogo(entry.name);
         const source = profile.work.find((item) => item.name === entry.name || item.nameEs === entry.name);
         const publicWork = profile.publicWork.filter((item) => item.project === source?.id);
 
         return (
           <article key={`${entry.name}-${entry.position}`} id={source ? `experience-${source.id}` : undefined} className="border-t border-ink/10 py-6">
             <div className="flex items-start gap-3.5">
-              {logo && (
-                <Image
-                  src={logo}
-                  alt=""
-                  width={44}
-                  height={44}
-                  sizes="44px"
-                  className="h-11 w-11 shrink-0 rounded bg-white object-contain"
-                />
-              )}
+              <CompanyLogo company={entry.name} />
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-base font-semibold">{entry.name}</h3>
