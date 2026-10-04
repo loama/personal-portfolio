@@ -177,6 +177,12 @@ export function azureReviewUrl(endpoint: string): URL {
   return url;
 }
 
+export function reviewReasoning(value: string | undefined): { reasoning_effort?: string } {
+  if (!value) return {};
+  if (!["low", "medium", "high"].includes(value)) throw new Error("AZURE_OPENAI_REASONING_EFFORT must be low, medium or high when configured.");
+  return { reasoning_effort: value };
+}
+
 function git(...args: string[]) {
   const result = Bun.spawnSync(["git", ...args], { stdout: "pipe", stderr: "pipe", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
   if (result.exitCode !== 0) throw new Error("Git could not prepare the review input.");
@@ -224,6 +230,7 @@ async function run() {
   const deployment = process.env.AZURE_OPENAI_DEPLOYMENT;
   if (!key || !endpoint || !deployment) throw new Error("Model review requires AZURE_OPENAI_API_KEY, AZURE_OPENAI_ENDPOINT and AZURE_OPENAI_DEPLOYMENT. Fork pull requests need an authorized maintainer review on a trusted branch.");
   const url = azureReviewUrl(endpoint);
+  const reasoning = reviewReasoning(process.env.AZURE_OPENAI_REASONING_EFFORT);
   const head = process.env.REVIEW_HEAD;
   if (!head || head.length !== 40 || !shaPattern.test(head)) throw new Error("REVIEW_HEAD must contain a full commit SHA.");
   ensureCommit(head);
@@ -266,7 +273,7 @@ async function run() {
             { role: "user", content: JSON.stringify({ batch: index + 1, batches: batches.length, inventory, patches: batch.map(({ file, diff }) => ({ file, diff })) }) },
             ...correctionMessages,
           ],
-          reasoning_effort: "high",
+          ...reasoning,
           max_completion_tokens: 16000,
           response_format: { type: "json_schema", json_schema: { name: "portfolio_review", strict: true, schema } },
         }),

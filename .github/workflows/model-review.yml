@@ -45,6 +45,7 @@ jobs:
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
           AZURE_OPENAI_ENDPOINT: ${{ vars.AZURE_OPENAI_ENDPOINT }}
           AZURE_OPENAI_DEPLOYMENT: ${{ vars.AZURE_OPENAI_DEPLOYMENT }}
+          AZURE_OPENAI_REASONING_EFFORT: ${{ vars.AZURE_OPENAI_REASONING_EFFORT }}
           REVIEW_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
           REVIEW_BASE: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
           REVIEW_EVENT: ${{ github.event_name }}
