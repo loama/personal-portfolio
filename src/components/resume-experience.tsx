@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import { getCompanyLogo } from "@/lib/company-logos";
-import type { Resume } from "@/lib/resume";
+import { profile, type Resume } from "@/lib/resume";
 import type { Locale } from "@/lib/site";
 
 export function ResumeExperience({ work, locale }: { work: Resume["work"]; locale: Locale }) {
@@ -11,9 +11,11 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
     <div className="mt-5">
       {work.map((entry) => {
         const logo = getCompanyLogo(entry.name);
+        const source = profile.work.find((item) => item.name === entry.name || item.nameEs === entry.name);
+        const publicWork = profile.publicWork.filter((item) => item.project === source?.id);
 
         return (
-          <article key={`${entry.name}-${entry.position}`} className="border-t border-ink/10 py-6">
+          <article key={`${entry.name}-${entry.position}`} id={source ? `experience-${source.id}` : undefined} className="border-t border-ink/10 py-6">
             <div className="flex items-start gap-3.5">
               {logo && (
                 <Image
@@ -22,7 +24,7 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
                   width={44}
                   height={44}
                   sizes="44px"
-                  className="h-11 w-11 shrink-0 bg-white object-contain"
+                  className="h-11 w-11 shrink-0 rounded bg-white object-contain p-0.5"
                 />
               )}
               <div className="min-w-0 flex-1">
@@ -34,7 +36,7 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
                     {entry.endDate?.replace("-", "/") ?? (es ? "Actualidad" : "Present")}
                   </p>
                 </div>
-                <p className="mt-1 text-sm text-accent">{entry.position}</p>
+                <p className="mt-1 text-sm text-muted">{entry.position}</p>
               </div>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted">{entry.summary}</p>
@@ -43,7 +45,7 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
                 {entry.highlights.map((item) => <li key={item} className="list-disc pl-1 marker:text-accent/50">{item}</li>)}
               </ul>
             )}
-            {entry.details.length > 0 && (
+            {(entry.details.length > 0 || publicWork.length > 0) && (
               <details className="group mt-3">
                 <summary className="flex min-h-11 w-fit cursor-pointer list-none items-center gap-2 rounded-md text-sm font-medium text-accent transition-colors hover:text-ink [&::-webkit-details-marker]:hidden">
                   {es ? "Más sobre este trabajo" : "More about this work"}
@@ -55,6 +57,15 @@ export function ResumeExperience({ work, locale }: { work: Resume["work"]; local
                     <h4 className="text-sm font-semibold text-ink">{detail.title}</h4>
                     {detail.paragraphs.map((paragraph) => <p key={paragraph} className="mt-2 text-sm leading-[1.8] text-muted">{paragraph}</p>)}
                   </section>)}
+                  {publicWork.length > 0 && <section>
+                    <h4 className="text-sm font-semibold text-ink">{es ? "Trabajo público seleccionado" : "Selected public work"}</h4>
+                    <ul className="mt-3 space-y-4">
+                      {publicWork.map((item) => <li key={item.url}>
+                        <a href={item.url} className="inline-block text-sm font-medium text-accent underline underline-offset-4">{item.title[locale]}</a>
+                        <p className="mt-2 text-sm leading-[1.8] text-muted">{item.body[locale]}</p>
+                      </li>)}
+                    </ul>
+                  </section>}
                 </div>
               </details>
             )}
