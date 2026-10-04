@@ -15,11 +15,14 @@ Configure these repository values through GitHub settings or a secure CLI sessio
 | Secret | `AZURE_OPENAI_API_KEY` | Key for the approved Azure review resource |
 | Variable | `AZURE_OPENAI_ENDPOINT` | Azure resource HTTPS endpoint, optionally ending in `/openai/v1` |
 | Variable | `AZURE_OPENAI_DEPLOYMENT` | Existing model deployment with structured JSON output support |
+| Variable | `AZURE_OPENAI_REASONING_EFFORT` | Optional `low`, `medium` or `high` for a deployment that supports reasoning effort |
 | Secret | `VERCEL_TOKEN` | Token authorized for this Vercel project |
 | Variable | `VERCEL_ORG_ID` | `team_aGAWbuKx6x5BVxlYeyS6gN1E` |
 | Variable | `VERCEL_PROJECT_ID` | `prj_AW8UKS2NcyxscGlIzrLMYOYazNmg` |
 
 The workflow passes the Vercel token through the environment. Vercel CLI 62.2.0 reads `VERCEL_TOKEN` directly. The token never appears in command arguments. The Azure key is available only to the model request step, and the Vercel token is available only to deployment configuration validation and deployment.
+
+Configure `AZURE_OPENAI_REASONING_EFFORT` only when the selected deployment supports that parameter. Leaving it unset omits the parameter, preserving support for models that offer structured output without reasoning controls. Invalid values fail before any provider request.
 
 This guide describes required setup. It does not establish that credentials, provider billing, analytics projects or domain settings are active. Check those in their services and confirm a real result before the first release.
 
@@ -35,7 +38,9 @@ The model reads text source, configuration and documentation changes. It also re
 
 Requests reserve a combined limit of 70,000 bytes for change inventory and source patches, with at most 16 batches. An oversized file or change fails explicitly. Nothing is silently truncated. Responses must match a fixed schema, use a known severity and cite exact text at the stated file and line. Deleted source uses the original line number and old side. Inventory findings use line zero and exact inventory evidence. Incomplete responses, missing configuration and provider failures fail the check. Medium, high and critical findings block completion. Low findings remain visible in the artifact.
 
-Model output is review data. The workflow never executes it or posts it as a pull request comment. Every completed review produces a `review.json` artifact with the commit range, reviewed files, exclusions, returned model and findings. The script never prints provider response bodies on HTTP failure.
+When individual findings fail schema or citation validation, the script sends the rejected response and exact validation errors back to the reviewer for one correction. The correction must preserve every finding that already passed validation. It cannot remove or downgrade those findings. A second invalid response fails the check. Malformed JSON or an invalid review envelope fails immediately, so an invalid summary cannot erase valid findings through a correction. Valid blocking reviews, provider failures and artifact storage errors receive no retry.
+
+Model output is review data. The workflow never executes it or posts it as a pull request comment. The `review.json` artifact records the commit range, reviewed files, exclusions, returned model and findings. It also preserves every response and validation error as each attempt completes, including rejected responses. Its `complete` field remains false until every batch has a valid review. The script never prints provider response bodies on HTTP failure.
 
 This review can still miss defects. Unit tests, browser checks and human review remain part of the release process.
 
