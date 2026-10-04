@@ -15,7 +15,7 @@ function lettering(value: string, x: number, y: number, size: number, color: str
   return `<g fill="${color}" transform="translate(${x},${y}) scale(${size / font.unitsPerEm},${-size / font.unitsPerEm})">${paths}</g>`;
 }
 
-const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#ff5125"/>${lettering("e", 14, 45, 48, "#000000")}<circle cx="48" cy="43" r="4" fill="#000000"/></svg>`;
+const icon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#ffffff"/>${lettering("e", 14, 45, 48, "#000000")}<circle cx="48" cy="43" r="4" fill="#000000"/></svg>`;
 await writeFile("public/icon.svg", icon);
 const png = await sharp(Buffer.from(icon)).resize(64, 64).png().toBuffer();
 const header = Buffer.alloc(22);
