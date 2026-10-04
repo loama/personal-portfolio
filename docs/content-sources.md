@@ -18,7 +18,7 @@ The résumé and website use the same career record in `content/profile.json`. E
 
 12. Eduardo's October 4, 2026 feedback sets the display names to "amiloz" and "freelance". The founder summary includes the funding amount, his CTO role, the first product versions, and subsequent hiring. He describes Supervisor and Constructor as software to help small and medium businesses run better using AI. His later feedback uses "Founder" throughout and supplies the current product descriptions.
 
-Private source documents remain outside this repository. Contact details were supplied by Eduardo. The portrait comes from the original image loaded by his LinkedIn photo editor, retrieved October 4, 2026 at his request. LinkedIn serves this original as a 900 by 900 pixel image. It replaces the earlier 800 by 800 profile crop. The X account came from his existing website.
+Private source documents remain outside this repository. Contact details were supplied by Eduardo. The portrait is the complete 1260 by 1849 pixel photograph he supplied on October 4, 2026. The website displays it at its original proportions without cropping or zoom. It replaces the square crop that LinkedIn served. The X account came from his existing website.
 
 ## Visual assets
 
@@ -32,11 +32,11 @@ The PDFs embed the regular and bold Liberation Sans fonts distributed with Mozil
 
 The YC mark is the [official vector asset](https://bookface-static.ycombinator.com/vite/assets/yc-logo-vector-CecLwoGq.js) served by Y Combinator. It identifies the amiloz W22 affiliation. Platanus Ventures is identified separately as the 2023 founder cohort.
 
-The Platanus symbol comes from the header SVG on its [official website](https://platan.us/), retrieved October 3, 2026. The local asset preserves the symbol's paths and yellow colors.
+The Platanus symbol comes from the header SVG on its [official website](https://platan.us/), retrieved October 3, 2026 and checked again against the live header on October 4. The local asset preserves the symbol's paths and yellow colors. The badge links to that website and displays the mark without an added background.
 
 The [Supervisor logo](https://trysupervisor.com/supervisor-logo.svg) comes from its current website. The local copy preserves the original icon and wordmark.
 
-Company logos appear beside the experience entries on the website and in the PDFs. Local PNG copies in `public/images/companies` preserve the source colors and proportions.
+Company logos appear beside the experience entries on the website and in the PDFs. Local PNG copies in `public/images/companies` preserve the source proportions. The website adds no frames or backgrounds. White mattes were removed from the amiloz, Centraal, Zeel, and freelance assets. Betterfin and Eiya have 8 pixel corner rounding. Monochrome marks follow the selected theme, and the Supervisor mark renders at 28 pixels. Static image imports give updated assets new URLs so browsers do not retain earlier backgrounds.
 
 1. Supervisor uses the icon from its existing official logo asset.
 2. Nixtla uses its [official site icon](https://nixtla.io/favicon.svg).
@@ -65,7 +65,7 @@ The Nixtla tenure statement is anchored to October 2026 and does not establish a
 
 The consulting record limits MarketPryce to the iOS app Eduardo described and records that it is no longer in use. Ciro was a Figma product design engagement with no code delivery. CervezaSiempre launched in approximately one and a half months and reached thousands of customers during the following one and a half months, according to Eduardo's account. The record does not infer revenue or a more precise customer count.
 
-Supervisor and Constructor are described as current development work. The project captions identify Eduardo as their founder, following his feedback. The previews embed the current public Supervisor and Constructor websites in sandboxed frames. Local screenshots of those headers, captured October 4, 2026, remain visible while the embedded documents are empty or waiting to load. The card descriptions follow Eduardo's October 4, 2026 wording and are shared with JSON and MCP through `content/profile.json`. The website does not claim a customer count, revenue, or growth rate for either product.
+Supervisor and Constructor are described as current development work. The project captions identify Eduardo as their founder, following his feedback. The previews fetch their public website HTML on the server and refresh cached content after 60 seconds. The live frames load when their cards approach the viewport, so they do not delay the résumé introduction. Sanitization removes scripts, event handlers, nested frames, and external resource references. Styling attributes remain so the headers preserve their layout. The previews use a full iframe sandbox and a separate content security policy that blocks scripts and limits styles, images, and fonts to the two websites. Local screenshots of those headers, captured October 4, 2026, remain visible if a preview is unavailable. The card descriptions follow Eduardo's October 4, 2026 wording and are shared with JSON and MCP through `content/profile.json`. The website does not claim a customer count, revenue, or growth rate for either product.
 
 Education records distinguish founder programs from a university degree. Language records do not assign unverified proficiency levels. No target salary, agency valuation, or independent review verdict appears as a career fact.
 
