@@ -85,6 +85,7 @@ export async function reviewBatch(
     const response = await request(correction);
     let review: Review | undefined;
     let validationError: string | null = null;
+    let canCorrect = false;
     try {
       const parsed = parseReview(response.content, patches, inventory);
       if (retained.some((finding) => !parsed.findings.some((candidate) => findingKeys.every((key) => candidate[key as keyof Finding] === finding[key as keyof Finding])))) {
@@ -93,11 +94,15 @@ export async function reviewBatch(
       review = parsed;
     } catch (error) {
       validationError = error instanceof Error ? error.message : "Review validation failed.";
-      if (error instanceof ReviewValidationError) retained = error.validFindings;
+      if (error instanceof ReviewValidationError) {
+        retained = error.validFindings;
+        canCorrect = true;
+      }
     }
     await recordAttempt({ ...response, attempt, validationError });
     if (validationError === null && review) return { model: response.model, review };
     if (attempt === 2) throw new Error(`Model review remained invalid after one correction. ${validationError}`);
+    if (!canCorrect) throw new Error(`Model review could not validate the response. ${validationError}`);
     correction = { content: response.content, validationError: validationError ?? "Review validation failed." };
   }
   throw new Error("Model review did not complete.");
