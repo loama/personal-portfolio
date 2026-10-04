@@ -6,9 +6,9 @@ export function Portrait({ locale }: { locale: Locale }) {
   const es = locale === "es";
 
   return <div className="portrait-enter relative mx-auto w-full max-w-[304px]">
-    <div className="portrait-shell mx-auto w-1/2 rounded-2xl p-1">
-      <div className="overflow-hidden rounded-xl">
-        <Image src={portraitImage} alt="Eduardo López" priority sizes="(min-width: 344px) 144px, calc(50vw - 28px)" className="block h-auto w-full object-contain" />
+    <div className="portrait-shell mx-auto w-3/4 rounded-3xl p-1.5">
+      <div className="overflow-hidden rounded-[18px]">
+        <Image src={portraitImage} alt="Eduardo López" priority sizes="(min-width: 344px) 216px, calc(75vw - 42px)" className="block h-auto w-full object-contain" />
       </div>
     </div>
     <div className="founder-note relative ml-4 mr-4 mt-4 grid gap-3 rounded-2xl px-4 py-4 sm:ml-[-28px] sm:mr-10">

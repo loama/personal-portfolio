@@ -45,8 +45,8 @@ for (const locale of ["en", "es"]) {
         await expect(freelanceIcon).toHaveCSS("mask-image", /freelance/);
         const amiloz = page.locator("#experience-amiloz");
         await expect(amiloz.getByRole("heading", { level: 3 })).toHaveText("amiloz");
-        await expect(amiloz.locator("img")).toHaveAttribute("src", /amiloz/);
-        for (const logo of [freelanceIcon, amiloz.locator("img")]) {
+        await expect(amiloz.locator(".company-logo")).toHaveCSS("mask-image", /amiloz/);
+        for (const logo of [freelanceIcon, amiloz.locator(".company-logo")]) {
           await expect(logo).toHaveCSS("padding", "0px");
           await expect(logo).toHaveCSS("border-width", "0px");
         }
@@ -55,6 +55,7 @@ for (const locale of ["en", "es"]) {
         await expect(repository.locator("svg").first()).toBeVisible();
 
         const profile = page.getByRole("region", { name: locale === "es" ? "Perfil" : "Profile", exact: true });
+        await expect(profile.locator(".eyebrow")).toHaveText(locale === "es" ? "Currículum" : "Resume");
         const portrait = profile.getByRole("img", { name: "Eduardo López", exact: true });
         await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
         await expect(portrait).toHaveCSS("object-fit", "contain");
@@ -65,8 +66,7 @@ for (const locale of ["en", "es"]) {
           const bounds = image.getBoundingClientRect();
           return { top: bounds.top, bottom: bounds.bottom, width: bounds.width, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
         });
-        expect(photo.width).toBeLessThanOrEqual(145);
-        expect(photo.width).toBeGreaterThanOrEqual(128);
+        expect(photo.width).toBeCloseTo(width === 320 ? 198 : 216, 0);
         expect(photo.ratio).toBeCloseTo(photo.naturalRatio, 2);
         expect(photo.naturalRatio).toBeCloseTo(1260 / 1849, 2);
         const badges = await profile.locator(".founder-note").boundingBox();

@@ -48,7 +48,7 @@ export function parseReview(content: string, patches: Patch[], inventory: Change
     const patch = patches.find(({ file }) => file === finding.file);
     const line = finding.side === "old" && patch?.removedLines.has(Number(finding.line)) ? patch.oldLines.get(Number(finding.line)) : finding.side === "new" ? patch?.lines.get(Number(finding.line)) : undefined;
     if (!line || !line.includes(String(finding.evidence))) {
-      throw new Error("A model finding did not cite exact evidence at a reviewed line.");
+      throw new Error(`A model finding did not cite exact evidence at a reviewed line. ${JSON.stringify({ finding, reviewedLine: line ?? null })}`);
     }
   }
   return result as Review;

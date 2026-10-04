@@ -88,7 +88,7 @@ POSTHOG_PROJECT_KEY=
 
 Use the dedicated portfolio PostHog project's ingestion key for `POSTHOG_PROJECT_KEY`. Choose `https://eu.i.posthog.com` for an EU project or `https://us.i.posthog.com` for a US project. Do not reuse another product's project. This key configures event ingestion; it is not a personal API key.
 
-Enable analytics only after the Plausible site and dedicated PostHog project exist and the deployed consent flow has been tested. After accepting consent, trigger a real page view and download, then confirm receipt in both services. Declining consent must prevent tracking. Until that verification succeeds, provider activation remains unconfirmed.
+Test the deployed consent flow before enabling analytics. Configure each provider only after its dedicated portfolio site or project exists. Providers activate independently, and an unset provider receives no events. After accepting consent, trigger a real page view and download, then confirm receipt in every configured service. Declining consent must prevent tracking. Until receipt is verified, that provider's activation remains unconfirmed.
 
 ## Rollback
 

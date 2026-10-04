@@ -2,6 +2,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import sharp from "sharp";
 
 test.use({ colorScheme: "light" });
 
@@ -18,6 +19,24 @@ async function background(page, selector = "body") {
 
 async function expectAppearance(page, appearance) {
   await expect.poll(() => background(page)).toEqual(appearance === "dark" ? [21, 21, 21] : [255, 255, 255]);
+}
+
+async function expectPaintedMark(page, selector, color) {
+  const mark = page.locator(selector);
+  await mark.evaluate(async (element) => {
+    const source = getComputedStyle(element).maskImage.match(/^url\("?([^\"]+)"?\)$/)?.[1];
+    if (!source) throw new Error("The company mark has no image source.");
+    const image = new Image();
+    image.src = source;
+    await image.decode();
+  });
+  const screenshot = await mark.screenshot({ animations: "disabled" });
+  const { data, info } = await sharp(screenshot).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  let visiblePixels = 0;
+  for (let offset = 0; offset < data.length; offset += info.channels) {
+    if (color.every((channel, index) => Math.abs(data[offset + index] - channel) <= 24)) visiblePixels++;
+  }
+  expect(visiblePixels, `${selector} should paint its mark in the selected theme`).toBeGreaterThan(20);
 }
 
 test("appearance selection slides to each choice and respects reduced motion", async ({ page }) => {
@@ -119,16 +138,21 @@ test("device appearance follows live system changes and explicit choices overrid
 test("company marks follow the selected appearance instead of the device", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "dark" });
   await page.goto("/en/resume/founder");
-  for (const [choice, monochrome, platanus] of [
-    ["Light", [0, 0, 0], [0, 0, 0]],
-    ["Dark", [255, 255, 255], [255, 236, 64]],
-    ["Light", [0, 0, 0], [0, 0, 0]],
+  for (const [choice, monochrome, amiloz, platanus] of [
+    ["Light", [0, 0, 0], [0, 0, 0], [0, 0, 0]],
+    ["Dark", [255, 255, 255], [250, 203, 0], [255, 236, 64]],
+    ["Light", [0, 0, 0], [0, 0, 0], [0, 0, 0]],
   ]) {
     await page.getByTitle(choice, { exact: true }).click();
     for (const company of ["supervisor", "nixtla"]) {
-      await expect.poll(() => background(page, `#experience-${company} .company-logo-monochrome`)).toEqual(monochrome);
+      const selector = `#experience-${company} .company-logo-monochrome`;
+      await expect.poll(() => background(page, selector)).toEqual(monochrome);
+      await expectPaintedMark(page, selector, monochrome);
     }
+    await expect.poll(() => background(page, "#experience-amiloz .company-logo")).toEqual(amiloz);
+    await expectPaintedMark(page, "#experience-amiloz .company-logo", amiloz);
     await expect.poll(() => background(page, ".platanus-logo")).toEqual(platanus);
+    await expectPaintedMark(page, ".platanus-logo", platanus);
   }
 });
 

@@ -15,6 +15,7 @@
   --color-edge: #ececec;
   --color-selection: #ffd9cc;
   --color-logo: #000000;
+  --color-amiloz: #000000;
   --color-platanus: #000000;
 }
 /* Keep light-dark() native so manual color scheme changes update the palette. */
@@ -31,6 +32,7 @@
     --color-edge: light-dark(#ececec, #ffffff14);
     --color-selection: light-dark(#ffd9cc, #883719);
     --color-logo: light-dark(#000000, #ffffff);
+    --color-amiloz: light-dark(#000000, #facb00);
     --color-platanus: light-dark(#000000, #ffec40);
   }
 }
@@ -71,6 +73,7 @@ body { margin: 0; }
 .theme-switcher[data-preference="dark"]::before { transform: translateX(200%); }
 .portrait-shell { background: #ff5125; box-shadow: 0 18px 65px -30px rgba(110,40,20,.2); }
 .company-logo-monochrome { background: var(--color-logo); mask-position: center; mask-repeat: no-repeat; }
+.company-logo-amiloz { background: var(--color-amiloz); }
 .platanus-logo { background: var(--color-platanus); mask: url("/images/platanus.svg") center / contain no-repeat; }
 .founder-note { background: var(--color-surface); box-shadow: 0 8px 28px rgba(0,0,0,.09), inset 0 0 0 1px var(--color-edge); }
 .project-shell { background: var(--color-mist); box-shadow: inset 0 0 0 1px var(--color-edge); }
@@ -82,8 +85,8 @@ body { margin: 0; }
   .button-primary:hover .button-label-hover { transform: translateY(0); }
 }
 @media (hover: hover) and (pointer: fine) {
-  body { cursor: url("/images/cursor.svg") 4 4, auto; }
-  :is(a[href], button:not(:disabled), summary, [role="button"], .cursor-pointer):not([aria-disabled="true"]) { cursor: url("/images/cursor.svg") 4 4, pointer; }
+  body { cursor: url("/images/cursor.svg") 2 2, auto; }
+  :is(a[href], button:not(:disabled), summary, [role="button"], .cursor-pointer):not([aria-disabled="true"]) { cursor: url("/images/cursor.svg") 2 2, pointer; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
