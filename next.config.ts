@@ -24,7 +24,15 @@ const nextConfig: NextConfig = {
         { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
         { key: "X-Frame-Options", value: "DENY" },
         { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
-        { key: "Content-Security-Policy", value: `default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://trysupervisor.com https://useconstructor.com https://www.useconstructor.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'` },
+        { key: "Content-Security-Policy", value: `default-src 'self'; script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'` },
+      ],
+    }, {
+      source: "/api/project-preview/:project",
+      headers: [
+        { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        { key: "Referrer-Policy", value: "no-referrer" },
+        { key: "X-Robots-Tag", value: "noindex" },
+        { key: "Content-Security-Policy", value: "default-src 'none'; script-src 'none'; style-src 'unsafe-inline' https://trysupervisor.com https://www.useconstructor.com; img-src https://trysupervisor.com https://www.useconstructor.com data:; font-src https://trysupervisor.com https://www.useconstructor.com; frame-ancestors 'self'; base-uri https://trysupervisor.com https://www.useconstructor.com; form-action 'none'; object-src 'none'; sandbox" },
       ],
     }];
   },
