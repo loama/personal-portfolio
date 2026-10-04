@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, LOCALES, SITE_URL } from "@/lib/site";
 import "../globals.css";
 import { Analytics } from "@/components/analytics";
+import { ThemeInit } from "@/components/theme-init";
 
 const modernist = localFont({
   src: "../../../public/fonts/Sk-Modernist-Bold.otf",
@@ -41,6 +42,7 @@ export default async function LocaleLayout({ children, params }: {
   if (!isLocale(lang)) notFound();
   return (
     <html lang={lang} className={`${modernist.variable} ${vcr.variable}`}>
+      <head><ThemeInit /></head>
       <body className="bg-paper font-sans text-ink antialiased">
         <a href="#main" className="skip-link">{lang === "es" ? "Saltar al contenido" : "Skip to content"}</a>
         {children}
