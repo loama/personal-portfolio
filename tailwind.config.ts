@@ -4,7 +4,16 @@ export default {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      colors: { paper: "#ffffff", ink: "#000000", muted: "#666666", accent: "#b63312", brand: "#ff5125", mist: "#f4f4f4", peach: "#fff0ea" },
+      colors: {
+        paper: "rgb(from var(--color-paper) r g b / <alpha-value>)",
+        ink: "rgb(from var(--color-ink) r g b / <alpha-value>)",
+        muted: "rgb(from var(--color-muted) r g b / <alpha-value>)",
+        accent: "rgb(from var(--color-accent) r g b / <alpha-value>)",
+        brand: "#ff5125",
+        mist: "rgb(from var(--color-mist) r g b / <alpha-value>)",
+        peach: "rgb(from var(--color-peach) r g b / <alpha-value>)",
+        surface: "rgb(from var(--color-surface) r g b / <alpha-value>)",
+      },
       fontFamily: {
         sans: ["ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-modernist)", "sans-serif"],

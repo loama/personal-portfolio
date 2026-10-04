@@ -1,11 +1,11 @@
 {
   "basics": {
     "name": "Eduardo López",
-    "label": "Ingeniero full stack",
+    "label": "Ingeniero full stack de IA",
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Ingeniero full stack con experiencia creando productos desde 2015. He desarrollado productos web para Nixtla y aplicaciones web o móviles para Selia y MarketPryce. Cofundé Amiloz, parte de Y Combinator W22, donde construí los primeros productos y dirigí un equipo de tecnología de siete personas en promedio. Mi trabajo abarca interfaces, APIs, diseño de producto y software para operaciones.",
+    "summary": "Creo productos desde 2015. Fui el primer ingeniero web de Nixtla, donde desarrollé la primera API de TimeGPT, el panel para desarrolladores y el sitio web. Cofundador y CTO de amiloz, parte de Y Combinator W22. Construí las primeras aplicaciones antes de que levantáramos más de USD 3.5 millones y después dirigí un equipo de tecnología de siete personas.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,45 +27,108 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Fundador único",
+      "position": "Fundador",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
       "highlights": [
         "El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.",
         "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."
-      ]
+      ],
+      "details": []
     },
     {
       "name": "Nixtla",
       "position": "Head of Web",
       "url": "https://nixtla.io",
-      "summary": "Productos web y experiencia para desarrolladores en pronóstico de series de tiempo.",
+      "summary": "Primer ingeniero web y, durante la mayor parte de mi etapa, el único en una empresa de IA para series de tiempo.",
       "highlights": [
-        "Desarrollé el sitio web y el portal para desarrolladores, y contribuí a las primeras versiones de la API de pronóstico."
+        "Creé la primera API de TimeGPT, el panel para desarrolladores y el sitio web.",
+        "Soy responsable de herramientas de monitoreo, analítica, integraciones con HubSpot y productos internos de IA."
+      ],
+      "details": [
+        {
+          "title": "El primer ingeniero web",
+          "paragraphs": [
+            "En octubre de 2026 llevaba algo más de tres años en Nixtla. Fui el primer ingeniero web y, durante la mayor parte de ese tiempo, el único en ese puesto. Sigo trabajando como Head of Web."
+          ]
+        },
+        {
+          "title": "TimeGPT y la experiencia para desarrolladores",
+          "paragraphs": [
+            "Creé la primera API que servía el modelo inicial de TimeGPT, además del panel para desarrolladores y el sitio web. Mi trabajo abarcaba los productos web y las interfaces con las que los desarrolladores accedían al servicio de pronóstico."
+          ]
+        },
+        {
+          "title": "Monitoreo, analítica y productos internos",
+          "paragraphs": [
+            "Desarrollé herramientas de monitoreo y asumí la responsabilidad de la analítica y las integraciones con HubSpot. Mi trabajo también incluye varios productos internos de IA que todavía no se han publicado."
+          ]
+        }
       ]
     },
     {
-      "name": "Amiloz",
+      "name": "amiloz",
       "position": "Cofundador y CTO",
       "url": "https://www.ycombinator.com/companies/amiloz",
       "startDate": "2021-07",
       "endDate": "2022-12",
       "summary": "Desarrollé los primeros productos de una empresa que abastecía a tiendas de barrio en México. Y Combinator W22.",
       "highlights": [
-        "Desarrollé la primera API, el sitio web, las aplicaciones móviles y las herramientas internas. Después contraté y dirigí un equipo de tecnología de siete personas en promedio.",
-        "Fui responsable de la tecnología para pedidos, almacén, entregas y análisis de datos.",
-        "Levantamos más de USD 3.5 millones y atendimos a cientos de clientes empresariales."
+        "Desarrollé la primera API, el sitio web y las apps de iOS, Android y web para clientes, almacenes y reparto antes de levantar capital.",
+        "Levantamos más de USD 3.5 millones. Contraté y dirigí a siete personas en tecnología dentro de una empresa de 80 personas."
+      ],
+      "details": [
+        {
+          "title": "De las primeras apps al equipo de ingeniería",
+          "paragraphs": [
+            "Antes de levantar capital, construí el software por mi cuenta: la API, el sitio web y las aplicaciones de iOS, Android y web para clientes, equipos de almacén y repartidores. También era responsable de las herramientas internas y la analítica.",
+            "Pasamos por Y Combinator W22, levantamos algo más de USD 3.5 millones durante mi etapa y atendimos a cientos de clientes empresariales. La empresa llegó a 80 empleados, incluido el equipo de tecnología de siete personas que contraté y dirigí."
+          ]
+        },
+        {
+          "title": "El siguiente rumbo",
+          "paragraphs": [
+            "Yo quería centrarme por completo en IA, mientras mis cofundadores querían orientar la empresa hacia el crédito. Acordamos mi salida como cofundador, con una pequeña compensación económica. La empresa ahora opera como BelozFi."
+          ]
+        }
       ]
     },
     {
-      "name": "Consultoría",
+      "name": "freelance",
       "position": "Consultor de software para startups",
       "startDate": "2018-01",
       "summary": "Productos web y móviles para fundadores y equipos en crecimiento.",
       "highlights": [
-        "Desarrollé la plataforma de Selia que conecta pacientes y terapeutas para web, iOS y Android, con herramientas para pacientes, terapeutas y equipos internos.",
-        "Creé las aplicaciones móviles de MarketPryce, rediseñé Ciro y dirigí el desarrollo de CervezaSiempre para AB InBev."
+        "Construí las primeras apps de Selia para iOS, Android y web, con reservas, pagos y videoconsultas.",
+        "Desarrollé la app de iOS de MarketPryce, diseñé Ciro en Figma y lideré CervezaSiempre para AB InBev."
+      ],
+      "details": [
+        {
+          "title": "Selia",
+          "paragraphs": [
+            "Construí la primera versión completa para terapeutas y pacientes en iOS, Android y web. Incluía búsqueda de terapeutas, conexión entre pacientes y terapeutas, reservas, pagos y sesiones por videollamada dentro de la app."
+          ]
+        },
+        {
+          "title": "MarketPryce",
+          "paragraphs": [
+            "Desarrollé la app de iOS para descubrir y conectar con figuras del deporte, incluida la búsqueda de coincidencias. Esa app ya no está en uso."
+          ]
+        },
+        {
+          "title": "Ciro",
+          "paragraphs": [
+            "Rediseñé todo el producto en Figma. El proyecto fue exclusivamente de diseño de producto y no incluyó programación."
+          ]
+        },
+        {
+          "title": "CervezaSiempre para AB InBev",
+          "paragraphs": [
+            "Lideré el desarrollo de un servicio de suscripción de cerveza para AB InBev. Lo lanzamos en aproximadamente un mes y medio y alcanzamos miles de clientes durante el mes y medio siguiente.",
+            "El proyecto estaba previsto como una colaboración corta. Al terminarlo, me incorporé al puesto en Betterfin que ya había acordado."
+          ]
+        }
       ]
     },
     {
@@ -74,7 +137,8 @@
       "startDate": "2019-06",
       "endDate": "2021-02",
       "summary": "Desarrollé el frontend de una plataforma de análisis financiero y crédito para empresas.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Zeel",
@@ -82,15 +146,24 @@
       "startDate": "2018-01",
       "endDate": "2019-05",
       "summary": "Desarrollé software interno para dar seguimiento a pedidos e incidencias operativas.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Eiya",
       "position": "Líder de ingeniería",
       "startDate": "2016-08",
       "endDate": "2017-12",
-      "summary": "Desarrollé herramientas para flotas, paneles para clientes y aplicaciones de reparto. Dirigí un equipo pequeño de ingeniería y diseño.",
-      "highlights": []
+      "summary": "Desarrollé apps de iOS, Android y web para repartidores, operaciones internas y clientes.",
+      "highlights": [],
+      "details": [
+        {
+          "title": "Productos de reparto y equipo",
+          "paragraphs": [
+            "Mi trabajo abarcaba las apps de reparto, las herramientas para flotas, los paneles de clientes y las operaciones internas en iOS, Android y web. También dirigí un equipo pequeño de ingeniería y diseño."
+          ]
+        }
+      ]
     },
     {
       "name": "Rappi",
@@ -98,7 +171,8 @@
       "startDate": "2016-02",
       "endDate": "2016-08",
       "summary": "Primer desarrollador interno en México. Desarrollé herramientas internas para operaciones y atención al cliente.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Centraal",
@@ -106,7 +180,8 @@
       "startDate": "2015-06",
       "endDate": "2016-02",
       "summary": "Desarrollé un ERP interno para la operación del coworking y su sitio web.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     }
   ],
   "education": [
@@ -158,24 +233,24 @@
   "projects": [
     {
       "name": "Supervisor",
-      "description": "Desarrollo software para que los equipos gestionen la operación de su empresa mediante una conversación.",
+      "url": "https://trysupervisor.com",
+      "description": "Supervisa y gestiona tu negocio automáticamente. Toda la información de tus operaciones en un solo lugar.",
       "highlights": [
         "El trabajo abarca diseño de producto, interfaces web y móviles, integraciones y agentes para consultas, supervisión y acciones programadas.",
         "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción."
-      ],
-      "url": "https://trysupervisor.com"
+      ]
     },
     {
       "name": "Constructor",
-      "description": "Desarrollo Constructor, un producto complementario para crear aplicaciones a partir de una descripción.",
-      "highlights": [],
-      "url": "https://useconstructor.com"
+      "url": "https://useconstructor.com",
+      "description": "Crea software de forma colaborativa. Apps, sitios web, APIs, MCPs, paneles de control, tareas programadas...",
+      "highlights": []
     }
   ],
   "meta": {
     "language": "es",
     "version": "employee",
-    "lastModified": "2026-10-03",
+    "lastModified": "2026-10-04",
     "sources": [
       "https://www.linkedin.com/in/eduardolopezamaya/",
       "https://www.ycombinator.com/companies/amiloz",

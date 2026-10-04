@@ -17,11 +17,12 @@ const openApiDocument = {
       get: {
         operationId: "getResume",
         summary: "Get a public résumé",
-        description: "Returns a JSON Resume document or redirects to its PDF. Unknown parameters, invalid values, and repeated parameters return 400. Parameters are case sensitive.",
+        description: "Returns JSON Resume fields with expanded experience in work[].details, or redirects to a short or full PDF. Unknown parameters, invalid values, and repeated parameters return 400. Parameters are case sensitive.",
         parameters: [
           { name: "lang", in: "query", description: "Résumé language.", schema: { type: "string", enum: ["en", "es"], default: "en" } },
           { name: "version", in: "query", description: "Experience emphasis and ordering.", schema: { type: "string", enum: ["founder", "employee"], default: "founder" } },
           { name: "format", in: "query", description: "Download format.", schema: { type: "string", enum: ["json", "pdf"], default: "json" } },
+          { name: "length", in: "query", description: "PDF length. Short is one page; full adds expanded experience. JSON always contains all details regardless of this parameter.", schema: { type: "string", enum: ["short", "full"], default: "short" } },
         ],
         responses: {
           "200": {
@@ -67,6 +68,10 @@ const openApiDocument = {
               properties: {
                 name: string, position: string, url: { type: "string", format: "uri" },
                 startDate: date, endDate: date, summary: string, highlights: stringArray,
+                details: {
+                  type: "array", description: "Expanded experience, grouped by subject or consulting project. Empty when no additional detail is recorded.",
+                  items: { type: "object", required: ["title", "paragraphs"], properties: { title: string, paragraphs: { ...stringArray, minItems: 1 } } },
+                },
               },
             },
           },

@@ -7,9 +7,9 @@ module.exports = {
       chromePath: process.env.CHROME_PATH,
       numberOfRuns: 3,
       url: [
-        "http://127.0.0.1:3100/en",
-        "http://127.0.0.1:3100/es",
-        "http://127.0.0.1:3100/en/work",
+        "http://127.0.0.1:3100/en/resume/founder",
+        "http://127.0.0.1:3100/es/resume/founder",
+        "http://127.0.0.1:3100/en/resume/employee",
         "http://127.0.0.1:3100/es/resume/employee",
       ],
       settings: { chromeFlags: "--headless --no-sandbox --disable-dev-shm-usage" },

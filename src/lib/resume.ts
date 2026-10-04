@@ -1,9 +1,10 @@
 import { z } from "zod";
 import sourceProfile from "../../content/profile.json";
-import { contacts, LOCALES, SITE_URL, VERSIONS, type Locale, type ResumeVersion } from "./site";
+import { contacts, LOCALES, PDF_LENGTHS, SITE_URL, VERSIONS, type Locale, type ResumeVersion } from "./site";
 
 const translatedText = z.strictObject({ en: z.string().min(1), es: z.string().min(1) });
 const translatedHighlights = z.strictObject({ en: z.array(z.string().min(1)), es: z.array(z.string().min(1)) });
+const translatedParagraphs = z.strictObject({ en: z.array(z.string().min(1)).min(1), es: z.array(z.string().min(1)).min(1) });
 const resumeDate = z.string().regex(/^\d{4}(?:-(?:0[1-9]|1[0-2]))?$/);
 
 export const profileSchema = z.strictObject({
@@ -20,6 +21,13 @@ export const profileSchema = z.strictObject({
     position: translatedText,
     summary: translatedText,
     highlights: translatedHighlights,
+    details: z.array(z.strictObject({ title: translatedText, paragraphs: translatedParagraphs })).optional(),
+  })).min(1),
+  projects: z.array(z.strictObject({
+    id: z.enum(["supervisor", "constructor"]),
+    name: z.string().min(1),
+    url: z.url(),
+    description: translatedText,
   })).min(1),
   publicWork: z.array(z.strictObject({ project: z.string().min(1), url: z.url(), title: translatedText, body: translatedText })),
   skills: z.array(z.string().min(1)),
@@ -38,6 +46,7 @@ export const resumeQuerySchema = z.strictObject({
   lang: z.enum(LOCALES).default("en"),
   version: z.enum(VERSIONS).default("founder"),
   format: z.enum(["json", "pdf"]).default("json"),
+  length: z.enum(PDF_LENGTHS).default("short"),
 });
 
 const workPriority: Record<ResumeVersion, string[]> = {
@@ -57,7 +66,7 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       name: profile.name,
       label: version === "founder"
         ? (locale === "en" ? "Founder and full stack AI engineer" : "Fundador e ingeniero full stack de IA")
-        : (locale === "en" ? "Full stack engineer" : "Ingeniero full stack"),
+        : (locale === "en" ? "Full stack AI engineer" : "Ingeniero full stack de IA"),
       email: contacts.email,
       phone: contacts.phone,
       url: SITE_URL,
@@ -76,6 +85,7 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       ...(work.endDate ? { endDate: work.endDate } : {}),
       summary: work.summary[locale],
       highlights: [...work.highlights[locale]],
+      details: (work.details ?? []).map((detail) => ({ title: detail.title[locale], paragraphs: [...detail.paragraphs[locale]] })),
     })),
     education: profile.education.map((education) => ({
       institution: education.institution,
@@ -87,19 +97,12 @@ export function getResume(locale: Locale = "en", version: ResumeVersion = "found
       keywords: [...profile.skills],
     }],
     languages: profile.languages.map((language) => ({ language: language[locale] })),
-    projects: profile.work.filter((work) => work.id === "supervisor").flatMap((work) => {
-      const supervisor = {
-        name: work.name,
-        description: work.summary[locale],
-        highlights: [...work.highlights[locale]],
-        ...(work.url ? { url: work.url } : {}),
-      };
-      const constructorDescription = work.highlights[locale].find((highlight) => highlight.includes("Constructor"));
-      const constructorUrl = profile.sources.find((url) => new URL(url).hostname === "useconstructor.com");
-      return constructorDescription && constructorUrl
-        ? [supervisor, { name: "Constructor", description: constructorDescription, highlights: [], url: constructorUrl }]
-        : [supervisor];
-    }),
+    projects: profile.projects.map((project) => ({
+      name: project.name,
+      url: project.url,
+      description: project.description[locale],
+      highlights: [...(profile.work.find((work) => work.id === project.id)?.highlights[locale] ?? [])],
+    })),
     meta: {
       language: locale,
       version,

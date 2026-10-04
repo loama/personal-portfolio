@@ -5,7 +5,7 @@ const commit = "a".repeat(40);
 const servers: ReturnType<typeof Bun.serve>[] = [];
 afterEach(() => { for (const server of servers.splice(0)) server.stop(true); });
 
-function serve(fetch: () => Response) {
+function serve(fetch: () => Response | Promise<Response>) {
   const server = Bun.serve({ port: 0, hostname: "127.0.0.1", fetch });
   servers.push(server);
   return new URL("/api/release", server.url).href;
@@ -38,5 +38,16 @@ describe("production release propagation", () => {
   test("fails with the last HTTP status when the route never appears", async () => {
     const url = serve(() => new Response(null, { status: 404 }));
     await expect(waitForRelease({ url, commit, intervalMs: 10, timeoutMs: 1000 })).rejects.toThrow("HTTP 404");
+  });
+
+  test("preserves the last HTTP status when the final request times out", async () => {
+    let requests = 0;
+    const url = serve(async () => {
+      if (++requests === 1) return new Response(null, { status: 404 });
+      await Bun.sleep(250);
+      return Response.json({ commit });
+    });
+    await expect(waitForRelease({ url, commit, intervalMs: 1, timeoutMs: 100 })).rejects.toThrow("HTTP 404. The request failed");
+    expect(requests).toBe(2);
   });
 });

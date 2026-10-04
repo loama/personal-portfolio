@@ -7,56 +7,67 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/en");
+  await expect(page).toHaveURL(/\/en\/resume\/founder$/);
   await expect(page).toHaveTitle(/Eduardo L\u00F3pez/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("I build software.");
-  const mainNavigation = page.getByRole("navigation", { name: "Main navigation", exact: true });
-  await expect(mainNavigation.getByRole("link")).toHaveCount(2);
-  await expect(mainNavigation.getByRole("link", { name: "Projects", exact: true })).toHaveAttribute("aria-current", "location");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Eduardo López");
+  const footer = page.getByRole("contentinfo");
+  await expect(page.getByRole("navigation", { name: "Resume version", exact: true })).toHaveCount(0);
+  await expect(footer.getByRole("link", { name: "Employee & consultant", exact: true })).toHaveAttribute("href", "/en/resume/employee");
+  await expect(page.getByRole("link", { name: "Projects", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Profile", exact: true }).getByRole("img", { name: "Eduardo López", exact: true })).toBeVisible();
+  await expect(page.locator("#work").getByRole("link", { name: "Visit Supervisor", exact: true })).toHaveAttribute("href", "https://trysupervisor.com");
+  await expect(page.locator("#work").getByRole("link", { name: "Visit Constructor", exact: true })).toHaveAttribute("href", "https://useconstructor.com");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
-  await page.getByRole("link", { name: "For your team", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/work$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("From the idea");
+  await footer.getByRole("link", { name: "Employee & consultant", exact: true }).click();
+  await expect(page).toHaveURL(/\/en\/resume\/employee$/);
+  await expect(page.getByRole("region", { name: "Profile", exact: true }).getByText("Full stack AI engineer", { exact: true })).toBeVisible();
   await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link", { name: "ES" }).click();
-  await expect(page).toHaveURL(/\/es\/work$/);
-  await expect(page.locator("html")).toHaveAttribute("lang", "es");
-  await page.getByRole("link", { name: "Ver mi experiencia", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/resume\/employee$/);
-  await page.getByRole("navigation", { name: "Versi\xF3n del curr\xEDculum" }).getByRole("link", { name: "Fundador", exact: true }).click();
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await footer.getByRole("link", { name: "Fundador", exact: true }).click();
   await expect(page).toHaveURL(/\/es\/resume\/founder$/);
-  const spanishNavigation = page.getByRole("navigation", { name: "Navegación principal", exact: true });
-  await expect(spanishNavigation.getByRole("link", { name: "Currículum", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(footer.getByRole("link", { name: "Empleado y consultor", exact: true })).toHaveAttribute("href", "/es/resume/employee");
   await expect(page.getByRole("link", { name: "Descargar PDF" })).toHaveAttribute("href", "/resume/eduardo-lopez-founder-es.pdf");
-  await spanishNavigation.getByRole("link", { name: "Proyectos", exact: true }).click();
-  await expect(page).toHaveURL(/\/es$/);
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  await expect(spanishNavigation.getByRole("link", { name: "Proyectos", exact: true })).toHaveAttribute("aria-current", "location");
   await page.goBack();
-  await expect(page).toHaveURL(/\/es\/resume\/founder$/);
-  await expect(spanishNavigation.getByRole("link", { name: "Currículum", exact: true })).toHaveAttribute("aria-current", "page");
+  await expect(page).toHaveURL(/\/es\/resume\/employee$/);
+  await expect(footer.getByRole("link", { name: "Fundador", exact: true })).toHaveAttribute("href", "/es/resume/founder");
   expect(errors).toEqual([]);
+});
+
+test("previous landing and project links reach the relevant resume", async ({ page }) => {
+  for (const locale of ["en", "es"]) {
+    for (const [source, destination] of [
+      ["", "/resume/founder"],
+      ["/work", "/resume/employee"],
+      ["/work/amiloz", "/resume/founder#experience-amiloz"],
+      ["/work/nixtla", "/resume/employee#experience-nixtla"],
+    ]) {
+      await page.goto(`/${locale}${source}`);
+      await expect(page).toHaveURL(`/${locale}${destination}`);
+      const target = destination.split("#")[1];
+      if (target) await expect(page.locator(`#${target}`)).toBeInViewport();
+    }
+  }
 });
 
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   test(`page navigation opens at the top at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
+    await page.goto("/en/resume/founder");
+    await page.getByRole("button", { name: "Decline", exact: true }).click();
     for (const locale of ["en", "es"]) {
-      for (const path of ["", "/work", "/resume/founder", "/resume/employee"]) {
-        const isResume = path.startsWith("/resume/");
-        const name = isResume ? (locale === "es" ? "Proyectos" : "Projects") : (locale === "es" ? "Currículum" : "Resume");
-        const destination = isResume ? `/${locale}` : `/${locale}/resume/${path === "/work" ? "employee" : "founder"}`;
+      for (const version of ["founder", "employee"]) {
+        const destination = version === "founder" ? "employee" : "founder";
+        const name = destination === "founder" ? (locale === "es" ? "Fundador" : "Founder") : (locale === "es" ? "Empleado y consultor" : "Employee & consultant");
         for (const y of [0, 400]) {
-          await page.goto(`/${locale}${path}`);
+          await page.goto(`/${locale}/resume/${version}`);
           await page.evaluate(() => document.fonts.ready);
           await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), y);
           await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
-          const link = page.getByRole("navigation", { name: /^(Main navigation|Navegación principal)$/ }).getByRole("link", { name, exact: true });
-          if (y === 0) {
-            await link.click();
-          } else {
-            // Keep the source scroll position until the navigation handles it.
-            await link.dispatchEvent("click");
-          }
-          await expect(page).toHaveURL(destination);
+          const link = page.getByRole("contentinfo").getByRole("link", { name, exact: true });
+          if (y === 0) await link.click();
+          else await link.dispatchEvent("click");
+          await expect(page).toHaveURL(`/${locale}/resume/${destination}`);
           await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
           await expect(page.getByRole("heading", { level: 1 })).toBeInViewport();
         }
@@ -66,24 +77,22 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 
   test(`language changes preserve scroll and resume version at ${viewport.width}px`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    for (const path of ["", "/work", "/resume/founder", "/resume/employee"]) {
+    for (const path of ["/resume/founder", "/resume/employee", "/agents", "/privacy"]) {
       await page.goto(`/en${path}`);
       await page.evaluate(() => document.fonts.ready);
       for (const y of [0, 400]) {
-        await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), y);
-        await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
+        let expectedScroll = await page.evaluate((requested) => Math.min(requested, Math.max(0, document.documentElement.scrollHeight - innerHeight)), y);
+        await page.evaluate((top) => window.scrollTo({ top, behavior: "instant" }), expectedScroll);
+        await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(expectedScroll);
         for (const lang of ["es", "en"]) {
           const link = page.getByRole("navigation", { name: /^(Language|Idioma)$/ }).getByRole("link", { name: lang.toUpperCase(), exact: true });
-          if (y === 0) {
-            await link.click();
-          } else {
-            // Activate the link without the test runner scrolling the header into view.
-            await link.dispatchEvent("click");
-          }
+          if (y === 0) await link.click();
+          else await link.dispatchEvent("click");
           await expect(page).toHaveURL(`/${lang}${path}`);
           await expect(page.locator("html")).toHaveAttribute("lang", lang);
           await page.evaluate(() => document.fonts.ready);
-          await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(y);
+          expectedScroll = await page.evaluate((previous) => Math.min(previous, Math.max(0, document.documentElement.scrollHeight - innerHeight)), expectedScroll);
+          await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(expectedScroll);
         }
       }
     }
@@ -97,7 +106,7 @@ test("layout fits small phones through wide screens", async ({ page }, testInfo)
     await page.setViewportSize({ width, height: 960 });
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-    const targetHeights = await page.getByRole("navigation", { name: "Main navigation", exact: true }).getByRole("link").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
+    const targetHeights = await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link").evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
     expect(targetHeights.every((height) => height >= 44)).toBe(true);
   }
   if (testInfo.project.name === "chromium") {
@@ -108,7 +117,7 @@ test("layout fits small phones through wide screens", async ({ page }, testInfo)
   }
 });
 test("key pages have no automated accessibility violations", async ({ page }) => {
-  for (const path of ["/en", "/es", "/en/work", "/es/resume/employee", "/en/work/amiloz", "/es/work/nixtla", "/en/agents", "/es/privacy"]) {
+  for (const path of ["/en/resume/founder", "/es/resume/founder", "/en/resume/employee", "/es/resume/employee", "/en/agents", "/es/privacy"]) {
     await page.goto(path);
     const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
     expect(results.violations, `${path}: ${JSON.stringify(results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })))}`).toEqual([]);
@@ -121,13 +130,22 @@ test("resume company logos load and fit phone and desktop layouts", async ({ pag
       await page.goto(`/${variant.locale}/resume/${variant.version}`);
       const decline = page.getByRole("button", { name: variant.decline, exact: true });
       if (await decline.isVisible()) await decline.click();
-      const entries = page.locator("main article");
+      const entries = page.locator("#experience article");
       await expect(entries.first().getByRole("heading", { level: 3 })).toHaveText("Supervisor");
-      const logos = entries.locator("img");
-      await expect(logos).toHaveCount(8);
+      const logos = entries.locator(".company-logo");
+      await expect(logos).toHaveCount(9);
       for (const logo of await logos.all()) {
         await logo.scrollIntoViewIfNeeded();
-        await expect.poll(() => logo.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
+        await expect.poll(() => logo.evaluate(async (element) => {
+          const source = element instanceof HTMLImageElement
+            ? element.currentSrc
+            : getComputedStyle(element).maskImage.match(/url\(["']?(.*?)["']?\)/)?.[1];
+          if (!source) return false;
+          const image = new Image();
+          image.src = source;
+          await image.decode();
+          return image.naturalWidth > 0 && image.naturalHeight > 0;
+        })).toBe(true);
       }
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
       if (testInfo.project.name === "chromium" && variant.locale === "en") {
@@ -240,23 +258,21 @@ test("browser privacy signals prevent tracking and explain the choice", async ({
   expect(events).toEqual([]);
 });
 
-test("case studies preserve language and team contact stays in context", async ({ page }) => {
-  await page.goto("/en/work");
-  await page.getByRole("button", { name: "Decline", exact: true }).click();
-  await page.getByRole("link", { name: "Get in touch", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/work#contact$/);
-  await expect(page.locator("#contact")).toBeInViewport();
-  await page.getByRole("link", { name: "Read about the work", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/work\/nixtla$/);
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link", { name: "ES" }).click();
-  await expect(page).toHaveURL(/\/es\/work\/nixtla$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("La parte web");
-  await page.getByRole("link", { name: "Siguiente: Amiloz", exact: true }).click();
-  await expect(page).toHaveURL(/\/es\/work\/amiloz$/);
-  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
-  for (const width of [320, 768, 1440]) {
-    await page.setViewportSize({ width, height: 960 });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+test("resume disclosures retain public work and contact links", async ({ page }) => {
+  for (const copy of [
+    { locale: "en", more: "More about this work at Nixtla", title: "Selected public work", route: "Put the fix where the routes live", workflow: "Replace the previous documentation output" },
+    { locale: "es", more: "Más sobre este trabajo en Nixtla", title: "Trabajo público seleccionado", route: "Corregir las rutas donde se gestionan", workflow: "Sustituir la documentación anterior" },
+  ]) {
+    await page.goto(`/${copy.locale}/resume/employee`);
+    const experience = page.locator("#experience-nixtla");
+    await expect(experience.getByRole("heading", { name: copy.title, exact: true })).not.toBeVisible();
+    await experience.locator("summary").filter({ hasText: copy.more }).click();
+    await expect(experience.getByRole("heading", { name: copy.title, exact: true })).toBeVisible();
+    await expect(experience.getByRole("link", { name: copy.route, exact: true })).toHaveAttribute("href", "https://github.com/Nixtla/nixtla/pull/855");
+    await expect(experience.getByRole("link", { name: copy.workflow, exact: true })).toHaveAttribute("href", "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df");
+    await expect(page.locator("#contact").getByRole("link", { name: "WhatsApp", exact: true })).toHaveAttribute("href", "https://wa.me/34637432670");
+    await expect(page.locator("#contact").getByRole("link", { name: "hello@eduardo-lopez.com", exact: true })).toHaveAttribute("href", "mailto:hello@eduardo-lopez.com");
+    await experience.locator("summary").filter({ hasText: copy.more }).press("Enter");
+    await expect(experience.getByRole("heading", { name: copy.title, exact: true })).not.toBeVisible();
   }
 });

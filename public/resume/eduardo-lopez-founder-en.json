@@ -5,7 +5,7 @@
     "email": "hello@eduardo-lopez.com",
     "phone": "+34 637 432 670",
     "url": "https://eduardo-lopez.com",
-    "summary": "Founder and full stack AI engineer. Building startup products since 2015. Cofounded Amiloz, a Y Combinator W22 company, and built its first products before hiring the engineering team. Now building Supervisor and Constructor, connecting business operations with software that teams can use through conversation.",
+    "summary": "Building startup products since 2015. Cofounded amiloz (over USD 3.5 million raised), a Y Combinator W22 company. As CTO, I built the first version of every product, then hired a team to continue the work. Now building Supervisor and Constructor, software to help SMBs run better using AI.",
     "profiles": [
       {
         "network": "LinkedIn",
@@ -27,45 +27,108 @@
   "work": [
     {
       "name": "Supervisor",
-      "position": "Solo founder",
+      "position": "Founder",
       "url": "https://trysupervisor.com",
       "startDate": "2023-07",
       "summary": "Building software that lets teams run business operations through conversation.",
       "highlights": [
         "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
         "Building Constructor, a companion product for creating applications from a description."
-      ]
+      ],
+      "details": []
     },
     {
-      "name": "Amiloz",
+      "name": "amiloz",
       "position": "Cofounder & CTO",
       "url": "https://www.ycombinator.com/companies/amiloz",
       "startDate": "2021-07",
       "endDate": "2022-12",
       "summary": "Built the first products for a company supplying corner stores in Mexico. Y Combinator W22.",
       "highlights": [
-        "Built the initial API, website, mobile apps, and internal tools, then hired and led a technology team averaging seven people.",
-        "Owned technology for customer ordering, warehouse operations, deliveries, and internal analytics.",
-        "We raised more than USD 3.5 million and served hundreds of business customers."
+        "Built the first API, website, and iOS, Android, and web apps for customers, warehouses, and deliveries before fundraising.",
+        "We raised more than USD 3.5 million. I hired and led a technology team of seven in a company of 80 people."
+      ],
+      "details": [
+        {
+          "title": "From the first apps to the engineering team",
+          "paragraphs": [
+            "Before we raised funding, I built the software myself: the API, website, and iOS, Android, and web applications for customers, warehouse teams, and delivery drivers. My remit also covered internal tools and analytics.",
+            "We went through Y Combinator W22, raised a little over USD 3.5 million during my time there, and served hundreds of business customers. The company reached 80 employees, including the technology team of seven that I hired and led."
+          ]
+        },
+        {
+          "title": "The next direction",
+          "paragraphs": [
+            "I wanted to focus fully on AI, while my cofounders wanted to pivot toward lending. We agreed on a founder separation that included a small personal exit. The company now operates as BelozFi."
+          ]
+        }
       ]
     },
     {
       "name": "Nixtla",
       "position": "Head of Web",
       "url": "https://nixtla.io",
-      "summary": "Web products and developer experience for time series forecasting.",
+      "summary": "First and, for most of my time there, sole web engineer for a time series AI company.",
       "highlights": [
-        "Built the website and developer portal, and contributed to early versions of the forecasting API."
+        "Created the first API serving TimeGPT, the developer dashboard, and the website.",
+        "Own monitoring tools, analytics, HubSpot integrations, and internal AI products."
+      ],
+      "details": [
+        {
+          "title": "The first web engineer",
+          "paragraphs": [
+            "As of October 2026, I had worked at Nixtla for a little over three years. I was the first web engineer and, for most of that time, the only person in that role. I continue as Head of Web."
+          ]
+        },
+        {
+          "title": "TimeGPT and the developer experience",
+          "paragraphs": [
+            "I created the first API serving the initial TimeGPT model, along with the developer dashboard and website. This covered the web products and interfaces through which developers accessed the forecasting service."
+          ]
+        },
+        {
+          "title": "Monitoring, analytics, and internal products",
+          "paragraphs": [
+            "I built monitoring tools and took responsibility for analytics and HubSpot integrations. My remit also includes several internal AI products that have not been publicly released."
+          ]
+        }
       ]
     },
     {
-      "name": "Independent",
+      "name": "freelance",
       "position": "Software consultant for startups",
       "startDate": "2018-01",
       "summary": "Web and mobile products for founders and growing teams.",
       "highlights": [
-        "Built Selia's therapist marketplace across web, iOS, and Android, with tools for patients, therapists, and internal teams.",
-        "Developed MarketPryce's mobile apps, redesigned Ciro, and led development of CervezaSiempre for AB InBev."
+        "Built Selia's first iOS, Android, and web apps, including booking, payments, and video consultations.",
+        "Built MarketPryce's iOS app, designed Ciro in Figma, and led CervezaSiempre for AB InBev."
+      ],
+      "details": [
+        {
+          "title": "Selia",
+          "paragraphs": [
+            "Built the complete first version for therapists and patients across iOS, Android, and web. It included therapist discovery, connecting patients with therapists, booking, payments, and video sessions inside the app."
+          ]
+        },
+        {
+          "title": "MarketPryce",
+          "paragraphs": [
+            "Built the iOS app for discovering and connecting with sports influencers, including matching. That app is no longer in use."
+          ]
+        },
+        {
+          "title": "Ciro",
+          "paragraphs": [
+            "Redesigned the whole product in Figma. This engagement was entirely product design and did not include writing code."
+          ]
+        },
+        {
+          "title": "CervezaSiempre for AB InBev",
+          "paragraphs": [
+            "Led development of a beer subscription service for AB InBev. We launched in about a month and a half and reached thousands of customers over the following month and a half.",
+            "It was planned as a short engagement. After completing it, I moved to the role at Betterfin that I had already arranged."
+          ]
+        }
       ]
     },
     {
@@ -74,7 +137,8 @@
       "startDate": "2019-06",
       "endDate": "2021-02",
       "summary": "Built the frontend for a business financial insights and lending platform.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Zeel",
@@ -82,15 +146,24 @@
       "startDate": "2018-01",
       "endDate": "2019-05",
       "summary": "Built internal software for tracking orders and operational issues.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Eiya",
       "position": "Lead engineer",
       "startDate": "2016-08",
       "endDate": "2017-12",
-      "summary": "Built fleet tools, customer dashboards, and delivery apps. Managed a small engineering and design team.",
-      "highlights": []
+      "summary": "Built iOS, Android, and web apps for delivery drivers, internal operations, and customers.",
+      "highlights": [],
+      "details": [
+        {
+          "title": "Delivery products and team",
+          "paragraphs": [
+            "My work covered the delivery apps, fleet tools, customer dashboards, and internal operations across iOS, Android, and web. I also managed a small engineering and design team."
+          ]
+        }
+      ]
     },
     {
       "name": "Rappi",
@@ -98,7 +171,8 @@
       "startDate": "2016-02",
       "endDate": "2016-08",
       "summary": "First in house developer in Mexico. Built internal software for operations and customer service.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     },
     {
       "name": "Centraal",
@@ -106,7 +180,8 @@
       "startDate": "2015-06",
       "endDate": "2016-02",
       "summary": "Built an internal ERP for coworking operations and the website.",
-      "highlights": []
+      "highlights": [],
+      "details": []
     }
   ],
   "education": [
@@ -158,24 +233,24 @@
   "projects": [
     {
       "name": "Supervisor",
-      "description": "Building software that lets teams run business operations through conversation.",
+      "url": "https://trysupervisor.com",
+      "description": "Supervise and run your business automatically. Get all the info about your operations in a single centralized place.",
       "highlights": [
         "Work spans product design, web and mobile interfaces, integrations, and agent workflows for questions, monitoring, and scheduled actions.",
         "Building Constructor, a companion product for creating applications from a description."
-      ],
-      "url": "https://trysupervisor.com"
+      ]
     },
     {
       "name": "Constructor",
-      "description": "Building Constructor, a companion product for creating applications from a description.",
-      "highlights": [],
-      "url": "https://useconstructor.com"
+      "url": "https://useconstructor.com",
+      "description": "Build software in a collaborative way. Apps, websites, APIs, MCPs, dashboards, scheduled jobs...",
+      "highlights": []
     }
   ],
   "meta": {
     "language": "en",
     "version": "founder",
-    "lastModified": "2026-10-03",
+    "lastModified": "2026-10-04",
     "sources": [
       "https://www.linkedin.com/in/eduardolopezamaya/",
       "https://www.ycombinator.com/companies/amiloz",

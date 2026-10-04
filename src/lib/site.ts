@@ -1,8 +1,11 @@
 export const SITE_URL = "https://eduardo-lopez.com";
+export const REPOSITORY_URL = "https://github.com/loama/personal-portfolio";
 export const LOCALES = ["en", "es"] as const;
 export const VERSIONS = ["founder", "employee"] as const;
+export const PDF_LENGTHS = ["short", "full"] as const;
 export type Locale = (typeof LOCALES)[number];
 export type ResumeVersion = (typeof VERSIONS)[number];
+export type PdfLength = (typeof PDF_LENGTHS)[number];
 
 export const contacts = {
   email: "hello@eduardo-lopez.com",
@@ -21,6 +24,7 @@ export function isVersion(value: string): value is ResumeVersion {
   return VERSIONS.some((version) => version === value);
 }
 
-export function resumePath(locale: Locale, version: ResumeVersion, format: "pdf" | "json") {
-  return `/resume/eduardo-lopez-${version}-${locale}.${format}`;
+export function resumePath(locale: Locale, version: ResumeVersion, format: "pdf" | "json", length: PdfLength = "short") {
+  const suffix = format === "pdf" && length === "full" ? "-full" : "";
+  return `/resume/eduardo-lopez-${version}-${locale}${suffix}.${format}`;
 }
