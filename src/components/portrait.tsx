@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Locale } from "@/lib/site";
-import portraitImage from "../../public/images/eduardo-linkedin.webp";
+import portraitImage from "../../public/images/eduardo-portrait.webp";
 
 export function Portrait({ locale }: { locale: Locale }) {
   const es = locale === "es";
@@ -16,10 +16,10 @@ export function Portrait({ locale }: { locale: Locale }) {
         <Image src="/images/y-combinator.svg" alt="Y Combinator" width={36} height={36} className="h-9 w-9 flex-none" />
         <span><span className="block text-xs font-semibold">Y Combinator W22</span><span className="mt-0.5 block text-[11px] text-muted">{es ? "Cofundador de amiloz" : "amiloz cofounder"}</span></span>
       </div>
-      <div className="flex items-center gap-3 border-t border-ink/10 pt-3">
-        <Image src="/images/platanus.svg" alt="Platanus Ventures" width={36} height={36} className="h-9 w-9 flex-none rounded bg-black p-1.5" />
-        <span><span className="block text-xs font-semibold">Platanus Ventures</span><span className="mt-0.5 block text-[11px] text-muted">{es ? "Generación de fundadores 2023" : "Founder cohort 2023"}</span></span>
-      </div>
+      <a href="https://platan.us/" className="flex items-center gap-3 border-t border-ink/10 pt-3">
+        <Image src="/images/platanus.svg" alt="" width={36} height={36} className="h-9 w-9 flex-none" />
+        <span><span className="block text-xs font-semibold underline decoration-ink/30 underline-offset-4">Platanus Ventures</span><span className="mt-0.5 block text-[11px] text-muted">{es ? "Generación de fundadores 2023" : "Founder cohort 2023"}</span></span>
+      </a>
     </div>
     <span className="absolute -right-1 -top-12 hidden rotate-6 rounded-full border border-brand/30 bg-paper px-4 py-2 font-action text-xs uppercase tracking-[.04em] text-ink sm:block">{es ? "ideas → productos" : "ideas → products"}</span>
   </div>;

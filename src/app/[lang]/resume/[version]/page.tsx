@@ -35,7 +35,7 @@ export default async function ResumePage({ params }: { params: Params }) {
   const resume = getResume(lang, version);
   const structured = {
     "@context": "https://schema.org", "@type": "Person", name: resume.basics.name,
-    url: `${SITE_URL}/${lang}/resume/${version}`, image: `${SITE_URL}/images/eduardo-linkedin.webp`,
+    url: `${SITE_URL}/${lang}/resume/${version}`, image: `${SITE_URL}/images/eduardo-portrait.webp`,
     jobTitle: resume.basics.label, email: contacts.email,
     sameAs: [contacts.linkedin, contacts.x, contacts.github], knowsLanguage: ["English", "Spanish"],
   };

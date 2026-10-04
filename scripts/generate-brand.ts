@@ -30,7 +30,7 @@ header.writeUInt32LE(22, 18);
 await writeFile("public/favicon.ico", Buffer.concat([header, png]));
 await sharp(Buffer.from(icon)).resize(180, 180).png().toFile("public/apple-touch-icon.png");
 
-const resizedPortrait = await sharp("public/images/eduardo-linkedin.webp").resize(346, 502, { fit: "inside" }).png().toBuffer({ resolveWithObject: true });
+const resizedPortrait = await sharp("public/images/eduardo-portrait.webp").resize(346, 502, { fit: "inside" }).png().toBuffer({ resolveWithObject: true });
 const { width, height } = resizedPortrait.info;
 const left = 792 + Math.round((346 - width) / 2);
 const top = 64 + Math.round((502 - height) / 2);
