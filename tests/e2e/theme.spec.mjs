@@ -5,15 +5,15 @@ import AxeBuilder from "@axe-core/playwright";
 
 test.use({ colorScheme: "light" });
 
-async function background(page) {
-  return page.evaluate(() => {
+async function background(page, selector = "body") {
+  return page.evaluate((selector) => {
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 1;
     const context = canvas.getContext("2d");
-    context.fillStyle = getComputedStyle(document.body).backgroundColor;
+    context.fillStyle = getComputedStyle(document.querySelector(selector)).backgroundColor;
     context.fillRect(0, 0, 1, 1);
     return Array.from(context.getImageData(0, 0, 1, 1).data).slice(0, 3);
-  });
+  }, selector);
 }
 
 async function expectAppearance(page, appearance) {
@@ -114,6 +114,22 @@ test("device appearance follows live system changes and explicit choices overrid
   await expectAppearance(page, "dark");
   const accessibility = await new AxeBuilder({ page }).include("header").withTags(["wcag2a", "wcag2aa", "wcag21aa"]).analyze();
   expect(accessibility.violations).toEqual([]);
+});
+
+test("company marks follow the selected appearance instead of the device", async ({ page }) => {
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.goto("/en/resume/founder");
+  for (const [choice, monochrome, platanus] of [
+    ["Light", [0, 0, 0], [0, 0, 0]],
+    ["Dark", [255, 255, 255], [255, 236, 64]],
+    ["Light", [0, 0, 0], [0, 0, 0]],
+  ]) {
+    await page.getByTitle(choice, { exact: true }).click();
+    for (const company of ["supervisor", "nixtla"]) {
+      await expect.poll(() => background(page, `#experience-${company} .company-logo-monochrome`)).toEqual(monochrome);
+    }
+    await expect.poll(() => background(page, ".platanus-logo")).toEqual(platanus);
+  }
 });
 
 test("links remain readable on every frame of an appearance change", async ({ page }) => {

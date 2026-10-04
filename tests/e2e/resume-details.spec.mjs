@@ -58,10 +58,15 @@ for (const locale of ["en", "es"]) {
         const portrait = profile.getByRole("img", { name: "Eduardo López", exact: true });
         await expect.poll(() => portrait.evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
         await expect(portrait).toHaveCSS("object-fit", "contain");
+        await portrait.evaluate(async (image) => {
+          await Promise.all(image.closest(".portrait-enter").getAnimations().map((animation) => animation.finished));
+        });
         const photo = await portrait.evaluate((image) => {
           const bounds = image.getBoundingClientRect();
-          return { top: bounds.top, bottom: bounds.bottom, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
+          return { top: bounds.top, bottom: bounds.bottom, width: bounds.width, ratio: bounds.width / bounds.height, naturalRatio: image.naturalWidth / image.naturalHeight };
         });
+        expect(photo.width).toBeLessThanOrEqual(145);
+        expect(photo.width).toBeGreaterThanOrEqual(128);
         expect(photo.ratio).toBeCloseTo(photo.naturalRatio, 2);
         expect(photo.naturalRatio).toBeCloseTo(1260 / 1849, 2);
         const badges = await profile.locator(".founder-note").boundingBox();
