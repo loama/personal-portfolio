@@ -41,7 +41,7 @@ html:has(.story-site) { scroll-padding-top: 4.25rem; overflow-anchor: none; }
 .story-site { background: var(--story-bg); color: var(--story-text); font-family: var(--font-story), sans-serif; font-size: 1rem; line-height: 1.65; min-height: 100svh; }
 .story-site :is(h1, h2, h3, h4) { font-family: inherit; color: var(--story-ink); }
 .story-site :is(a, button, label) { -webkit-tap-highlight-color: transparent; }
-.story-site a { color: var(--story-ink); text-decoration: none; transition: color 180ms, border-color 180ms; }
+.story-site a { color: var(--story-ink); text-decoration: none; }
 .story-site a:hover { color: var(--story-accent); }
 .story-site :focus-visible { outline-color: var(--story-accent); }
 .story-site ::selection { color: var(--story-ink); background: color-mix(in srgb, var(--story-accent) 35%, var(--story-bg)); }
@@ -116,7 +116,7 @@ html:has(.story-site) { scroll-padding-top: 4.25rem; overflow-anchor: none; }
 .story-appearance { display: flex; border: 1px solid var(--story-line-soft); border-radius: .4rem; padding: .125rem; }
 .story-appearance label { position: relative; }
 .story-appearance input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; }
-.story-appearance label > span { display: flex; align-items: center; justify-content: center; gap: .375rem; padding: .5rem; min-height: 2.5rem; border-radius: .25rem; color: var(--story-mute); transition: color 200ms, background 200ms; }
+.story-appearance label > span { display: flex; align-items: center; justify-content: center; gap: .375rem; padding: .5rem; min-height: 2.5rem; border-radius: .25rem; color: var(--story-mute); }
 .story-appearance svg { width: .875rem; height: .875rem; }
 .story-appearance input:checked + span { color: var(--story-ink); background: var(--story-top); }
 .story-appearance input:focus-visible + span { outline: 2px solid var(--story-accent); outline-offset: 2px; }
