@@ -22,6 +22,10 @@ Private source documents remain outside this repository. Contact details were su
 
 ## Visual assets
 
+The optional second design at `/en/v2` and `/es/v2` follows the layout, typography, monochrome palette and interactive chapter structure of [albinanikiforova.com](https://albinanikiforova.com/), as requested by Eduardo. Its story chapters derive their factual paragraphs from `content/profile.json`. The isometric SVG illustrations depict Eduardo's projects and experience. The portrait, cursor, contact marks and company logos reuse the existing local assets.
+
+The second design uses [DM Sans](https://fonts.google.com/specimen/DM+Sans), served locally from `public/fonts/DM-Sans-Latin.woff2`. Its SIL Open Font License is stored beside it as `DM-Sans-OFL.txt`.
+
 The orange and white palette, Sk Modernist headings, system body font, and VCR OSD Mono action font follow [Supervisor](https://trysupervisor.com), as requested by Eduardo. The font files come from his Supervisor website assets. Orange text uses a darker shade in Light mode and a lighter shade in Dark mode.
 
 Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Buttons have white labels on a darker orange for readable contrast. The portrait uses its source image dimensions, automatic height, and no crop or zoom. The founder badges sit below the photo, and the decorative label sits above it. The favicon has a white background.
