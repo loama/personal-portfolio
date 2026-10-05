@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { StoryNavigation, StoryPageLink } from "@/components/story/navigation";
 import { StoryFooter, StorySocials } from "@/components/story/footer";
@@ -7,6 +8,7 @@ import { ResumeSummary } from "@/components/resume-summary";
 import { getResume } from "@/lib/resume";
 import { storyCopy } from "@/lib/story-copy";
 import { isLocale, isVersion, resumePath, VERSIONS } from "@/lib/site";
+import portrait from "../../../../../../public/images/eduardo-portrait.webp";
 
 type Params = Promise<{ lang: string; version: string }>;
 export function generateStaticParams() { return VERSIONS.map((version) => ({ version })); }
@@ -32,9 +34,14 @@ export default async function StoryResumePage({ params }: { params: Params }) {
     <StoryNavigation locale={lang} path={`/v2/resume/${version}`} version={version} />
     <main id="main" className="story-cv">
       <section className="story-cv-intro" aria-label={copy.profile}>
-        <p className="story-eyebrow">{copy.resume}</p>
-        <h1>{resume.basics.name}</h1>
-        <StorySocials />
+        <div className="story-cv-heading">
+          <p className="story-eyebrow">{copy.resume}</p>
+          <h1>{resume.basics.name}</h1>
+          <StorySocials />
+        </div>
+        <figure className="story-portrait story-cv-portrait">
+          <Image src={portrait} alt={resume.basics.name} priority sizes="(max-width: 760px) 112px, 160px" />
+        </figure>
         <ResumeSummary resume={resume} />
         <div className="story-cv-tools">
           <nav aria-label={copy.resumeVersion}>

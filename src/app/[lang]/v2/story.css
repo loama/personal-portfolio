@@ -122,11 +122,14 @@ html:has(.story-site) { scroll-padding-top: 4.25rem; overflow-anchor: none; }
 .story-appearance input:focus-visible + span { outline: 2px solid var(--story-accent); outline-offset: 2px; }
 .story-cv { max-width: 67.5rem; margin-inline: auto; padding: 3rem 1.5rem 0; }
 .story-cv + .story-footer { width: calc(100% - 3rem); margin-inline: auto; }
+.story-cv-intro { display: grid; grid-template-columns: minmax(0, 1fr) 10rem; column-gap: 2.5rem; }
+.story-cv-heading { grid-column: 1; }
+.story-cv-portrait { grid-column: 2; grid-row: 1 / 3; align-self: start; border-radius: .75rem; }
 .story-cv-intro h1 { font-size: 2rem; font-weight: 500; line-height: 1.2; letter-spacing: -.02em; }
 .story-cv-intro .story-socials { margin-block: .5rem 1rem; }
-.story-cv-intro > p:not(.story-eyebrow) { margin: 0; max-width: none; font-size: 1rem; line-height: 1.65; }
+.story-cv-intro > p { grid-column: 1; margin: 0; max-width: none; font-size: 1rem; line-height: 1.65; }
 .story-cv-intro > p > span { font-weight: 600; }
-.story-cv-tools { margin-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .75rem 1.5rem; font-family: var(--story-mono); font-size: .75rem; }
+.story-cv-tools { grid-column: 1 / -1; margin-top: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: .75rem 1.5rem; font-family: var(--story-mono); font-size: .75rem; }
 .story-cv-tools :is(nav, div) { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 .story-cv-tools a { display: inline-flex; align-items: center; gap: .375rem; min-height: 2.75rem; color: var(--story-mute); }
 .story-cv-tools a[aria-current] { color: var(--story-ink); text-decoration: underline; text-underline-offset: .45em; text-decoration-color: var(--story-accent); }
@@ -191,6 +194,9 @@ html:has(.story-site) { scroll-padding-top: 4.25rem; overflow-anchor: none; }
   .story-footer-bottom .story-appearance { order: -1; margin-bottom: .75rem; }
   .story-cv { padding: 2rem 1.25rem 0; }
   .story-cv + .story-footer { width: calc(100% - 2.5rem); }
+  .story-cv-intro { grid-template-columns: minmax(0, 1fr) 7rem; column-gap: 1.25rem; }
+  .story-cv-portrait { grid-row: 1; }
+  .story-cv-intro > p { grid-column: 1 / -1; }
   .story-cv-intro h1 { font-size: 2rem; }
   .story-cv-section article p, .story-cv-section article ul { font-size: .9375rem; }
 }
