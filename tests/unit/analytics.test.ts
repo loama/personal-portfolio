@@ -23,6 +23,22 @@ function request(payload: unknown = event, headers: Record<string, string> = {})
 }
 
 describe("consented analytics ingestion", () => {
+  test("accepts the six story routes without allowing private URL data", async () => {
+    process.env.ANALYTICS_ENABLED = "false";
+    for (const locale of ["en", "es"]) {
+      for (const suffix of ["", "/resume/founder", "/resume/employee"]) {
+        const path = `/${locale}/v2${suffix}`;
+        expect((await POST(request({ ...event, path }))).status).toBe(204);
+        for (const extra of ["?email=private@example.com", "#private", "/extra"]) {
+          expect((await POST(request({ ...event, path: `${path}${extra}` }))).status).toBe(400);
+        }
+      }
+    }
+    for (const path of ["/fr/v2", "/en/v2/resume", "/en/v2/resume/admin", "/en/v20"]) {
+      expect((await POST(request({ ...event, path }))).status).toBe(400);
+    }
+  });
+
   test("rejects foreign origins, invalid data and unconsented events", async () => {
     expect((await POST(request(event, { origin: "https://other.example" }))).status).toBe(403);
     expect((await POST(request(event, { "content-type": "text/html" }))).status).toBe(415);
