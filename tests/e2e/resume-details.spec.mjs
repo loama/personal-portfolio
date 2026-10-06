@@ -116,7 +116,6 @@ test("detailed downloads and JSON include the matching experience record", async
 
 test("the detailed PDF button downloads the full document and records the action after consent", async ({ page }) => {
   await page.goto("/en/resume/employee");
-  await page.getByRole("button", { name: "Privacy options", exact: true }).click();
   await page.getByRole("button", { name: "Accept analytics", exact: true }).click();
   const event = page.waitForRequest((request) => request.url().endsWith("/api/events") && request.postDataJSON().name === "download_pdf_full");
   const download = page.waitForEvent("download");
