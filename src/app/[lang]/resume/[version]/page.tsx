@@ -51,8 +51,8 @@ export default async function ResumePage({ params }: { params: Params }) {
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
             <a href={resumePath(lang, version, "pdf")} download className="button-primary" data-track="download_pdf"><ButtonLabel>{es ? "Descargar PDF" : "Download PDF"}</ButtonLabel><span className="button-icon"><DownloadIcon aria-hidden="true" className="h-4 w-4" /></span></a>
             <a href={resumePath(lang, version, "pdf", "full")} download className="flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:text-ink" data-track="download_pdf_full">{es ? "PDF detallado" : "Detailed PDF"}<DownloadIcon aria-hidden="true" className="h-4 w-4" /></a>
-            <a href={resumePath(lang, version, "json")} download className="flex min-h-11 items-center gap-2 text-sm font-medium" data-track="download_json">JSON<Arrow /></a>
-            <a href={contacts.whatsapp} className="flex min-h-11 items-center gap-2 text-sm" data-track="contact_whatsapp"><SocialIcon platform="whatsapp" />WhatsApp<Arrow /></a>
+            <a href={resumePath(lang, version, "json")} download className="flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:text-ink" data-track="download_json">JSON<Arrow /></a>
+            <a href={contacts.whatsapp} className="flex min-h-11 items-center gap-2 text-sm font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:text-ink" data-track="contact_whatsapp"><SocialIcon platform="whatsapp" />WhatsApp<Arrow /></a>
           </div>
         </div>
         <Portrait locale={lang} />
@@ -67,7 +67,7 @@ export default async function ResumePage({ params }: { params: Params }) {
       </section>
       {version === "employee" && <Projects locale={lang} />}
     </main>
-    <Footer locale={lang} mode={version} />
+    <Footer locale={lang} />
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structured).replace(/</g, "\\u003c") }} />
   </>;
 }

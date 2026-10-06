@@ -93,17 +93,17 @@ test("theme choices persist through navigation, language changes and reload", as
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => { if (message.type() === "error") errors.push(message.text()); });
-  await page.goto("/en/resume/founder");
+  await page.goto("/en/resume/employee");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
   await page.getByTitle("Dark", { exact: true }).click();
   await expect(page.getByRole("radio", { name: "Dark", exact: true })).toBeChecked();
   await expectAppearance(page, "dark");
   await expect.poll(() => page.evaluate(() => localStorage.getItem("portfolio_theme"))).toBe("dark");
-  await page.getByRole("link", { name: "Employee & consultant", exact: true }).click();
-  await expect(page).toHaveURL(/\/en\/resume\/employee$/);
+  await page.locator("header .wordmark").click();
+  await expect(page).toHaveURL(/\/en\/resume\/founder$/);
   await expectAppearance(page, "dark");
   await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link", { name: "ES", exact: true }).click();
-  await expect(page).toHaveURL(/\/es\/resume\/employee$/);
+  await expect(page).toHaveURL(/\/es\/resume\/founder$/);
   await expect(page.getByRole("radio", { name: "Oscuro", exact: true })).toBeChecked();
   await expectAppearance(page, "dark");
   await page.reload();
@@ -174,7 +174,7 @@ test("links remain readable on every frame of an appearance change", async ({ pa
       return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
     }).reduce((total, value, index) => total + value * [0.2126, 0.7152, 0.0722][index], 0);
     const links = document.querySelectorAll('header nav a, a[data-track="view_source"]');
-    if (links.length !== 3) throw new Error("Expected the language and source links.");
+    if (links.length !== 4) throw new Error("Expected the language links and both source links.");
     let minimum = Infinity;
     for (let frame = 0; frame < 20; frame++) {
       await new Promise((resolve) => requestAnimationFrame(resolve));
@@ -250,14 +250,14 @@ test("appearance stays usable when browser storage is unavailable", async ({ pag
   await page.addInitScript(() => {
     Object.defineProperty(window, "localStorage", { get() { throw new DOMException("Storage unavailable", "SecurityError"); } });
   });
-  await page.goto("/en/resume/founder");
+  await page.goto("/en/resume/employee");
   await page.getByTitle("Dark", { exact: true }).click();
   await expectAppearance(page, "dark");
   await expect(page.getByRole("radio", { name: "Dark", exact: true })).toBeChecked();
-  await page.getByRole("link", { name: "Employee & consultant", exact: true }).click();
+  await page.locator("header .wordmark").click();
   await expectAppearance(page, "dark");
   await page.getByRole("navigation", { name: "Language", exact: true }).getByRole("link", { name: "ES", exact: true }).click();
-  await expect(page).toHaveURL(/\/es\/resume\/employee$/);
+  await expect(page).toHaveURL(/\/es\/resume\/founder$/);
   await expectAppearance(page, "dark");
   await page.getByTitle("Claro", { exact: true }).click();
   await expectAppearance(page, "light");

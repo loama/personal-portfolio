@@ -16,6 +16,12 @@ bun run dev
 
 Open [localhost:3000](http://localhost:3000). Analytics is disabled in the example configuration. See `docs/releasing.md` for production configuration.
 
+## Second design
+
+Open `/en/v2` or `/es/v2` for the second design, based on [albinanikiforova.com](https://albinanikiforova.com/). It presents the same career record as eight chapters with interactive isometric drawings. The full portrait keeps its original proportions, and the existing cursor is shared with the original design.
+
+The matching CV pages are `/en/v2/resume/founder` and `/en/v2/resume/employee`, with Spanish versions under `/es/v2/resume/`. They reuse the existing experience details, PDF and JSON downloads, API and MCP. The second design defaults to dark and stores its Device, Light or Dark preference separately. The original résumé remains the default page and is linked from the second design's footer.
+
 ## Validate a change
 
 ```sh

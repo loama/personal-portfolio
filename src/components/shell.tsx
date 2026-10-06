@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
-import { contacts, type Locale, type ResumeVersion } from "@/lib/site";
+import { contacts, REPOSITORY_URL, type Locale } from "@/lib/site";
 import { SocialIcon } from "./social-icon";
 import { ThemeSwitcher } from "./theme-switcher";
 
@@ -14,7 +14,7 @@ export function Header({ locale, path = "" }: { locale: Locale; path?: string })
     <header className="relative z-20 mx-auto grid max-w-[1320px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-4 px-5 pb-5 pt-7 sm:px-10">
       <Link prefetch={false} href={`/${locale}/resume/founder`} className="wordmark col-start-1 row-start-1 inline-flex min-h-11 flex-col items-start justify-center gap-0.5">
         <span className="font-display text-lg font-semibold leading-5 tracking-tight">eduardo lopez<span className="text-brand">.</span></span>
-        <span className="text-xs leading-4 text-muted">{es ? 'puedes llamarme "edu"' : 'you can call me "edu"'}</span>
+        <span className="text-xs leading-4 text-muted">{es ? "puedes llamarme edu" : "you can call me edu"}</span>
         <span className="sr-only">{es ? ", inicio" : ", home"}</span>
       </Link>
       <div className="contents sm:col-start-2 sm:row-start-1 sm:flex sm:items-center sm:justify-end sm:gap-3">
@@ -27,15 +27,14 @@ export function Header({ locale, path = "" }: { locale: Locale; path?: string })
   );
 }
 
-export function Footer({ locale, mode = "founder" }: { locale: Locale; mode?: ResumeVersion }) {
-  const alternate = mode === "founder" ? "employee" : "founder";
+export function Footer({ locale }: { locale: Locale }) {
   return <footer className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-7 px-5 py-10 text-xs text-muted sm:px-10">
     <p>© 2026 Eduardo López</p>
     <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
       <a href={contacts.linkedin} data-track="social_linkedin" className="inline-flex items-center gap-2"><SocialIcon platform="linkedin" />LinkedIn</a>
       <a href={contacts.x} data-track="social_x" className="inline-flex items-center gap-2"><SocialIcon platform="x" />X</a>
       <a href={contacts.github} data-track="social_github" className="inline-flex items-center gap-2"><SocialIcon platform="github" />GitHub</a>
-      <Link prefetch={false} href={`/${locale}/resume/${alternate}`} className="inline-flex min-h-11 items-center">{alternate === "founder" ? (locale === "es" ? "Fundador" : "Founder") : (locale === "es" ? "Empleado y consultor" : "Employee & consultant")}</Link>
+      <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" data-track="view_source" className="inline-flex min-h-11 items-center gap-2">{locale === "es" ? "Código fuente" : "Source code"}<Arrow /></a>
       <Link prefetch={false} href={`/${locale}/agents`}>{locale === "es" ? "Para agentes" : "For agents"}</Link>
       <Link prefetch={false} href={`/${locale}/privacy`}>{locale === "es" ? "Privacidad" : "Privacy"}</Link>
     </div>
