@@ -14,6 +14,7 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(page.getByRole("navigation", { name: "Resume version", exact: true })).toHaveCount(0);
   await expect(footer.getByRole("link", { name: "Employee & consultant", exact: true })).toHaveCount(0);
   await expect(footer.getByRole("link", { name: "Privacy", exact: true })).toHaveCount(0);
+  await expect(page.locator("header").getByRole("link", { name: "Cookie settings", exact: true })).toHaveAttribute("href", "/en/privacy");
   const source = footer.getByRole("link", { name: "Source code", exact: true });
   await expect(source).toHaveAttribute("href", "https://github.com/loama/personal-portfolio");
   await expect(source).toHaveAttribute("target", "_blank");
@@ -38,6 +39,7 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(page).toHaveURL(/\/es\/resume\/founder$/);
   await expect(footer.getByRole("link", { name: "Empleado y consultor", exact: true })).toHaveCount(0);
   await expect(footer.getByRole("link", { name: "Privacidad", exact: true })).toHaveCount(0);
+  await expect(page.locator("header").getByRole("link", { name: "Preferencias de cookies", exact: true })).toHaveAttribute("href", "/es/privacy");
   await expect(footer.getByRole("link", { name: "Código fuente", exact: true })).toHaveAttribute("href", "https://github.com/loama/personal-portfolio");
   await expect(page.locator("header .wordmark")).toContainText("puedes llamarme edu");
   await expect(page.getByRole("link", { name: "Descargar PDF" })).toHaveAttribute("href", "/resume/eduardo-lopez-founder-es.pdf");
@@ -197,7 +199,7 @@ test("analytics requires consent and records the real download action", async ({
   await page.getByRole("link", { name: "Download PDF", exact: true }).click();
   expect((await download).suggestedFilename()).toBe("eduardo-lopez-founder-en.pdf");
   expect((await event).postDataJSON()).toMatchObject({ name: "download_pdf" });
-  await page.goto("/en/privacy");
+  await page.locator("header").getByRole("link", { name: "Cookie settings", exact: true }).click();
   await page.getByRole("button", { name: "Privacy options", exact: true }).click();
   await page.getByRole("button", { name: "Decline", exact: true }).click();
   events.length = 0;
@@ -207,8 +209,8 @@ test("analytics requires consent and records the real download action", async ({
 });
 for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 }]) {
   for (const copy of [
-    { locale: "en", options: "Privacy options", preferences: "Analytics preferences", close: "Close preferences", accept: "Accept analytics", decline: "Decline" },
-    { locale: "es", options: "Opciones de privacidad", preferences: "Preferencias de analítica", close: "Cerrar preferencias", accept: "Aceptar analítica", decline: "Rechazar" },
+    { locale: "en", settings: "Cookie settings", options: "Privacy options", preferences: "Analytics preferences", close: "Close preferences", accept: "Accept analytics", decline: "Decline" },
+    { locale: "es", settings: "Preferencias de cookies", options: "Opciones de privacidad", preferences: "Preferencias de analítica", close: "Cerrar preferencias", accept: "Aceptar analítica", decline: "Rechazar" },
   ]) {
     test(`privacy preferences restore keyboard focus without changing scroll in ${copy.locale} at ${viewport.width}px`, async ({ page }) => {
       await page.setViewportSize(viewport);
@@ -227,7 +229,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
         await expect(trigger).toHaveCount(0);
         await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(400);
       }
-      await page.goto(`/${copy.locale}/privacy`);
+      await page.locator("header").getByRole("link", { name: copy.settings, exact: true }).click();
       await expect(trigger).toBeVisible();
       for (const action of [copy.close, copy.accept, copy.decline]) {
         for (const activation of [{ key: "Enter", delay: 0 }, { key: "Enter", delay: 100 }, { key: "Space", delay: 100 }]) {
@@ -269,7 +271,7 @@ test("browser privacy signals prevent tracking and explain the choice", async ({
   });
   await page.goto("/en");
   await expect(page.getByRole("button", { name: "Privacy options", exact: true })).toHaveCount(0);
-  await page.goto("/en/privacy");
+  await page.locator("header").getByRole("link", { name: "Cookie settings", exact: true }).click();
   await page.getByRole("button", { name: "Privacy options", exact: true }).click();
   await expect(page.getByText("Your browser has disabled analytics")).toBeVisible();
   await expect(page.getByRole("button", { name: "Accept analytics", exact: true })).toHaveCount(0);
