@@ -36,7 +36,6 @@ export function Footer({ locale }: { locale: Locale }) {
       <a href={contacts.github} data-track="social_github" className="inline-flex items-center gap-2"><SocialIcon platform="github" />GitHub</a>
       <a href={REPOSITORY_URL} target="_blank" rel="noopener noreferrer" data-track="view_source" className="inline-flex min-h-11 items-center gap-2">{locale === "es" ? "Código fuente" : "Source code"}<Arrow /></a>
       <Link prefetch={false} href={`/${locale}/agents`}>{locale === "es" ? "Para agentes" : "For agents"}</Link>
-      <Link prefetch={false} href={`/${locale}/privacy`}>{locale === "es" ? "Privacidad" : "Privacy"}</Link>
     </div>
   </footer>;
 }

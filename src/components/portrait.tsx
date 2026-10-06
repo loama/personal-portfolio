@@ -21,6 +21,5 @@ export function Portrait({ locale }: { locale: Locale }) {
         <span><span className="block text-xs font-semibold underline decoration-ink/30 underline-offset-4">Platanus Ventures</span><span className="mt-0.5 block text-[11px] text-muted">{es ? "Generación de fundadores 2023" : "Founder cohort 2023"}</span></span>
       </a>
     </div>
-    <span className="absolute -top-12 left-1/2 hidden -translate-x-1/2 rotate-6 whitespace-nowrap rounded-full border border-brand/30 bg-paper px-4 py-2 font-action text-xs uppercase tracking-[.04em] text-ink sm:block">{es ? "ideas → productos" : "ideas → products"}</span>
   </div>;
 }
