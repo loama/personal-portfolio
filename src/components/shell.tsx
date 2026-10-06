@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowTopRightIcon } from "@radix-ui/react-icons";
+import { ArrowTopRightIcon, CookieIcon } from "@radix-ui/react-icons";
 import { contacts, REPOSITORY_URL, type Locale } from "@/lib/site";
 import { SocialIcon } from "./social-icon";
 import { ThemeSwitcher } from "./theme-switcher";
@@ -18,7 +18,10 @@ export function Header({ locale, path = "" }: { locale: Locale; path?: string })
         <span className="sr-only">{es ? ", inicio" : ", home"}</span>
       </Link>
       <div className="contents sm:col-start-2 sm:row-start-1 sm:flex sm:items-center sm:justify-end sm:gap-3">
-        <ThemeSwitcher locale={locale} className="col-span-2 row-start-2 justify-self-end" />
+        <div className="col-span-2 row-start-2 flex items-center justify-self-end gap-2">
+          <Link prefetch={false} href={`/${locale}/privacy`} aria-label={es ? "Preferencias de cookies" : "Cookie settings"} title={es ? "Preferencias de cookies" : "Cookie settings"} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-muted hover:bg-mist hover:text-ink"><CookieIcon aria-hidden="true" className="h-4 w-4" /></Link>
+          <ThemeSwitcher locale={locale} />
+        </div>
         <nav aria-label={es ? "Idioma" : "Language"} className="col-start-2 row-start-1 flex items-center justify-self-end gap-1 text-xs font-semibold">
           {(["en", "es"] as const).map((lang) => <Link prefetch={false} key={lang} href={`/${lang}${path}`} scroll={false} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 py-2 ${lang === locale ? "bg-ink text-paper" : "text-muted hover:bg-mist"}`}>{lang.toUpperCase()}</Link>)}
         </nav>
