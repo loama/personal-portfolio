@@ -74,6 +74,11 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           bun -e 'for (const name of ["VERCEL_TOKEN", "VERCEL_ORG_ID", "VERCEL_PROJECT_ID"]) { if (!process.env[name]) throw new Error(`Missing ${name}`); }'
+      # CLI 62.2.0 reads process.env.VERCEL_TOKEN when no token argument is given.
+      - name: Verify deployment authentication
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: '"$RUNNER_TEMP/vercel-cli/node_modules/.bin/vercel" whoami > /dev/null'
       - name: Deploy release source and wait for completion
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
