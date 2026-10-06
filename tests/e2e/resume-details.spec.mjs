@@ -71,11 +71,7 @@ for (const locale of ["en", "es"]) {
         expect(photo.naturalRatio).toBeCloseTo(1260 / 1849, 2);
         const badges = await profile.locator(".founder-note").boundingBox();
         expect(badges.y).toBeGreaterThanOrEqual(photo.bottom);
-        const label = profile.getByText(locale === "es" ? "ideas → productos" : "ideas → products", { exact: true });
-        if (await label.isVisible()) {
-          const bounds = await label.boundingBox();
-          expect(bounds.y + bounds.height).toBeLessThanOrEqual(photo.top);
-        }
+        await expect(profile.getByText(locale === "es" ? "ideas → productos" : "ideas → products", { exact: true })).toHaveCount(0);
         if (version === "founder") {
           for (const [name, href] of [["Supervisor", "https://trysupervisor.com"], ["Constructor", "https://useconstructor.com"]]) {
             const link = profile.getByRole("link", { name, exact: true });

@@ -20,7 +20,7 @@ Configure these repository values through GitHub settings or a secure CLI sessio
 | Variable | `VERCEL_ORG_ID` | `team_aGAWbuKx6x5BVxlYeyS6gN1E` |
 | Variable | `VERCEL_PROJECT_ID` | `prj_AW8UKS2NcyxscGlIzrLMYOYazNmg` |
 
-The workflow passes the Vercel token through the environment. Vercel CLI 62.2.0 reads `VERCEL_TOKEN` directly. The token never appears in command arguments. The Azure key is available only to the model request step, and the Vercel token is available only to deployment configuration validation and deployment.
+The workflow passes the Vercel token through the environment. Vercel CLI 62.2.0 reads `VERCEL_TOKEN` directly. The token never appears in command arguments. Before deploying, `vercel whoami` verifies authentication and discards its account output. The Azure key is available only to the model request step. The Vercel token is available only to deployment configuration validation, authentication verification and deployment.
 
 Configure `AZURE_OPENAI_REASONING_EFFORT` only when the selected deployment supports that parameter. Leaving it unset omits the parameter, preserving support for models that offer structured output without reasoning controls. Invalid values fail before any provider request.
 

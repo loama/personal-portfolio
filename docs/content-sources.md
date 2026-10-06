@@ -28,9 +28,9 @@ The second design uses [DM Sans](https://fonts.google.com/specimen/DM+Sans), ser
 
 The orange and white palette, Sk Modernist headings, system body font, and VCR OSD Mono action font follow [Supervisor](https://trysupervisor.com), as requested by Eduardo. The font files come from his Supervisor website assets. Orange text uses a darker shade in Light mode and a lighter shade in Dark mode.
 
-Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Buttons have white labels on a darker orange for readable contrast. The portrait uses its source image dimensions, automatic height, and no crop or zoom. The founder badges sit below the photo, and the decorative label sits above it. The favicon has a white background.
+Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Buttons have white labels on a darker orange for readable contrast. The portrait uses its source image dimensions, automatic height, and no crop or zoom. The founder badges sit below the photo. The favicon has a white background.
 
-The résumé is now the main page. Both versions include the portrait, founder program badges, and Supervisor and Constructor cards. Previous landing pages redirect to the corresponding résumé. The header keeps language and appearance controls. A footer link opens the alternate résumé version. Device, Light, and Dark options use a sliding selection indicator and respect reduced motion preferences. The choice stays in the browser.
+The résumé is now the main page. Both versions include the portrait, founder program badges, and Supervisor and Constructor cards. Previous landing pages redirect to the corresponding résumé. The header keeps language and appearance controls and a link to cookie settings. The footer includes contact, source code and agent links. Device, Light, and Dark options use a sliding selection indicator and respect reduced motion preferences. The choice stays in the browser.
 
 The PDFs embed the regular and bold Liberation Sans fonts distributed with Mozilla's PDF.js. The font files and their SIL Open Font License are stored in `assets/fonts`. These static fonts preserve the PDF layout and avoid relying on fonts installed in the viewer. Unicode mappings keep accented text searchable and selectable.
 
