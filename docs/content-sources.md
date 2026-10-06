@@ -30,7 +30,7 @@ The orange and white palette, Sk Modernist headings, system body font, and VCR O
 
 Eyebrows, uppercase labels, and button styling follow the live Supervisor site viewed October 3, 2026. Buttons have white labels on a darker orange for readable contrast. The portrait uses its source image dimensions, automatic height, and no crop or zoom. The founder badges sit below the photo. The favicon has a white background.
 
-The résumé is now the main page. Both versions include the portrait, founder program badges, and Supervisor and Constructor cards. Previous landing pages redirect to the corresponding résumé. The header keeps language and appearance controls. The footer includes contact, source code and agent links. Device, Light, and Dark options use a sliding selection indicator and respect reduced motion preferences. The choice stays in the browser.
+The résumé is now the main page. Both versions include the portrait, founder program badges, and Supervisor and Constructor cards. Previous landing pages redirect to the corresponding résumé. The header keeps language and appearance controls and a link to cookie settings. The footer includes contact, source code and agent links. Device, Light, and Dark options use a sliding selection indicator and respect reduced motion preferences. The choice stays in the browser.
 
 The PDFs embed the regular and bold Liberation Sans fonts distributed with Mozilla's PDF.js. The font files and their SIL Open Font License are stored in `assets/fonts`. These static fonts preserve the PDF layout and avoid relying on fonts installed in the viewer. Unicode mappings keep accented text searchable and selectable.
 
