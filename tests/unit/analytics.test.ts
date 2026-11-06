@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { POST } from "../../src/app/api/events/route";
+import { isAnalyticsEventName } from "../../src/lib/analytics";
+import { profile } from "../../src/lib/resume";
 
 const environment = { ...process.env };
 const visitor = "ad15e5df-e074-4c88-b53a-a6ab346c1ef8";
@@ -103,5 +105,9 @@ describe("consented analytics ingestion", () => {
     process.env.POSTHOG_HOST = "https://other.example";
     expect((await POST(request())).status).toBe(204);
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  test("every project card click is an accepted event", () => {
+    for (const project of profile.projects) expect(isAnalyticsEventName(`project_${project.id}`)).toBe(true);
   });
 });
