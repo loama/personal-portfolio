@@ -28,14 +28,14 @@ test("project previews display the current websites and remain linked at phone a
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 960 });
     for (const project of [
-      { name: "Supervisor", url: "https://trysupervisor.com" },
-      { name: "Constructor", url: "https://useconstructor.com" },
+      { id: "supervisor", name: "Supervisor", url: "https://trysupervisor.com" },
+      { id: "constructor", name: "Constructor", url: "https://useconstructor.com" },
     ]) {
       const link = page.getByRole("link", { name: `Visit ${project.name}`, exact: true });
       await link.scrollIntoViewIfNeeded();
       await expect(link).toHaveAttribute("href", project.url);
       const preview = link.locator("iframe");
-      await expect(preview).toHaveAttribute("src", `/api/project-preview/${project.name.toLowerCase()}`);
+      await expect(preview).toHaveAttribute("src", `/api/project-preview/${project.id}`);
       await expect(preview).toHaveAttribute("tabindex", "-1");
       await expect(preview).toHaveAttribute("sandbox", "");
       const content = page.frameLocator(`iframe[title="${project.name} website preview"]`);
@@ -61,7 +61,7 @@ test("website screenshots remain visible when external pages cannot load", async
   }
   await page.goto("/en/resume/founder");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
-  for (const name of ["Supervisor", "Constructor"]) {
+  for (const name of ["Supervisor", "Constructor", "Live Transit"]) {
     const preview = page.getByRole("link", { name: `Visit ${name}`, exact: true });
     await preview.scrollIntoViewIfNeeded();
     await expect.poll(() => preview.locator("img").evaluate((image) => image.complete && image.naturalWidth > 0)).toBe(true);
@@ -83,4 +83,5 @@ test("preview responses block scripts and reject arbitrary sources", async ({ re
     expect(html).toContain(project === "supervisor" ? "Supervisor home" : "Build software");
   }
   expect((await request.get("/api/project-preview/unknown")).status()).toBe(404);
+  expect((await request.get("/api/project-preview/live-transit")).status()).toBe(404);
 });

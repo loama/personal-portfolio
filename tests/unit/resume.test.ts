@@ -34,7 +34,7 @@ describe("résumé source and variants", () => {
         expect(resume.languages).toEqual(language === "en"
           ? [{ language: "English" }, { language: "Spanish" }]
           : [{ language: "Inglés" }, { language: "Español" }]);
-        expect(resume.projects.map(({ name }) => name)).toEqual(["Supervisor", "Constructor"]);
+        expect(resume.projects.map(({ name }) => name)).toEqual(["Supervisor", "Constructor", "Live Transit"]);
         expect(resume.projects[1].url).toBe("https://useconstructor.com");
         expect(resume.projects.map(({ name, url, description }) => ({ name, url, description })))
           .toEqual(sourceProfile.projects.map((project) => ({ name: project.name, url: project.url, description: project.description[language] })));

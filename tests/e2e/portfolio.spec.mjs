@@ -28,6 +28,7 @@ test("founder, team, language and resume navigation work", async ({ page }) => {
   await expect(page.getByRole("region", { name: "Profile", exact: true }).getByRole("img", { name: "Eduardo López", exact: true })).toBeVisible();
   await expect(page.locator("#work").getByRole("link", { name: "Visit Supervisor", exact: true })).toHaveAttribute("href", "https://trysupervisor.com");
   await expect(page.locator("#work").getByRole("link", { name: "Visit Constructor", exact: true })).toHaveAttribute("href", "https://useconstructor.com");
+  await expect(page.locator("#work").getByRole("link", { name: "Visit Live Transit", exact: true })).toHaveAttribute("href", "https://livetransit.vercel.app");
   await page.getByRole("button", { name: "Decline", exact: true }).click();
   await page.goto("/en/resume/employee");
   await expect(page).toHaveURL(/\/en\/resume\/employee$/);
