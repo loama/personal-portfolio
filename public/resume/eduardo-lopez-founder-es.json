@@ -245,6 +245,12 @@
       "url": "https://useconstructor.com",
       "description": "Crea software de forma colaborativa. Apps, sitios web, APIs, MCPs, paneles de control, tareas programadas...",
       "highlights": []
+    },
+    {
+      "name": "Live Transit",
+      "url": "https://livetransit.vercel.app",
+      "description": "Estado en tiempo real, mapas de líneas y posiciones de vehículos del transporte público de todo el mundo, directo de los operadores. Código abierto, con API pública y servidor MCP.",
+      "highlights": []
     }
   ],
   "meta": {
@@ -256,6 +262,8 @@
       "https://www.ycombinator.com/companies/amiloz",
       "https://trysupervisor.com",
       "https://useconstructor.com",
+      "https://livetransit.vercel.app",
+      "https://github.com/loama/live-transit",
       "https://github.com/Nixtla/nixtla/pull/855",
       "https://github.com/Nixtla/docs/commit/e9a8c4b88fe67e19673a459ae564697030ab12df"
     ]

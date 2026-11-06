@@ -24,7 +24,7 @@ export const profileSchema = z.strictObject({
     details: z.array(z.strictObject({ title: translatedText, paragraphs: translatedParagraphs })).optional(),
   })).min(1),
   projects: z.array(z.strictObject({
-    id: z.enum(["supervisor", "constructor"]),
+    id: z.enum(["supervisor", "constructor", "live-transit"]),
     name: z.string().min(1),
     url: z.url(),
     description: translatedText,
